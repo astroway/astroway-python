@@ -1,0 +1,39 @@
+name: release
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+
+# PyPI Trusted Publishing (OIDC) — no API token needed.
+# Configure once at https://pypi.org/manage/project/astroway/settings/publishing/
+#   Provider: GitHub
+#   Owner: astroway
+#   Repository: astroway-python
+#   Workflow: release.yml
+#   Environment: (leave empty)
+permissions:
+  contents: read
+  id-token: write
+  attestations: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    environment: pypi
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install -e ".[dev]"
+      - run: pytest -q
+      - run: pip install build
+      - run: python -m build
+      - uses: actions/attest-build-provenance@v2
+        with:
+          subject-path: dist/*
+      - uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          attestations: true
