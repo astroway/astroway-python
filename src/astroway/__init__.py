@@ -20,13 +20,13 @@ Errors thrown by the SDK live in :mod:`astroway.errors` — catch
 
 from __future__ import annotations
 
-from ._client import AsyncAstroway, Astroway
+from ._client import Astroway, AsyncAstroway
 from ._retry import RetryConfig
 from ._version import SDK_VERSION
 from .errors import (
     APIConnectionError,
-    APITimeoutError,
     ApiError,
+    APITimeoutError,
     AuthenticationError,
     BadRequestError,
     InternalServerError,
@@ -39,11 +39,12 @@ from .errors import (
 __version__ = SDK_VERSION
 
 __all__ = [
+    "SDK_VERSION",
     "APIConnectionError",
     "APITimeoutError",
     "ApiError",
-    "AsyncAstroway",
     "Astroway",
+    "AsyncAstroway",
     "AuthenticationError",
     "BadRequestError",
     "InternalServerError",
@@ -51,6 +52,5 @@ __all__ = [
     "PermissionDeniedError",
     "RateLimitError",
     "RetryConfig",
-    "SDK_VERSION",
     "UnprocessableEntityError",
 ]

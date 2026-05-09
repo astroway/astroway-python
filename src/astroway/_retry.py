@@ -9,7 +9,6 @@ import asyncio
 import email.utils
 import random
 import time
-from collections.abc import Iterable
 from dataclasses import dataclass
 
 import httpx

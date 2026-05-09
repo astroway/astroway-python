@@ -15,8 +15,8 @@ from ._retry import AsyncRetryTransport, RetryConfig, SyncRetryTransport
 from ._version import SDK_VERSION
 from .errors import (
     APIConnectionError,
-    APITimeoutError,
     ApiError,
+    APITimeoutError,
     classify_http_error,
 )
 
@@ -66,7 +66,7 @@ def _raise_on_error(response: httpx.Response) -> None:
                 code = str(err["code"])
             if err.get("message"):
                 message = str(err["message"])
-    except Exception:  # noqa: BLE001 — body wasn't JSON, fine
+    except Exception:
         pass
 
     raise classify_http_error(
@@ -189,7 +189,7 @@ class Astroway(_BaseAstroway):
         _raise_on_error(response)
         try:
             payload = response.json()
-        except Exception:  # noqa: BLE001
+        except Exception:
             return response.text
         # Endpoints wrap responses as { ok, data, error } — unwrap data when present.
         if isinstance(payload, dict) and "data" in payload:
@@ -293,7 +293,7 @@ class AsyncAstroway(_BaseAstroway):
         _raise_on_error(response)
         try:
             payload = response.json()
-        except Exception:  # noqa: BLE001
+        except Exception:
             return response.text
         if isinstance(payload, dict) and "data" in payload:
             return payload["data"]

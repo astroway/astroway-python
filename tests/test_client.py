@@ -9,8 +9,8 @@ import pytest
 
 from astroway import (
     ApiError,
-    AsyncAstroway,
     Astroway,
+    AsyncAstroway,
     AuthenticationError,
     BadRequestError,
     RateLimitError,

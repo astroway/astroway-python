@@ -6,8 +6,8 @@ import pytest
 
 from astroway import (
     APIConnectionError,
-    APITimeoutError,
     ApiError,
+    APITimeoutError,
     AuthenticationError,
     BadRequestError,
     InternalServerError,
