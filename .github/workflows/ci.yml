@@ -1,8 +1,7 @@
 name: ci
 
 on:
-  push:
-    branches: [main]
+  workflow_dispatch:      # manual runs only — push trigger disabled until SDK code is ready
   pull_request:
     branches: [main]
 

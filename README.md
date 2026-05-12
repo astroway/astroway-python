@@ -31,18 +31,18 @@ Requires Python 3.9+.
 ### Synchronous
 
 ```python
-from astroway import Astroway
+from astroway import Astroway, BirthData
 
 aw = Astroway(api_key="aw_live_...")
 
-chart = aw.post("/chart", body={
-    "date": "1990-07-14",
-    "time": "14:30:00",
-    "timezoneOffset": 3,
-    "latitude": 50.45,
-    "longitude": 30.52,
-    "houseSystem": "P",
-})
+chart = aw.chart.compute(BirthData(
+    date="1990-07-14",
+    time="14:30:00",
+    timezone_offset=3,
+    latitude=50.45,
+    longitude=30.52,
+    house_system="P",
+))
 
 asc = chart["angles"]["asc"]
 print(f"ASC: {asc['sign']} {asc['degree']:.2f}°")
@@ -56,7 +56,7 @@ from astroway import AsyncAstroway
 
 async def main() -> None:
     async with AsyncAstroway(api_key="aw_live_...") as aw:
-        chart = await aw.post("/chart", body={
+        chart = await aw.chart.compute({
             "date": "1990-07-14",
             "time": "14:30:00",
             "timezoneOffset": 3,
@@ -68,7 +68,11 @@ async def main() -> None:
 asyncio.run(main())
 ```
 
-The two clients share an identical surface — same constructor params, same methods (`get`, `post`, `put`, `delete`, low-level `request`), same error types.
+The SDK exposes **103 typed namespaces / 623 methods** auto-generated from the OpenAPI spec — `aw.synastry.aspect_grid({...})`, `aw.bazi.day_master({...})`, `aw.vedic.dashas_vimshottari_maha({...})`, etc. The `{ ok, data, error }` envelope is unwrapped for you.
+
+Top-4 categories (chart, synastry, transits, vedic dashas) ship **Pydantic v2 request models** for IDE autocomplete + validation: `BirthData`, `SynastryRequest`, `TransitsRequest`, `VedicDashaRequest`. Pass either a model or a `dict` — both work everywhere.
+
+Sync and async clients share an identical surface — both expose the same namespaces, plus low-level `aw.request(method, path, body=…)` / `aw.post(path, body=…)` escape hatches.
 
 ---
 
@@ -77,44 +81,50 @@ The two clients share an identical surface — same constructor params, same met
 ### Synastry
 
 ```python
-result = aw.post("/synastry", body={
-    "chart1": {"date": "1990-07-14", "time": "14:30:00", "timezoneOffset": 3, "latitude": 50.45, "longitude": 30.52},
-    "chart2": {"date": "1992-03-22", "time": "09:15:00", "timezoneOffset": 2, "latitude": 48.85, "longitude": 2.35},
-})
+from astroway import BirthData, SynastryRequest
+
+result = aw.synastry.compute(SynastryRequest(
+    chart1=BirthData(date="1990-07-14", time="14:30:00", timezone_offset=3, latitude=50.45, longitude=30.52),
+    chart2=BirthData(date="1992-03-22", time="09:15:00", timezone_offset=2, latitude=48.85, longitude=2.35),
+))
 print(f"Score: {result['compatibility']['score']}/100 ({result['compatibility']['label']})")
 ```
 
 ### Transits to natal
 
 ```python
-transits = aw.post("/transits", body={
-    "date": "1990-07-14", "time": "14:30:00", "timezoneOffset": 3, "latitude": 50.45, "longitude": 30.52,
-    "targetDate": "2027-01-01",
-})
+from astroway import TransitsRequest
+
+transits = aw.transits.compute(TransitsRequest(
+    date="1990-07-14", time="14:30:00", timezone_offset=3, latitude=50.45, longitude=30.52,
+    target_date="2027-01-01",
+))
 ```
 
 ### Vedic Vimshottari Mahadasha
 
 ```python
-dasha = aw.post("/vedic/dashas/vimshottari/maha", body={
-    "date": "1985-07-22", "time": "06:45:00", "timezoneOffset": 5.5,
-    "latitude": 19.07, "longitude": 72.87,
-})
+from astroway import VedicDashaRequest
+
+dasha = aw.vedic.dashas_vimshottari_maha(VedicDashaRequest(
+    date="1985-07-22", time="06:45:00", timezone_offset=5.5,
+    latitude=19.07, longitude=72.87,
+))
 ```
 
-### Tarot reading
+### Tarot daily card
 
 ```python
-spread = aw.post("/tarot/rider-waite/spread", body={"spreadType": "three-card", "seed": 42})
+card = aw.tarot.rider_waite_daily({"seed": 42})
 ```
 
 ### Human Design
 
 ```python
-hd = aw.post("/human-design", body={
+hd = aw.human_design.compute({
     "date": "1990-07-14", "time": "14:30:00", "timezoneOffset": 3, "latitude": 50.45, "longitude": 30.52,
 })
-print(f"{hd['type']} — {hd['strategy']} — {hd['authority']}")
+print(f"{hd['type']} - {hd['strategy']} - {hd['authority']}")
 ```
 
 ---
@@ -207,9 +217,27 @@ Neither carries a session ID, machine fingerprint, or anything personal.
 
 ## Stability
 
-- **Public API stable inside a major version.** Methods/classes shipped under `1.x` won't be renamed or removed without a deprecation note in `CHANGELOG.md` and a one-minor parallel-availability window.
-- **Body shape stable inside a minor version.** Tightening (constraints, enum) ships in patches; new required keys require a minor bump.
-- **API version vs SDK version are independent.** SDK `0.x` follows its own semver; the API itself sits at `/v1/`.
+Since **`1.0.0` (2026-05-11)** this package follows strict SemVer:
+
+- **Public names in `astroway.__all__` stable inside `1.x`.** Removing or narrowing requires a `2.0.0` major bump with deprecation period.
+- **Method signatures stable inside `1.x`.** Adding a new keyword-only parameter (with default) is non-breaking; reordering or renaming is breaking.
+- **Body shape stable inside `1.minor`.** Tightening (constraints, enum) ships in patches; new required keys require a minor bump.
+- **API version vs SDK version are independent.** SDK `1.x` follows its own semver; the API itself sits at `/v1/`.
+- **Python 3.10+ required** since `1.0.0`. Need 3.9? Stay on `0.x` (will receive critical security patches).
+
+### Migration from `0.1.0a1` … `0.1.0rc1` to `0.1.0`
+
+`0.1.0` freezes the public surface. **No breaking changes** vs `0.1.0rc1` — every export, namespace, error class, and option added across alphas / betas / RCs ships unchanged. The freeze means future `0.1.x` patches will not narrow types or remove names; that level of change requires a `0.2.0` minor bump.
+
+| Coming from | Action |
+|---|---|
+| `0.1.0a1` (manual `aw.post('/chart', body=...)`) | Switch to typed namespaces — `aw.chart.compute(body)`, `aw.synastry.aspect_grid(body)`, etc. The escape hatch (`aw.request(...)`) still works. |
+| `0.1.0a2` … `a3` (no idempotency / errors) | Pick up automatic `Idempotency-Key` on POSTs, `error.request_id` / `error.credits_remaining` getters, Pydantic models for top categories. |
+| `0.1.0a4` … `a6` (no helpers) | `from astroway.helpers import BirthDateTime` for `from_city()` / `from_coordinates()`. |
+| `0.1.0b1` … `b3` (no streaming / cache / mock) | `for chunk in aw.charts.compute(...).stream()`, `Astroway(cache=MemoryCache())`, `from astroway.testing import MockAstroway`. |
+| `0.1.0rc1` (no bring-your-own httpx) | Optional: pass `http_client=httpx.Client(...)`, `limits=httpx.Limits(...)`, or `transport='aiohttp'` (with `pip install astroway[aiohttp]`). |
+
+A type-stability test suite (`tests/test_types.py`) inspects constructor signatures, error subclass tree, dataclass fields, and Literal unions — any future PR that breaks the public surface fails CI before reaching PyPI.
 
 ---
 

@@ -4,12 +4,12 @@ build-backend = "hatchling.build"
 
 [project]
 name = "astroway"
-version = "0.1.0a1"
+version = "1.0.0"
 description = "Official Python SDK for the AstroWay API — natal, synastry, transits, Vedic, Human Design, Tarot, Numerology, AI horoscopes. Type-safe, retry-aware, OpenAPI 3.1 generated."
 readme = "README.md"
 license = "MIT"
 license-files = ["LICENSE"]
-requires-python = ">=3.9"
+requires-python = ">=3.10"
 authors = [{ name = "AstroWay", email = "astroway.info@gmail.com" }]
 keywords = [
   "astrology", "api", "sdk",
@@ -22,7 +22,6 @@ classifiers = [
   "Intended Audience :: Developers",
   "License :: OSI Approved :: MIT License",
   "Programming Language :: Python :: 3",
-  "Programming Language :: Python :: 3.9",
   "Programming Language :: Python :: 3.10",
   "Programming Language :: Python :: 3.11",
   "Programming Language :: Python :: 3.12",
@@ -42,12 +41,27 @@ Issues = "https://github.com/astroway/astroway-python/issues"
 Changelog = "https://github.com/astroway/astroway-python/blob/main/CHANGELOG.md"
 
 [project.optional-dependencies]
+aiohttp = [
+  "httpx-aiohttp>=0.1",
+]
+django = [
+  "django>=4.2",
+]
+fastapi = [
+  "fastapi>=0.110",
+  "starlette>=0.36",
+]
 dev = [
   "pytest>=8.0",
   "pytest-asyncio>=0.23",
   "respx>=0.21",
   "ruff>=0.6",
   "datamodel-code-generator[http]>=0.26",
+  # Framework deps for integration tests; intentionally NOT pulling
+  # httpx-aiohttp here — test_http_client.py asserts the ImportError path
+  # when the optional extra is absent.
+  "django>=4.2",
+  "fastapi>=0.110",
 ]
 
 [tool.hatch.build.targets.wheel]
