@@ -198,6 +198,7 @@ class _BaseAstroway:
         default_headers: Mapping[str, str] | None = None,
         idempotency: IdempotencyMode | None = None,
         cache: Any = None,
+        lang: str | None = None,
     ) -> None:
         if not api_key:
             raise ApiError(
@@ -210,11 +211,18 @@ class _BaseAstroway:
         self.idempotency = idempotency if idempotency is not None else "auto"
         self._idempotency_generator = resolve_key_generator(self.idempotency)
         self.timeout = timeout
+        self.lang = lang
         self.retry = (
             retry if isinstance(retry, RetryConfig) else RetryConfig.from_dict(retry)
         )
+        # Inject Accept-Language into base headers if lang is set; caller-supplied
+        # default_headers wins. Server (api-calc v2.30.0+) resolves the header
+        # against 21 active langs and routes into AI prompt instructions for
+        # /horoscope/* + /interpret/*. Numeric fields stay canonical.
+        lang_header = {"Accept-Language": lang} if lang else {}
         self._headers: dict[str, str] = {
             **_default_headers(api_key, auth_scheme),
+            **lang_header,
             **(dict(default_headers) if default_headers else {}),
         }
         self.cache = resolve_cache_option(cache)
@@ -250,6 +258,7 @@ class Astroway(_BaseAstroway):
         http_client: httpx.Client | None = None,
         idempotency: IdempotencyMode | None = None,
         cache: Any = None,
+        lang: str | None = None,
     ) -> None:
         super().__init__(
             api_key=api_key,
@@ -260,6 +269,7 @@ class Astroway(_BaseAstroway):
             default_headers=default_headers,
             idempotency=idempotency,
             cache=cache,
+            lang=lang,
         )
         if http_client is not None:
             if transport is not None or limits is not None:
@@ -513,6 +523,7 @@ class AsyncAstroway(_BaseAstroway):
         http_client: httpx.AsyncClient | None = None,
         idempotency: IdempotencyMode | None = None,
         cache: Any = None,
+        lang: str | None = None,
     ) -> None:
         super().__init__(
             api_key=api_key,
@@ -523,6 +534,7 @@ class AsyncAstroway(_BaseAstroway):
             default_headers=default_headers,
             idempotency=idempotency,
             cache=cache,
+            lang=lang,
         )
         if http_client is not None:
             if transport is not None or limits is not None:

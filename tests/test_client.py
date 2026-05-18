@@ -117,6 +117,41 @@ def test_bearer_when_auth_scheme_bearer() -> None:
     assert inner.last_request.headers.get("x-api-key") is None
 
 
+def test_lang_option_sets_accept_language() -> None:
+    inner = _RecordingTransport(_ok_response({}))
+    aw = Astroway(api_key="aw_test", lang="hi", transport=inner)
+    aw.post("/horoscope/daily", body={"sign": "leo"})
+    aw.close()
+    assert inner.last_request is not None
+    assert inner.last_request.headers["accept-language"] == "hi"
+    assert aw.lang == "hi"
+
+
+def test_lang_default_unset_emits_no_accept_language() -> None:
+    inner = _RecordingTransport(_ok_response({}))
+    aw = Astroway(api_key="aw_test", transport=inner)
+    aw.post("/horoscope/daily", body={"sign": "leo"})
+    aw.close()
+    assert inner.last_request is not None
+    # httpx adds its own default Accept-Language; SDK should not inject one.
+    assert "accept-language" not in {k.lower() for k in inner.last_request.headers if k.lower() == "accept-language" and inner.last_request.headers[k] in ("hi", "de", "uk")}
+    assert aw.lang is None
+
+
+def test_default_headers_accept_language_wins() -> None:
+    inner = _RecordingTransport(_ok_response({}))
+    aw = Astroway(
+        api_key="aw_test",
+        lang="hi",
+        default_headers={"Accept-Language": "de"},
+        transport=inner,
+    )
+    aw.post("/horoscope/daily", body={"sign": "leo"})
+    aw.close()
+    assert inner.last_request is not None
+    assert inner.last_request.headers["accept-language"] == "de"
+
+
 # ─── Error mapping ───────────────────────────────────────────────
 
 
