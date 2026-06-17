@@ -231,3 +231,65 @@ async def test_async_raises_auth_error() -> None:
     async with AsyncAstroway(api_key="aw_test_x", transport=inner, retry={"max_retries": 0}) as aw:
         with pytest.raises(AuthenticationError):
             await aw.post("/chart", body={})
+
+
+# ─── System self-check (version / health) ────────────────────────
+
+
+def test_version_hits_version_endpoint_with_get() -> None:
+    payload = {
+        "version": "2.81.1",
+        "build_commit": "abc1234",
+        "started_at": "2026-06-13T00:00:00.000Z",
+        "uptime_seconds": 42,
+        "docs_url": "https://api.astroway.info/docs/api/",
+    }
+    inner = _RecordingTransport(_ok_response(payload))
+    aw = Astroway(api_key="aw_test_x", transport=inner)
+    result = aw.version()
+    aw.close()
+    assert inner.last_request is not None
+    assert inner.last_request.method == "GET"
+    assert inner.last_request.url.path.endswith("/version")
+    assert result == payload
+
+
+def test_health_hits_health_endpoint_with_get() -> None:
+    payload = {"status": "ok", "version": "2.81.1", "uptime_seconds": 7, "timestamp": "2026-06-13T00:00:00.000Z"}
+    inner = _RecordingTransport(_ok_response(payload))
+    aw = Astroway(api_key="aw_test_x", transport=inner)
+    result = aw.health()
+    aw.close()
+    assert inner.last_request is not None
+    assert inner.last_request.method == "GET"
+    assert inner.last_request.url.path.endswith("/health")
+    assert result["status"] == "ok"
+
+
+@pytest.mark.asyncio
+async def test_async_version_hits_version_endpoint() -> None:
+    payload = {
+        "version": "2.81.1",
+        "build_commit": None,
+        "started_at": "2026-06-13T00:00:00.000Z",
+        "uptime_seconds": 1,
+        "docs_url": "https://api.astroway.info/docs/api/",
+    }
+    inner = _RecordingAsyncTransport(_ok_response(payload))
+    async with AsyncAstroway(api_key="aw_test_x", transport=inner) as aw:
+        result = await aw.version()
+    assert inner.last_request is not None
+    assert inner.last_request.method == "GET"
+    assert inner.last_request.url.path.endswith("/version")
+    assert result == payload
+
+
+@pytest.mark.asyncio
+async def test_async_health_hits_health_endpoint() -> None:
+    payload = {"status": "ok", "version": "2.81.1", "uptime_seconds": 3, "timestamp": "2026-06-13T00:00:00.000Z"}
+    inner = _RecordingAsyncTransport(_ok_response(payload))
+    async with AsyncAstroway(api_key="aw_test_x", transport=inner) as aw:
+        result = await aw.health()
+    assert inner.last_request is not None
+    assert inner.last_request.url.path.endswith("/health")
+    assert result["status"] == "ok"

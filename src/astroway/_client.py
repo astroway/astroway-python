@@ -440,6 +440,23 @@ class Astroway(_BaseAstroway):
     def delete(self, path: str) -> Any:
         return self.request("DELETE", path)
 
+    def version(self) -> dict[str, Any]:
+        """Deploy metadata for SDK self-check.
+
+        Wraps the free, no-auth ``GET /v1/version`` — returns
+        ``{ version, build_commit, started_at, uptime_seconds, docs_url }``.
+        ``build_commit`` uniquely identifies the running deploy, handy for
+        support-ticket triage and detecting breaking changes on boot. No credits.
+        """
+        return self.get("/version")
+
+    def health(self) -> dict[str, Any]:
+        """Liveness probe — ``{ status, version, uptime_seconds, timestamp }``.
+
+        Thinner counterpart to :meth:`version`; wraps the free, no-auth ``GET /v1/health``.
+        """
+        return self.get("/health")
+
     def paginate(
         self,
         method: str,
@@ -700,6 +717,14 @@ class AsyncAstroway(_BaseAstroway):
 
     async def delete(self, path: str) -> Any:
         return await self.request("DELETE", path)
+
+    async def version(self) -> dict[str, Any]:
+        """Deploy metadata for SDK self-check — see :meth:`Astroway.version`."""
+        return await self.get("/version")
+
+    async def health(self) -> dict[str, Any]:
+        """Liveness probe — see :meth:`Astroway.health`."""
+        return await self.get("/health")
 
     def paginate(
         self,

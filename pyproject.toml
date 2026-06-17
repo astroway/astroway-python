@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "astroway"
-version = "1.1.0"
+version = "1.2.0"
 description = "Official Python SDK for the AstroWay API — natal, synastry, transits, Vedic, Human Design, Tarot, Numerology, AI horoscopes. Type-safe, retry-aware, OpenAPI 3.1 generated."
 readme = "README.md"
 license = "MIT"
