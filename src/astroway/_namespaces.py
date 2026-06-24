@@ -159,6 +159,19 @@ class _AspectTimelineNamespace:
         return self._client.request("POST", "/aspect-timeline", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
 
+class _AspectsNamespace:
+    """Sync namespace for `aspects.*` endpoints."""
+
+    __slots__ = ("_client",)
+
+    def __init__(self, client: Astroway) -> None:
+        self._client = client
+
+    def compute(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
+        """Aspect Matrix (POST /aspects)"""
+        return self._client.request("POST", "/aspects", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
+
+
 class _BaziNamespace:
     """Sync namespace for `bazi.*` endpoints."""
 
@@ -1139,6 +1152,19 @@ class _HoroscopeNamespace:
         return self._client.request("POST", "/horoscope/yearly", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
 
+class _HousesNamespace:
+    """Sync namespace for `houses.*` endpoints."""
+
+    __slots__ = ("_client",)
+
+    def __init__(self, client: Astroway) -> None:
+        self._client = client
+
+    def compute(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
+        """House Cusps (POST /houses)"""
+        return self._client.request("POST", "/houses", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
+
+
 class _HumanDesignNamespace:
     """Sync namespace for `human_design.*` endpoints."""
 
@@ -1493,6 +1519,19 @@ class _MoonAspectsNamespace:
     def compute(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
         """Moon Aspects (POST /moon-aspects)"""
         return self._client.request("POST", "/moon-aspects", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
+
+
+class _MoonPhaseNamespace:
+    """Sync namespace for `moon_phase.*` endpoints."""
+
+    __slots__ = ("_client",)
+
+    def __init__(self, client: Astroway) -> None:
+        self._client = client
+
+    def compute(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
+        """Moon Phase (POST /moon-phase)"""
+        return self._client.request("POST", "/moon-phase", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
 
 class _MoonVocNamespace:
@@ -2114,6 +2153,10 @@ class _ReportsNamespace:
     def child(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
         """Generate Child Astrology Report (PDF or HTML) (POST /reports/child)"""
         return self._client.request("POST", "/reports/child", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
+
+    def generate(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
+        """Generate Report - Unified Dispatcher (V2) (POST /reports/generate)"""
+        return self._client.request("POST", "/reports/generate", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def human_design(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
         """Generate Human Design Report (PDF or HTML) (POST /reports/human-design)"""
@@ -2881,6 +2924,10 @@ class _VedicNamespace:
         """Doshas - Shrapit (curse) (POST /vedic/doshas/parashara/shrapit)"""
         return self._client.request("POST", "/vedic/doshas/parashara/shrapit", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
+    def jaimini_argala_analysis(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
+        """Jaimini - Argala / Virodhargala scan (POST /vedic/jaimini/argala-analysis)"""
+        return self._client.request("POST", "/vedic/jaimini/argala-analysis", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
+
     def jaimini_aspects(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
         """Jaimini - Aspects (Rasi + Graha drishti) (POST /vedic/jaimini/aspects)"""
         return self._client.request("POST", "/vedic/jaimini/aspects", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
@@ -2888,6 +2935,10 @@ class _VedicNamespace:
     def jaimini_atmakaraka_navamsa(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
         """Jaimini - Karakamsa (AK in Navamsa) (POST /vedic/jaimini/atmakaraka-navamsa)"""
         return self._client.request("POST", "/vedic/jaimini/atmakaraka-navamsa", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
+
+    def jaimini_atmakaraka_rotation(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
+        """Jaimini - Atmakaraka rotation (timeline) (POST /vedic/jaimini/atmakaraka-rotation)"""
+        return self._client.request("POST", "/vedic/jaimini/atmakaraka-rotation", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def jaimini_chara_karakas(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
         """Jaimini - Chara Karakas (detailed) (POST /vedic/jaimini/chara-karakas)"""
@@ -3193,9 +3244,21 @@ class _VedicNamespace:
         """Yogas - Jaimini full summary (POST /vedic/yogas/jaimini/full)"""
         return self._client.request("POST", "/vedic/yogas/jaimini/full", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
+    def yogas_jaimini_karaka_yoga(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
+        """Yogas - Jaimini Karaka yoga (all 8 karakas) (POST /vedic/yogas/jaimini/karaka-yoga)"""
+        return self._client.request("POST", "/vedic/yogas/jaimini/karaka-yoga", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
+
+    def yogas_jaimini_karakamsa(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
+        """Yogas - Karakamsa chart (12-house projection) (POST /vedic/yogas/jaimini/karakamsa)"""
+        return self._client.request("POST", "/vedic/yogas/jaimini/karakamsa", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
+
     def yogas_jaimini_raja(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
         """Yogas - Jaimini Raja yoga (POST /vedic/yogas/jaimini/raja)"""
         return self._client.request("POST", "/vedic/yogas/jaimini/raja", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
+
+    def yogas_jaimini_shubha_graha(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
+        """Yogas - Shubha-graha (functional natures) (POST /vedic/yogas/jaimini/shubha-graha)"""
+        return self._client.request("POST", "/vedic/yogas/jaimini/shubha-graha", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def yogas_jaimini_viparita(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
         """Yogas - Jaimini Viparita Raja yoga (POST /vedic/yogas/jaimini/viparita)"""
@@ -3576,6 +3639,19 @@ class _AspectTimelineAsyncNamespace:
     async def compute(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
         """Aspect Timeline (POST /aspect-timeline)"""
         return await self._client.request("POST", "/aspect-timeline", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
+
+
+class _AspectsAsyncNamespace:
+    """Async namespace for `aspects.*` endpoints."""
+
+    __slots__ = ("_client",)
+
+    def __init__(self, client: AsyncAstroway) -> None:
+        self._client = client
+
+    async def compute(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
+        """Aspect Matrix (POST /aspects)"""
+        return await self._client.request("POST", "/aspects", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
 
 class _BaziAsyncNamespace:
@@ -4558,6 +4634,19 @@ class _HoroscopeAsyncNamespace:
         return await self._client.request("POST", "/horoscope/yearly", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
 
+class _HousesAsyncNamespace:
+    """Async namespace for `houses.*` endpoints."""
+
+    __slots__ = ("_client",)
+
+    def __init__(self, client: AsyncAstroway) -> None:
+        self._client = client
+
+    async def compute(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
+        """House Cusps (POST /houses)"""
+        return await self._client.request("POST", "/houses", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
+
+
 class _HumanDesignAsyncNamespace:
     """Async namespace for `human_design.*` endpoints."""
 
@@ -4912,6 +5001,19 @@ class _MoonAspectsAsyncNamespace:
     async def compute(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
         """Moon Aspects (POST /moon-aspects)"""
         return await self._client.request("POST", "/moon-aspects", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
+
+
+class _MoonPhaseAsyncNamespace:
+    """Async namespace for `moon_phase.*` endpoints."""
+
+    __slots__ = ("_client",)
+
+    def __init__(self, client: AsyncAstroway) -> None:
+        self._client = client
+
+    async def compute(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
+        """Moon Phase (POST /moon-phase)"""
+        return await self._client.request("POST", "/moon-phase", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
 
 class _MoonVocAsyncNamespace:
@@ -5533,6 +5635,10 @@ class _ReportsAsyncNamespace:
     async def child(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
         """Generate Child Astrology Report (PDF or HTML) (POST /reports/child)"""
         return await self._client.request("POST", "/reports/child", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
+
+    async def generate(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
+        """Generate Report - Unified Dispatcher (V2) (POST /reports/generate)"""
+        return await self._client.request("POST", "/reports/generate", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def human_design(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
         """Generate Human Design Report (PDF or HTML) (POST /reports/human-design)"""
@@ -6300,6 +6406,10 @@ class _VedicAsyncNamespace:
         """Doshas - Shrapit (curse) (POST /vedic/doshas/parashara/shrapit)"""
         return await self._client.request("POST", "/vedic/doshas/parashara/shrapit", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
+    async def jaimini_argala_analysis(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
+        """Jaimini - Argala / Virodhargala scan (POST /vedic/jaimini/argala-analysis)"""
+        return await self._client.request("POST", "/vedic/jaimini/argala-analysis", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
+
     async def jaimini_aspects(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
         """Jaimini - Aspects (Rasi + Graha drishti) (POST /vedic/jaimini/aspects)"""
         return await self._client.request("POST", "/vedic/jaimini/aspects", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
@@ -6307,6 +6417,10 @@ class _VedicAsyncNamespace:
     async def jaimini_atmakaraka_navamsa(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
         """Jaimini - Karakamsa (AK in Navamsa) (POST /vedic/jaimini/atmakaraka-navamsa)"""
         return await self._client.request("POST", "/vedic/jaimini/atmakaraka-navamsa", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
+
+    async def jaimini_atmakaraka_rotation(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
+        """Jaimini - Atmakaraka rotation (timeline) (POST /vedic/jaimini/atmakaraka-rotation)"""
+        return await self._client.request("POST", "/vedic/jaimini/atmakaraka-rotation", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def jaimini_chara_karakas(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
         """Jaimini - Chara Karakas (detailed) (POST /vedic/jaimini/chara-karakas)"""
@@ -6612,9 +6726,21 @@ class _VedicAsyncNamespace:
         """Yogas - Jaimini full summary (POST /vedic/yogas/jaimini/full)"""
         return await self._client.request("POST", "/vedic/yogas/jaimini/full", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
+    async def yogas_jaimini_karaka_yoga(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
+        """Yogas - Jaimini Karaka yoga (all 8 karakas) (POST /vedic/yogas/jaimini/karaka-yoga)"""
+        return await self._client.request("POST", "/vedic/yogas/jaimini/karaka-yoga", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
+
+    async def yogas_jaimini_karakamsa(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
+        """Yogas - Karakamsa chart (12-house projection) (POST /vedic/yogas/jaimini/karakamsa)"""
+        return await self._client.request("POST", "/vedic/yogas/jaimini/karakamsa", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
+
     async def yogas_jaimini_raja(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
         """Yogas - Jaimini Raja yoga (POST /vedic/yogas/jaimini/raja)"""
         return await self._client.request("POST", "/vedic/yogas/jaimini/raja", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
+
+    async def yogas_jaimini_shubha_graha(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
+        """Yogas - Shubha-graha (functional natures) (POST /vedic/yogas/jaimini/shubha-graha)"""
+        return await self._client.request("POST", "/vedic/yogas/jaimini/shubha-graha", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def yogas_jaimini_viparita(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
         """Yogas - Jaimini Viparita Raja yoga (POST /vedic/yogas/jaimini/viparita)"""
@@ -6863,6 +6989,7 @@ def _attach_sync(client: Astroway) -> None:
     client.ashtakavarga = _AshtakavargaNamespace(client)  # type: ignore[attr-defined]
     client.aspect_bar = _AspectBarNamespace(client)  # type: ignore[attr-defined]
     client.aspect_timeline = _AspectTimelineNamespace(client)  # type: ignore[attr-defined]
+    client.aspects = _AspectsNamespace(client)  # type: ignore[attr-defined]
     client.bazi = _BaziNamespace(client)  # type: ignore[attr-defined]
     client.business = _BusinessNamespace(client)  # type: ignore[attr-defined]
     client.ccg_analysis = _CcgAnalysisNamespace(client)  # type: ignore[attr-defined]
@@ -6899,6 +7026,7 @@ def _attach_sync(client: Astroway) -> None:
     client.horary = _HoraryNamespace(client)  # type: ignore[attr-defined]
     client.horizon = _HorizonNamespace(client)  # type: ignore[attr-defined]
     client.horoscope = _HoroscopeNamespace(client)  # type: ignore[attr-defined]
+    client.houses = _HousesNamespace(client)  # type: ignore[attr-defined]
     client.human_design = _HumanDesignNamespace(client)  # type: ignore[attr-defined]
     client.hyleg = _HylegNamespace(client)  # type: ignore[attr-defined]
     client.iching = _IchingNamespace(client)  # type: ignore[attr-defined]
@@ -6915,6 +7043,7 @@ def _attach_sync(client: Astroway) -> None:
     client.minor_progressions = _MinorProgressionsNamespace(client)  # type: ignore[attr-defined]
     client.modern = _ModernNamespace(client)  # type: ignore[attr-defined]
     client.moon_aspects = _MoonAspectsNamespace(client)  # type: ignore[attr-defined]
+    client.moon_phase = _MoonPhaseNamespace(client)  # type: ignore[attr-defined]
     client.moon_voc = _MoonVocNamespace(client)  # type: ignore[attr-defined]
     client.nakshatras = _NakshatrasNamespace(client)  # type: ignore[attr-defined]
     client.numerology = _NumerologyNamespace(client)  # type: ignore[attr-defined]
@@ -6969,6 +7098,7 @@ def _attach_async(client: AsyncAstroway) -> None:
     client.ashtakavarga = _AshtakavargaAsyncNamespace(client)  # type: ignore[attr-defined]
     client.aspect_bar = _AspectBarAsyncNamespace(client)  # type: ignore[attr-defined]
     client.aspect_timeline = _AspectTimelineAsyncNamespace(client)  # type: ignore[attr-defined]
+    client.aspects = _AspectsAsyncNamespace(client)  # type: ignore[attr-defined]
     client.bazi = _BaziAsyncNamespace(client)  # type: ignore[attr-defined]
     client.business = _BusinessAsyncNamespace(client)  # type: ignore[attr-defined]
     client.ccg_analysis = _CcgAnalysisAsyncNamespace(client)  # type: ignore[attr-defined]
@@ -7005,6 +7135,7 @@ def _attach_async(client: AsyncAstroway) -> None:
     client.horary = _HoraryAsyncNamespace(client)  # type: ignore[attr-defined]
     client.horizon = _HorizonAsyncNamespace(client)  # type: ignore[attr-defined]
     client.horoscope = _HoroscopeAsyncNamespace(client)  # type: ignore[attr-defined]
+    client.houses = _HousesAsyncNamespace(client)  # type: ignore[attr-defined]
     client.human_design = _HumanDesignAsyncNamespace(client)  # type: ignore[attr-defined]
     client.hyleg = _HylegAsyncNamespace(client)  # type: ignore[attr-defined]
     client.iching = _IchingAsyncNamespace(client)  # type: ignore[attr-defined]
@@ -7021,6 +7152,7 @@ def _attach_async(client: AsyncAstroway) -> None:
     client.minor_progressions = _MinorProgressionsAsyncNamespace(client)  # type: ignore[attr-defined]
     client.modern = _ModernAsyncNamespace(client)  # type: ignore[attr-defined]
     client.moon_aspects = _MoonAspectsAsyncNamespace(client)  # type: ignore[attr-defined]
+    client.moon_phase = _MoonPhaseAsyncNamespace(client)  # type: ignore[attr-defined]
     client.moon_voc = _MoonVocAsyncNamespace(client)  # type: ignore[attr-defined]
     client.nakshatras = _NakshatrasAsyncNamespace(client)  # type: ignore[attr-defined]
     client.numerology = _NumerologyAsyncNamespace(client)  # type: ignore[attr-defined]
