@@ -44,9 +44,15 @@ chart = aw.chart.compute(BirthData(
     house_system="P",
 ))
 
-asc = chart["angles"]["asc"]
-print(f"ASC: {asc['sign']} {asc['degree']:.2f}°")
+SIGNS = ["Aries", "Taurus", "Gemini", "Cancer", "Leo", "Virgo",
+         "Libra", "Scorpio", "Sagittarius", "Capricorn", "Aquarius", "Pisces"]
+
+asc = chart["houses"]["ascendant"]                            # 212.0929
+print(f"ASC: {SIGNS[int(asc // 30)]} {asc % 30:.2f}°")        # ASC: Scorpio 2.09°
+print(f"Sun: {chart['planets'][0]['longitude']:.2f}°")        # Sun: 111.77°
 ```
+
+`/chart` returns positions, not labels: `houses["ascendant"]` and every `planets[i]["longitude"]` are ecliptic longitudes in degrees, so the sign is `longitude // 30` into the list above and the degree within it is `longitude % 30`.
 
 ### Asynchronous
 
@@ -63,7 +69,7 @@ async def main() -> None:
             "latitude": 50.45,
             "longitude": 30.52,
         })
-        print(chart["angles"]["asc"])
+        print(chart["houses"]["ascendant"])
 
 asyncio.run(main())
 ```
@@ -188,6 +194,10 @@ Full hierarchy:
   - `UnprocessableEntityError` (422)
   - `RateLimitError` (429) — carries `retry_after_seconds`
   - `InternalServerError` (5xx)
+
+### The 400 you are most likely to hit first
+
+Chart bodies take `latitude`, `longitude` and `timezone_offset` (`timezoneOffset` over the wire). The short spellings `lat`, `lon`, `lng`, `long`, `tz` and `timezone` are refused with a `BadRequestError` whose `e.code` is `INVALID_FIELD`, and `e.body["error"]["details"]` names every offending field at once as `{"path", "expected", "message"}`. They are not accepted and not deprecated: they were never in the spec, and before the API started refusing them they were silently ignored, which charted 0°N 0°E at UTC under a `200`. Details: <https://api.astroway.info/en/errors/#invalid_field>.
 
 ---
 
