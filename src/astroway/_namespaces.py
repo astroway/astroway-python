@@ -25,6 +25,10 @@ class _AcgNamespace:
         """A*C*G by Life Category (POST /acg/by-category)"""
         return self._client.request("POST", "/acg/by-category", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
+    def categories_get(self, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None) -> Any:
+        """A*C*G Life Categories (GET /acg/categories)"""
+        return self._client.request("GET", "/acg/categories", params=params, headers=headers)
+
     def compute(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
         """Astrocartography (A*C*G) (POST /acg)"""
         return self._client.request("POST", "/acg", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
@@ -565,6 +569,18 @@ class _EsotericNamespace:
         """Decode Angel Number (POST /esoteric/angel-numbers/decode)"""
         return self._client.request("POST", "/esoteric/angel-numbers/decode", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
+    def angel_numbers_get(self, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None) -> Any:
+        """Angel Numbers - Catalogue (GET /esoteric/angel-numbers)"""
+        return self._client.request("GET", "/esoteric/angel-numbers", params=params, headers=headers)
+
+    def angel_numbers_today_get(self, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None) -> Any:
+        """Daily Angel Number (GET /esoteric/angel-numbers/today)"""
+        return self._client.request("GET", "/esoteric/angel-numbers/today", params=params, headers=headers)
+
+    def crystals_get(self, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None) -> Any:
+        """Crystals - Full Directory (GET /esoteric/crystals)"""
+        return self._client.request("GET", "/esoteric/crystals", params=params, headers=headers)
+
     def crystals_recommend(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
         """Crystal Recommendations (POST /esoteric/crystals/recommend)"""
         return self._client.request("POST", "/esoteric/crystals/recommend", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
@@ -572,6 +588,14 @@ class _EsotericNamespace:
     def dreams_decode(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
         """Decode Dream Text (POST /esoteric/dreams/decode)"""
         return self._client.request("POST", "/esoteric/dreams/decode", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
+
+    def dreams_get(self, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None) -> Any:
+        """Dream Symbol Dictionary (GET /esoteric/dreams)"""
+        return self._client.request("GET", "/esoteric/dreams", params=params, headers=headers)
+
+    def dreams_recurring_themes_get(self, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None) -> Any:
+        """Recurring Dream Themes (GET /esoteric/dreams/recurring-themes)"""
+        return self._client.request("GET", "/esoteric/dreams/recurring-themes", params=params, headers=headers)
 
 
 class _EssentialDignitiesNamespace:
@@ -1278,19 +1302,6 @@ class _InterpretNamespace:
         return self._client.request("POST", "/interpret/transits", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
 
-class _KeysNamespace:
-    """Sync namespace for `keys.*` endpoints."""
-
-    __slots__ = ("_client",)
-
-    def __init__(self, client: Astroway) -> None:
-        self._client = client
-
-    def compute(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Create API Key (POST /keys)"""
-        return self._client.request("POST", "/keys", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
-
-
 class _LocalSpaceNamespace:
     """Sync namespace for `local_space.*` endpoints."""
 
@@ -1400,6 +1411,10 @@ class _McpNamespace:
         """MCP Agent Debate (POST /mcp/agent-debate)"""
         return self._client.request("POST", "/mcp/agent-debate", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
+    def agent_pool_status_get(self, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None) -> Any:
+        """MCP Agent Pool Status (GET /mcp/agent-pool-status)"""
+        return self._client.request("GET", "/mcp/agent-pool-status", params=params, headers=headers)
+
     def multi_agent_coordinate(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
         """MCP Multi-Agent Coordinate (POST /mcp/multi-agent-coordinate)"""
         return self._client.request("POST", "/mcp/multi-agent-coordinate", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
@@ -1419,6 +1434,10 @@ class _McpNamespace:
     def tool_call_stream(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
         """MCP Tool-Call Stream (POST /mcp/tool-call-stream)"""
         return self._client.request("POST", "/mcp/tool-call-stream", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
+
+    def tools_list_get(self, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None) -> Any:
+        """MCP Tools List (GET /mcp/tools-list)"""
+        return self._client.request("GET", "/mcp/tools-list", params=params, headers=headers)
 
 
 class _MidpointTreesNamespace:
@@ -1566,6 +1585,19 @@ class _MoonVocNamespace:
     def compute(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
         """Moon Void-of-Course (POST /moon-voc)"""
         return self._client.request("POST", "/moon-voc", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
+
+
+class _MuhurtaNamespace:
+    """Sync namespace for `muhurta.*` endpoints."""
+
+    __slots__ = ("_client",)
+
+    def __init__(self, client: Astroway) -> None:
+        self._client = client
+
+    def types_get(self, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None) -> Any:
+        """Muhurat - activity catalogue (GET /muhurta/types)"""
+        return self._client.request("GET", "/muhurta/types", params=params, headers=headers)
 
 
 class _NakshatrasNamespace:
@@ -2057,6 +2089,71 @@ class _RectificationNamespace:
         return self._client.request("POST", "/rectification/trutine", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
 
+class _ReferenceNamespace:
+    """Sync namespace for `reference.*` endpoints."""
+
+    __slots__ = ("_client",)
+
+    def __init__(self, client: Astroway) -> None:
+        self._client = client
+
+    def aspects_get(self, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None) -> Any:
+        """Aspects (GET /reference/aspects)"""
+        return self._client.request("GET", "/reference/aspects", params=params, headers=headers)
+
+    def asteroids_get(self, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None) -> Any:
+        """Asteroids & Centaurs (GET /reference/asteroids)"""
+        return self._client.request("GET", "/reference/asteroids", params=params, headers=headers)
+
+    def decans_get(self, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None) -> Any:
+        """Decans (GET /reference/decans)"""
+        return self._client.request("GET", "/reference/decans", params=params, headers=headers)
+
+    def dignities_get(self, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None) -> Any:
+        """Essential Dignities (GET /reference/dignities)"""
+        return self._client.request("GET", "/reference/dignities", params=params, headers=headers)
+
+    def elements_get(self, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None) -> Any:
+        """Elements (GET /reference/elements)"""
+        return self._client.request("GET", "/reference/elements", params=params, headers=headers)
+
+    def glyphs_get(self, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None) -> Any:
+        """Glyphs (GET /reference/glyphs)"""
+        return self._client.request("GET", "/reference/glyphs", params=params, headers=headers)
+
+    def houses_get(self, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None) -> Any:
+        """Houses (GET /reference/houses)"""
+        return self._client.request("GET", "/reference/houses", params=params, headers=headers)
+
+    def lots_get(self, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None) -> Any:
+        """Hellenistic Lots (GET /reference/lots)"""
+        return self._client.request("GET", "/reference/lots", params=params, headers=headers)
+
+    def modalities_get(self, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None) -> Any:
+        """Modalities (GET /reference/modalities)"""
+        return self._client.request("GET", "/reference/modalities", params=params, headers=headers)
+
+    def nakshatras_get(self, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None) -> Any:
+        """Nakshatras (GET /reference/nakshatras)"""
+        return self._client.request("GET", "/reference/nakshatras", params=params, headers=headers)
+
+    def planets_get(self, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None) -> Any:
+        """Planets (GET /reference/planets)"""
+        return self._client.request("GET", "/reference/planets", params=params, headers=headers)
+
+    def polarities_get(self, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None) -> Any:
+        """Polarities (GET /reference/polarities)"""
+        return self._client.request("GET", "/reference/polarities", params=params, headers=headers)
+
+    def signs_get(self, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None) -> Any:
+        """Zodiac Signs (GET /reference/signs)"""
+        return self._client.request("GET", "/reference/signs", params=params, headers=headers)
+
+    def zodiac_systems_get(self, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None) -> Any:
+        """Zodiac Systems (GET /reference/zodiac-systems)"""
+        return self._client.request("GET", "/reference/zodiac-systems", params=params, headers=headers)
+
+
 class _RelocationNamespace:
     """Sync namespace for `relocation.*` endpoints."""
 
@@ -2178,6 +2275,10 @@ class _ReportsNamespace:
     def generate(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
         """Generate Report - Unified Dispatcher (V2) (POST /reports/generate)"""
         return self._client.request("POST", "/reports/generate", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
+
+    def history_get(self, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None) -> Any:
+        """List Recent Report Exports (GET /reports/history)"""
+        return self._client.request("GET", "/reports/history", params=params, headers=headers)
 
     def human_design(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
         """Generate Human Design Report (PDF or HTML) (POST /reports/human-design)"""
@@ -2417,6 +2518,10 @@ class _TarotNamespace:
     def __init__(self, client: Astroway) -> None:
         self._client = client
 
+    def lenormand_cards_get(self, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None) -> Any:
+        """Lenormand - All Cards (GET /tarot/lenormand/cards)"""
+        return self._client.request("GET", "/tarot/lenormand/cards", params=params, headers=headers)
+
     def lenormand_daily(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
         """Lenormand - Daily Cards (POST /tarot/lenormand/daily)"""
         return self._client.request("POST", "/tarot/lenormand/daily", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
@@ -2445,9 +2550,17 @@ class _TarotNamespace:
         """Lenormand - Three-Card (POST /tarot/lenormand/draw/three-card)"""
         return self._client.request("POST", "/tarot/lenormand/draw/three-card", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
+    def lenormand_houses_get(self, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None) -> Any:
+        """Lenormand - 36 Houses (GET /tarot/lenormand/houses)"""
+        return self._client.request("GET", "/tarot/lenormand/houses", params=params, headers=headers)
+
     def marseille_birth_card(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
         """Marseille - Birth Card (POST /tarot/marseille/birth-card)"""
         return self._client.request("POST", "/tarot/marseille/birth-card", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
+
+    def marseille_cards_get(self, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None) -> Any:
+        """Marseille - All Cards (GET /tarot/marseille/cards)"""
+        return self._client.request("GET", "/tarot/marseille/cards", params=params, headers=headers)
 
     def marseille_clarify(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
         """Marseille - Clarifier (POST /tarot/marseille/clarify)"""
@@ -2501,6 +2614,14 @@ class _TarotNamespace:
         """Marseille - Interpret (POST /tarot/marseille/interpret)"""
         return self._client.request("POST", "/tarot/marseille/interpret", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
+    def marseille_majors_get(self, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None) -> Any:
+        """Marseille - 22 Majors (GET /tarot/marseille/majors)"""
+        return self._client.request("GET", "/tarot/marseille/majors", params=params, headers=headers)
+
+    def marseille_spreads_get(self, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None) -> Any:
+        """Marseille - All Spreads (GET /tarot/marseille/spreads)"""
+        return self._client.request("GET", "/tarot/marseille/spreads", params=params, headers=headers)
+
     def marseille_timing(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
         """Marseille - Timing (POST /tarot/marseille/timing)"""
         return self._client.request("POST", "/tarot/marseille/timing", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
@@ -2517,9 +2638,17 @@ class _TarotNamespace:
         """RWS - Birth Card (POST /tarot/rider-waite/birth-card)"""
         return self._client.request("POST", "/tarot/rider-waite/birth-card", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
+    def rider_waite_cards_get(self, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None) -> Any:
+        """RWS - All Cards (GET /tarot/rider-waite/cards)"""
+        return self._client.request("GET", "/tarot/rider-waite/cards", params=params, headers=headers)
+
     def rider_waite_clarify(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
         """RWS - Clarifier Card (POST /tarot/rider-waite/clarify)"""
         return self._client.request("POST", "/tarot/rider-waite/clarify", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
+
+    def rider_waite_courts_get(self, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None) -> Any:
+        """RWS - 16 Court Cards (GET /tarot/rider-waite/courts)"""
+        return self._client.request("GET", "/tarot/rider-waite/courts", params=params, headers=headers)
 
     def rider_waite_cross_sum(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
         """RWS - Court Card Cross-Sum (POST /tarot/rider-waite/cross-sum)"""
@@ -2581,6 +2710,14 @@ class _TarotNamespace:
         """RWS - Interpret a Hand (POST /tarot/rider-waite/interpret)"""
         return self._client.request("POST", "/tarot/rider-waite/interpret", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
+    def rider_waite_majors_get(self, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None) -> Any:
+        """RWS - 22 Majors (GET /tarot/rider-waite/majors)"""
+        return self._client.request("GET", "/tarot/rider-waite/majors", params=params, headers=headers)
+
+    def rider_waite_minors_get(self, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None) -> Any:
+        """RWS - 40 Minors (GET /tarot/rider-waite/minors)"""
+        return self._client.request("GET", "/tarot/rider-waite/minors", params=params, headers=headers)
+
     def rider_waite_missing_info(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
         """RWS - Missing Info Card (POST /tarot/rider-waite/missing-info)"""
         return self._client.request("POST", "/tarot/rider-waite/missing-info", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
@@ -2596,6 +2733,10 @@ class _TarotNamespace:
     def rider_waite_soul_personality_card(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
         """RWS - Soul + Personality (POST /tarot/rider-waite/soul-personality-card)"""
         return self._client.request("POST", "/tarot/rider-waite/soul-personality-card", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
+
+    def rider_waite_spreads_get(self, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None) -> Any:
+        """RWS - All Spreads (GET /tarot/rider-waite/spreads)"""
+        return self._client.request("GET", "/tarot/rider-waite/spreads", params=params, headers=headers)
 
     def rider_waite_timing(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
         """RWS - Timing Card (POST /tarot/rider-waite/timing)"""
@@ -2660,6 +2801,10 @@ class _TranslateNamespace:
     def batch(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
         """Translate batch (POST /translate/batch)"""
         return self._client.request("POST", "/translate/batch", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
+
+    def languages_get(self, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None) -> Any:
+        """Supported languages (GET /translate/languages)"""
+        return self._client.request("GET", "/translate/languages", params=params, headers=headers)
 
 
 class _VedicNamespace:
@@ -3368,6 +3513,10 @@ class _WebhooksNamespace:
         """Register Eclipse-Alert Webhook (POST /webhooks/eclipse-alert)"""
         return self._client.request("POST", "/webhooks/eclipse-alert", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
+    def get(self, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None) -> Any:
+        """List Webhook Subscriptions (GET /webhooks)"""
+        return self._client.request("GET", "/webhooks", params=params, headers=headers)
+
     def mahadasha_end(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
         """Register Mahadasha-End Webhook (POST /webhooks/mahadasha-end)"""
         return self._client.request("POST", "/webhooks/mahadasha-end", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
@@ -3458,6 +3607,10 @@ class _WhitelabelNamespace:
     def __init__(self, client: Astroway) -> None:
         self._client = client
 
+    def config_get(self, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None) -> Any:
+        """Get White-label Config (GET /whitelabel/config)"""
+        return self._client.request("GET", "/whitelabel/config", params=params, headers=headers)
+
     def domain_verify(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
         """Verify Custom Domain DNS (POST /whitelabel/domain/verify)"""
         return self._client.request("POST", "/whitelabel/domain/verify", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
@@ -3541,6 +3694,63 @@ class _ZiweiNamespace:
         return self._client.request("POST", "/ziwei/twelve-palaces", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
 
+class _ZodiacNamespace:
+    """Sync namespace for `zodiac.*` endpoints."""
+
+    __slots__ = ("_client",)
+
+    def __init__(self, client: Astroway) -> None:
+        self._client = client
+
+    def aquarius_get(self, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None) -> Any:
+        """Aquarius - Fixed Air (GET /zodiac/aquarius)"""
+        return self._client.request("GET", "/zodiac/aquarius", params=params, headers=headers)
+
+    def aries_get(self, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None) -> Any:
+        """Aries - Cardinal Fire (GET /zodiac/aries)"""
+        return self._client.request("GET", "/zodiac/aries", params=params, headers=headers)
+
+    def cancer_get(self, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None) -> Any:
+        """Cancer - Cardinal Water (GET /zodiac/cancer)"""
+        return self._client.request("GET", "/zodiac/cancer", params=params, headers=headers)
+
+    def capricorn_get(self, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None) -> Any:
+        """Capricorn - Cardinal Earth (GET /zodiac/capricorn)"""
+        return self._client.request("GET", "/zodiac/capricorn", params=params, headers=headers)
+
+    def gemini_get(self, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None) -> Any:
+        """Gemini - Mutable Air (GET /zodiac/gemini)"""
+        return self._client.request("GET", "/zodiac/gemini", params=params, headers=headers)
+
+    def leo_get(self, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None) -> Any:
+        """Leo - Fixed Fire (GET /zodiac/leo)"""
+        return self._client.request("GET", "/zodiac/leo", params=params, headers=headers)
+
+    def libra_get(self, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None) -> Any:
+        """Libra - Cardinal Air (GET /zodiac/libra)"""
+        return self._client.request("GET", "/zodiac/libra", params=params, headers=headers)
+
+    def pisces_get(self, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None) -> Any:
+        """Pisces - Mutable Water (GET /zodiac/pisces)"""
+        return self._client.request("GET", "/zodiac/pisces", params=params, headers=headers)
+
+    def sagittarius_get(self, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None) -> Any:
+        """Sagittarius - Mutable Fire (GET /zodiac/sagittarius)"""
+        return self._client.request("GET", "/zodiac/sagittarius", params=params, headers=headers)
+
+    def scorpio_get(self, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None) -> Any:
+        """Scorpio - Fixed Water (GET /zodiac/scorpio)"""
+        return self._client.request("GET", "/zodiac/scorpio", params=params, headers=headers)
+
+    def taurus_get(self, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None) -> Any:
+        """Taurus - Fixed Earth (GET /zodiac/taurus)"""
+        return self._client.request("GET", "/zodiac/taurus", params=params, headers=headers)
+
+    def virgo_get(self, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None) -> Any:
+        """Virgo - Mutable Earth (GET /zodiac/virgo)"""
+        return self._client.request("GET", "/zodiac/virgo", params=params, headers=headers)
+
+
 class _AcgAsyncNamespace:
     """Async namespace for `acg.*` endpoints."""
 
@@ -3552,6 +3762,10 @@ class _AcgAsyncNamespace:
     async def by_category(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
         """A*C*G by Life Category (POST /acg/by-category)"""
         return await self._client.request("POST", "/acg/by-category", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
+
+    async def categories_get(self, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None) -> Any:
+        """A*C*G Life Categories (GET /acg/categories)"""
+        return await self._client.request("GET", "/acg/categories", params=params, headers=headers)
 
     async def compute(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
         """Astrocartography (A*C*G) (POST /acg)"""
@@ -4093,6 +4307,18 @@ class _EsotericAsyncNamespace:
         """Decode Angel Number (POST /esoteric/angel-numbers/decode)"""
         return await self._client.request("POST", "/esoteric/angel-numbers/decode", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
+    async def angel_numbers_get(self, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None) -> Any:
+        """Angel Numbers - Catalogue (GET /esoteric/angel-numbers)"""
+        return await self._client.request("GET", "/esoteric/angel-numbers", params=params, headers=headers)
+
+    async def angel_numbers_today_get(self, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None) -> Any:
+        """Daily Angel Number (GET /esoteric/angel-numbers/today)"""
+        return await self._client.request("GET", "/esoteric/angel-numbers/today", params=params, headers=headers)
+
+    async def crystals_get(self, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None) -> Any:
+        """Crystals - Full Directory (GET /esoteric/crystals)"""
+        return await self._client.request("GET", "/esoteric/crystals", params=params, headers=headers)
+
     async def crystals_recommend(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
         """Crystal Recommendations (POST /esoteric/crystals/recommend)"""
         return await self._client.request("POST", "/esoteric/crystals/recommend", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
@@ -4100,6 +4326,14 @@ class _EsotericAsyncNamespace:
     async def dreams_decode(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
         """Decode Dream Text (POST /esoteric/dreams/decode)"""
         return await self._client.request("POST", "/esoteric/dreams/decode", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
+
+    async def dreams_get(self, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None) -> Any:
+        """Dream Symbol Dictionary (GET /esoteric/dreams)"""
+        return await self._client.request("GET", "/esoteric/dreams", params=params, headers=headers)
+
+    async def dreams_recurring_themes_get(self, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None) -> Any:
+        """Recurring Dream Themes (GET /esoteric/dreams/recurring-themes)"""
+        return await self._client.request("GET", "/esoteric/dreams/recurring-themes", params=params, headers=headers)
 
 
 class _EssentialDignitiesAsyncNamespace:
@@ -4806,19 +5040,6 @@ class _InterpretAsyncNamespace:
         return await self._client.request("POST", "/interpret/transits", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
 
-class _KeysAsyncNamespace:
-    """Async namespace for `keys.*` endpoints."""
-
-    __slots__ = ("_client",)
-
-    def __init__(self, client: AsyncAstroway) -> None:
-        self._client = client
-
-    async def compute(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Create API Key (POST /keys)"""
-        return await self._client.request("POST", "/keys", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
-
-
 class _LocalSpaceAsyncNamespace:
     """Async namespace for `local_space.*` endpoints."""
 
@@ -4928,6 +5149,10 @@ class _McpAsyncNamespace:
         """MCP Agent Debate (POST /mcp/agent-debate)"""
         return await self._client.request("POST", "/mcp/agent-debate", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
+    async def agent_pool_status_get(self, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None) -> Any:
+        """MCP Agent Pool Status (GET /mcp/agent-pool-status)"""
+        return await self._client.request("GET", "/mcp/agent-pool-status", params=params, headers=headers)
+
     async def multi_agent_coordinate(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
         """MCP Multi-Agent Coordinate (POST /mcp/multi-agent-coordinate)"""
         return await self._client.request("POST", "/mcp/multi-agent-coordinate", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
@@ -4947,6 +5172,10 @@ class _McpAsyncNamespace:
     async def tool_call_stream(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
         """MCP Tool-Call Stream (POST /mcp/tool-call-stream)"""
         return await self._client.request("POST", "/mcp/tool-call-stream", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
+
+    async def tools_list_get(self, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None) -> Any:
+        """MCP Tools List (GET /mcp/tools-list)"""
+        return await self._client.request("GET", "/mcp/tools-list", params=params, headers=headers)
 
 
 class _MidpointTreesAsyncNamespace:
@@ -5094,6 +5323,19 @@ class _MoonVocAsyncNamespace:
     async def compute(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
         """Moon Void-of-Course (POST /moon-voc)"""
         return await self._client.request("POST", "/moon-voc", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
+
+
+class _MuhurtaAsyncNamespace:
+    """Async namespace for `muhurta.*` endpoints."""
+
+    __slots__ = ("_client",)
+
+    def __init__(self, client: AsyncAstroway) -> None:
+        self._client = client
+
+    async def types_get(self, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None) -> Any:
+        """Muhurat - activity catalogue (GET /muhurta/types)"""
+        return await self._client.request("GET", "/muhurta/types", params=params, headers=headers)
 
 
 class _NakshatrasAsyncNamespace:
@@ -5585,6 +5827,71 @@ class _RectificationAsyncNamespace:
         return await self._client.request("POST", "/rectification/trutine", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
 
+class _ReferenceAsyncNamespace:
+    """Async namespace for `reference.*` endpoints."""
+
+    __slots__ = ("_client",)
+
+    def __init__(self, client: AsyncAstroway) -> None:
+        self._client = client
+
+    async def aspects_get(self, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None) -> Any:
+        """Aspects (GET /reference/aspects)"""
+        return await self._client.request("GET", "/reference/aspects", params=params, headers=headers)
+
+    async def asteroids_get(self, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None) -> Any:
+        """Asteroids & Centaurs (GET /reference/asteroids)"""
+        return await self._client.request("GET", "/reference/asteroids", params=params, headers=headers)
+
+    async def decans_get(self, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None) -> Any:
+        """Decans (GET /reference/decans)"""
+        return await self._client.request("GET", "/reference/decans", params=params, headers=headers)
+
+    async def dignities_get(self, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None) -> Any:
+        """Essential Dignities (GET /reference/dignities)"""
+        return await self._client.request("GET", "/reference/dignities", params=params, headers=headers)
+
+    async def elements_get(self, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None) -> Any:
+        """Elements (GET /reference/elements)"""
+        return await self._client.request("GET", "/reference/elements", params=params, headers=headers)
+
+    async def glyphs_get(self, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None) -> Any:
+        """Glyphs (GET /reference/glyphs)"""
+        return await self._client.request("GET", "/reference/glyphs", params=params, headers=headers)
+
+    async def houses_get(self, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None) -> Any:
+        """Houses (GET /reference/houses)"""
+        return await self._client.request("GET", "/reference/houses", params=params, headers=headers)
+
+    async def lots_get(self, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None) -> Any:
+        """Hellenistic Lots (GET /reference/lots)"""
+        return await self._client.request("GET", "/reference/lots", params=params, headers=headers)
+
+    async def modalities_get(self, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None) -> Any:
+        """Modalities (GET /reference/modalities)"""
+        return await self._client.request("GET", "/reference/modalities", params=params, headers=headers)
+
+    async def nakshatras_get(self, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None) -> Any:
+        """Nakshatras (GET /reference/nakshatras)"""
+        return await self._client.request("GET", "/reference/nakshatras", params=params, headers=headers)
+
+    async def planets_get(self, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None) -> Any:
+        """Planets (GET /reference/planets)"""
+        return await self._client.request("GET", "/reference/planets", params=params, headers=headers)
+
+    async def polarities_get(self, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None) -> Any:
+        """Polarities (GET /reference/polarities)"""
+        return await self._client.request("GET", "/reference/polarities", params=params, headers=headers)
+
+    async def signs_get(self, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None) -> Any:
+        """Zodiac Signs (GET /reference/signs)"""
+        return await self._client.request("GET", "/reference/signs", params=params, headers=headers)
+
+    async def zodiac_systems_get(self, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None) -> Any:
+        """Zodiac Systems (GET /reference/zodiac-systems)"""
+        return await self._client.request("GET", "/reference/zodiac-systems", params=params, headers=headers)
+
+
 class _RelocationAsyncNamespace:
     """Async namespace for `relocation.*` endpoints."""
 
@@ -5706,6 +6013,10 @@ class _ReportsAsyncNamespace:
     async def generate(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
         """Generate Report - Unified Dispatcher (V2) (POST /reports/generate)"""
         return await self._client.request("POST", "/reports/generate", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
+
+    async def history_get(self, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None) -> Any:
+        """List Recent Report Exports (GET /reports/history)"""
+        return await self._client.request("GET", "/reports/history", params=params, headers=headers)
 
     async def human_design(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
         """Generate Human Design Report (PDF or HTML) (POST /reports/human-design)"""
@@ -5945,6 +6256,10 @@ class _TarotAsyncNamespace:
     def __init__(self, client: AsyncAstroway) -> None:
         self._client = client
 
+    async def lenormand_cards_get(self, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None) -> Any:
+        """Lenormand - All Cards (GET /tarot/lenormand/cards)"""
+        return await self._client.request("GET", "/tarot/lenormand/cards", params=params, headers=headers)
+
     async def lenormand_daily(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
         """Lenormand - Daily Cards (POST /tarot/lenormand/daily)"""
         return await self._client.request("POST", "/tarot/lenormand/daily", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
@@ -5973,9 +6288,17 @@ class _TarotAsyncNamespace:
         """Lenormand - Three-Card (POST /tarot/lenormand/draw/three-card)"""
         return await self._client.request("POST", "/tarot/lenormand/draw/three-card", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
+    async def lenormand_houses_get(self, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None) -> Any:
+        """Lenormand - 36 Houses (GET /tarot/lenormand/houses)"""
+        return await self._client.request("GET", "/tarot/lenormand/houses", params=params, headers=headers)
+
     async def marseille_birth_card(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
         """Marseille - Birth Card (POST /tarot/marseille/birth-card)"""
         return await self._client.request("POST", "/tarot/marseille/birth-card", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
+
+    async def marseille_cards_get(self, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None) -> Any:
+        """Marseille - All Cards (GET /tarot/marseille/cards)"""
+        return await self._client.request("GET", "/tarot/marseille/cards", params=params, headers=headers)
 
     async def marseille_clarify(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
         """Marseille - Clarifier (POST /tarot/marseille/clarify)"""
@@ -6029,6 +6352,14 @@ class _TarotAsyncNamespace:
         """Marseille - Interpret (POST /tarot/marseille/interpret)"""
         return await self._client.request("POST", "/tarot/marseille/interpret", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
+    async def marseille_majors_get(self, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None) -> Any:
+        """Marseille - 22 Majors (GET /tarot/marseille/majors)"""
+        return await self._client.request("GET", "/tarot/marseille/majors", params=params, headers=headers)
+
+    async def marseille_spreads_get(self, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None) -> Any:
+        """Marseille - All Spreads (GET /tarot/marseille/spreads)"""
+        return await self._client.request("GET", "/tarot/marseille/spreads", params=params, headers=headers)
+
     async def marseille_timing(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
         """Marseille - Timing (POST /tarot/marseille/timing)"""
         return await self._client.request("POST", "/tarot/marseille/timing", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
@@ -6045,9 +6376,17 @@ class _TarotAsyncNamespace:
         """RWS - Birth Card (POST /tarot/rider-waite/birth-card)"""
         return await self._client.request("POST", "/tarot/rider-waite/birth-card", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
+    async def rider_waite_cards_get(self, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None) -> Any:
+        """RWS - All Cards (GET /tarot/rider-waite/cards)"""
+        return await self._client.request("GET", "/tarot/rider-waite/cards", params=params, headers=headers)
+
     async def rider_waite_clarify(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
         """RWS - Clarifier Card (POST /tarot/rider-waite/clarify)"""
         return await self._client.request("POST", "/tarot/rider-waite/clarify", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
+
+    async def rider_waite_courts_get(self, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None) -> Any:
+        """RWS - 16 Court Cards (GET /tarot/rider-waite/courts)"""
+        return await self._client.request("GET", "/tarot/rider-waite/courts", params=params, headers=headers)
 
     async def rider_waite_cross_sum(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
         """RWS - Court Card Cross-Sum (POST /tarot/rider-waite/cross-sum)"""
@@ -6109,6 +6448,14 @@ class _TarotAsyncNamespace:
         """RWS - Interpret a Hand (POST /tarot/rider-waite/interpret)"""
         return await self._client.request("POST", "/tarot/rider-waite/interpret", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
+    async def rider_waite_majors_get(self, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None) -> Any:
+        """RWS - 22 Majors (GET /tarot/rider-waite/majors)"""
+        return await self._client.request("GET", "/tarot/rider-waite/majors", params=params, headers=headers)
+
+    async def rider_waite_minors_get(self, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None) -> Any:
+        """RWS - 40 Minors (GET /tarot/rider-waite/minors)"""
+        return await self._client.request("GET", "/tarot/rider-waite/minors", params=params, headers=headers)
+
     async def rider_waite_missing_info(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
         """RWS - Missing Info Card (POST /tarot/rider-waite/missing-info)"""
         return await self._client.request("POST", "/tarot/rider-waite/missing-info", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
@@ -6124,6 +6471,10 @@ class _TarotAsyncNamespace:
     async def rider_waite_soul_personality_card(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
         """RWS - Soul + Personality (POST /tarot/rider-waite/soul-personality-card)"""
         return await self._client.request("POST", "/tarot/rider-waite/soul-personality-card", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
+
+    async def rider_waite_spreads_get(self, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None) -> Any:
+        """RWS - All Spreads (GET /tarot/rider-waite/spreads)"""
+        return await self._client.request("GET", "/tarot/rider-waite/spreads", params=params, headers=headers)
 
     async def rider_waite_timing(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
         """RWS - Timing Card (POST /tarot/rider-waite/timing)"""
@@ -6188,6 +6539,10 @@ class _TranslateAsyncNamespace:
     async def batch(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
         """Translate batch (POST /translate/batch)"""
         return await self._client.request("POST", "/translate/batch", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
+
+    async def languages_get(self, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None) -> Any:
+        """Supported languages (GET /translate/languages)"""
+        return await self._client.request("GET", "/translate/languages", params=params, headers=headers)
 
 
 class _VedicAsyncNamespace:
@@ -6896,6 +7251,10 @@ class _WebhooksAsyncNamespace:
         """Register Eclipse-Alert Webhook (POST /webhooks/eclipse-alert)"""
         return await self._client.request("POST", "/webhooks/eclipse-alert", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
+    async def get(self, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None) -> Any:
+        """List Webhook Subscriptions (GET /webhooks)"""
+        return await self._client.request("GET", "/webhooks", params=params, headers=headers)
+
     async def mahadasha_end(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
         """Register Mahadasha-End Webhook (POST /webhooks/mahadasha-end)"""
         return await self._client.request("POST", "/webhooks/mahadasha-end", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
@@ -6986,6 +7345,10 @@ class _WhitelabelAsyncNamespace:
     def __init__(self, client: AsyncAstroway) -> None:
         self._client = client
 
+    async def config_get(self, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None) -> Any:
+        """Get White-label Config (GET /whitelabel/config)"""
+        return await self._client.request("GET", "/whitelabel/config", params=params, headers=headers)
+
     async def domain_verify(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
         """Verify Custom Domain DNS (POST /whitelabel/domain/verify)"""
         return await self._client.request("POST", "/whitelabel/domain/verify", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
@@ -7069,6 +7432,63 @@ class _ZiweiAsyncNamespace:
         return await self._client.request("POST", "/ziwei/twelve-palaces", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
 
+class _ZodiacAsyncNamespace:
+    """Async namespace for `zodiac.*` endpoints."""
+
+    __slots__ = ("_client",)
+
+    def __init__(self, client: AsyncAstroway) -> None:
+        self._client = client
+
+    async def aquarius_get(self, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None) -> Any:
+        """Aquarius - Fixed Air (GET /zodiac/aquarius)"""
+        return await self._client.request("GET", "/zodiac/aquarius", params=params, headers=headers)
+
+    async def aries_get(self, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None) -> Any:
+        """Aries - Cardinal Fire (GET /zodiac/aries)"""
+        return await self._client.request("GET", "/zodiac/aries", params=params, headers=headers)
+
+    async def cancer_get(self, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None) -> Any:
+        """Cancer - Cardinal Water (GET /zodiac/cancer)"""
+        return await self._client.request("GET", "/zodiac/cancer", params=params, headers=headers)
+
+    async def capricorn_get(self, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None) -> Any:
+        """Capricorn - Cardinal Earth (GET /zodiac/capricorn)"""
+        return await self._client.request("GET", "/zodiac/capricorn", params=params, headers=headers)
+
+    async def gemini_get(self, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None) -> Any:
+        """Gemini - Mutable Air (GET /zodiac/gemini)"""
+        return await self._client.request("GET", "/zodiac/gemini", params=params, headers=headers)
+
+    async def leo_get(self, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None) -> Any:
+        """Leo - Fixed Fire (GET /zodiac/leo)"""
+        return await self._client.request("GET", "/zodiac/leo", params=params, headers=headers)
+
+    async def libra_get(self, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None) -> Any:
+        """Libra - Cardinal Air (GET /zodiac/libra)"""
+        return await self._client.request("GET", "/zodiac/libra", params=params, headers=headers)
+
+    async def pisces_get(self, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None) -> Any:
+        """Pisces - Mutable Water (GET /zodiac/pisces)"""
+        return await self._client.request("GET", "/zodiac/pisces", params=params, headers=headers)
+
+    async def sagittarius_get(self, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None) -> Any:
+        """Sagittarius - Mutable Fire (GET /zodiac/sagittarius)"""
+        return await self._client.request("GET", "/zodiac/sagittarius", params=params, headers=headers)
+
+    async def scorpio_get(self, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None) -> Any:
+        """Scorpio - Fixed Water (GET /zodiac/scorpio)"""
+        return await self._client.request("GET", "/zodiac/scorpio", params=params, headers=headers)
+
+    async def taurus_get(self, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None) -> Any:
+        """Taurus - Fixed Earth (GET /zodiac/taurus)"""
+        return await self._client.request("GET", "/zodiac/taurus", params=params, headers=headers)
+
+    async def virgo_get(self, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None) -> Any:
+        """Virgo - Mutable Earth (GET /zodiac/virgo)"""
+        return await self._client.request("GET", "/zodiac/virgo", params=params, headers=headers)
+
+
 # Attach helpers used by the client constructors.
 def _attach_sync(client: Astroway) -> None:
     client.acg = _AcgNamespace(client)  # type: ignore[attr-defined]
@@ -7124,7 +7544,6 @@ def _attach_sync(client: Astroway) -> None:
     client.iching = _IchingNamespace(client)  # type: ignore[attr-defined]
     client.ingresses = _IngressesNamespace(client)  # type: ignore[attr-defined]
     client.interpret = _InterpretNamespace(client)  # type: ignore[attr-defined]
-    client.keys = _KeysNamespace(client)  # type: ignore[attr-defined]
     client.local_space = _LocalSpaceNamespace(client)  # type: ignore[attr-defined]
     client.lunar_calendar = _LunarCalendarNamespace(client)  # type: ignore[attr-defined]
     client.lunar_return = _LunarReturnNamespace(client)  # type: ignore[attr-defined]
@@ -7138,6 +7557,7 @@ def _attach_sync(client: Astroway) -> None:
     client.moon_aspects = _MoonAspectsNamespace(client)  # type: ignore[attr-defined]
     client.moon_phase = _MoonPhaseNamespace(client)  # type: ignore[attr-defined]
     client.moon_voc = _MoonVocNamespace(client)  # type: ignore[attr-defined]
+    client.muhurta = _MuhurtaNamespace(client)  # type: ignore[attr-defined]
     client.nakshatras = _NakshatrasNamespace(client)  # type: ignore[attr-defined]
     client.numerology = _NumerologyNamespace(client)  # type: ignore[attr-defined]
     client.palmistry = _PalmistryNamespace(client)  # type: ignore[attr-defined]
@@ -7155,6 +7575,7 @@ def _attach_sync(client: Astroway) -> None:
     client.progressions = _ProgressionsNamespace(client)  # type: ignore[attr-defined]
     client.receptions = _ReceptionsNamespace(client)  # type: ignore[attr-defined]
     client.rectification = _RectificationNamespace(client)  # type: ignore[attr-defined]
+    client.reference = _ReferenceNamespace(client)  # type: ignore[attr-defined]
     client.relocation = _RelocationNamespace(client)  # type: ignore[attr-defined]
     client.render = _RenderNamespace(client)  # type: ignore[attr-defined]
     client.reports = _ReportsNamespace(client)  # type: ignore[attr-defined]
@@ -7179,6 +7600,7 @@ def _attach_sync(client: Astroway) -> None:
     client.whitelabel = _WhitelabelNamespace(client)  # type: ignore[attr-defined]
     client.zenith = _ZenithNamespace(client)  # type: ignore[attr-defined]
     client.ziwei = _ZiweiNamespace(client)  # type: ignore[attr-defined]
+    client.zodiac = _ZodiacNamespace(client)  # type: ignore[attr-defined]
 
 
 def _attach_async(client: AsyncAstroway) -> None:
@@ -7235,7 +7657,6 @@ def _attach_async(client: AsyncAstroway) -> None:
     client.iching = _IchingAsyncNamespace(client)  # type: ignore[attr-defined]
     client.ingresses = _IngressesAsyncNamespace(client)  # type: ignore[attr-defined]
     client.interpret = _InterpretAsyncNamespace(client)  # type: ignore[attr-defined]
-    client.keys = _KeysAsyncNamespace(client)  # type: ignore[attr-defined]
     client.local_space = _LocalSpaceAsyncNamespace(client)  # type: ignore[attr-defined]
     client.lunar_calendar = _LunarCalendarAsyncNamespace(client)  # type: ignore[attr-defined]
     client.lunar_return = _LunarReturnAsyncNamespace(client)  # type: ignore[attr-defined]
@@ -7249,6 +7670,7 @@ def _attach_async(client: AsyncAstroway) -> None:
     client.moon_aspects = _MoonAspectsAsyncNamespace(client)  # type: ignore[attr-defined]
     client.moon_phase = _MoonPhaseAsyncNamespace(client)  # type: ignore[attr-defined]
     client.moon_voc = _MoonVocAsyncNamespace(client)  # type: ignore[attr-defined]
+    client.muhurta = _MuhurtaAsyncNamespace(client)  # type: ignore[attr-defined]
     client.nakshatras = _NakshatrasAsyncNamespace(client)  # type: ignore[attr-defined]
     client.numerology = _NumerologyAsyncNamespace(client)  # type: ignore[attr-defined]
     client.palmistry = _PalmistryAsyncNamespace(client)  # type: ignore[attr-defined]
@@ -7266,6 +7688,7 @@ def _attach_async(client: AsyncAstroway) -> None:
     client.progressions = _ProgressionsAsyncNamespace(client)  # type: ignore[attr-defined]
     client.receptions = _ReceptionsAsyncNamespace(client)  # type: ignore[attr-defined]
     client.rectification = _RectificationAsyncNamespace(client)  # type: ignore[attr-defined]
+    client.reference = _ReferenceAsyncNamespace(client)  # type: ignore[attr-defined]
     client.relocation = _RelocationAsyncNamespace(client)  # type: ignore[attr-defined]
     client.render = _RenderAsyncNamespace(client)  # type: ignore[attr-defined]
     client.reports = _ReportsAsyncNamespace(client)  # type: ignore[attr-defined]
@@ -7290,6 +7713,7 @@ def _attach_async(client: AsyncAstroway) -> None:
     client.whitelabel = _WhitelabelAsyncNamespace(client)  # type: ignore[attr-defined]
     client.zenith = _ZenithAsyncNamespace(client)  # type: ignore[attr-defined]
     client.ziwei = _ZiweiAsyncNamespace(client)  # type: ignore[attr-defined]
+    client.zodiac = _ZodiacAsyncNamespace(client)  # type: ignore[attr-defined]
 
 
 __all__ = [
