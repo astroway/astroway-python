@@ -36,18 +36,25 @@ _API_CONFIG = ConfigDict(populate_by_name=True, extra="allow")
 class BirthData(BaseModel):
     """Birth-moment input shared across natal, transits, Human Design, Vedic.
 
-    Required: ``date`` (YYYY-MM-DD), ``time`` (HH:MM:SS).
-    Latitude/longitude/timezone default to 0 — pass real values for accurate
-    house cusps and ascendant.
+    Required: ``date`` (YYYY-MM-DD), ``time`` (HH:MM:SS), ``latitude`` and
+    ``longitude`` in decimal degrees.
+
+    The coordinates used to default to 0, which sent a real request for 0N 0E,
+    six hundred kilometres off the coast of Ghana, and the server could not tell
+    that apart from a deliberate one. api-calc stopped defaulting them in
+    2.141.0: every ``/reports/*`` path answers 400 without them, and the JSON
+    chart endpoints answer with a Deprecation header until 2026-11-09 and a 400
+    after it. ``timezone_offset`` still defaults to 0, meaning UTC, and is
+    counted in hours: 5.5 for India, not 330.
     """
 
     model_config = _API_CONFIG
 
     date: str = Field(pattern=r"^\d{4}-\d{2}-\d{2}$")
     time: str = Field(pattern=r"^\d{2}:\d{2}:\d{2}$")
-    timezone_offset: float = Field(default=0, alias="timezoneOffset")
-    latitude: float = 0
-    longitude: float = 0
+    timezone_offset: float = Field(default=0, alias="timezoneOffset", ge=-14, le=14)
+    latitude: float = Field(ge=-90, le=90)
+    longitude: float = Field(ge=-180, le=180)
     house_system: str = Field(default="P", alias="houseSystem")
     name: Optional[str] = None
     city: Optional[str] = None

@@ -61,6 +61,8 @@ def test_birth_data_accepts_camel_case_aliases() -> None:
         time="14:30:00",
         timezoneOffset=3,
         houseSystem="W",
+        latitude=50.45,
+        longitude=30.52,
     )
     assert b.timezone_offset == 3
     assert b.house_system == "W"
@@ -68,16 +70,31 @@ def test_birth_data_accepts_camel_case_aliases() -> None:
 
 def test_birth_data_validates_date_format() -> None:
     with pytest.raises(ValueError):
-        BirthData(date="not-a-date", time="14:30:00")
+        BirthData(date="not-a-date", time="14:30:00", latitude=50.45, longitude=30.52)
 
 
 def test_birth_data_validates_time_format() -> None:
     with pytest.raises(ValueError):
-        BirthData(date="1990-07-14", time="14:30")
+        BirthData(date="1990-07-14", time="14:30", latitude=50.45, longitude=30.52)
+
+
+def test_birth_data_refuses_a_chart_with_no_place() -> None:
+    """0N 0E is a real place in the Gulf of Guinea and the server cannot tell it
+    from a request that forgot to say where. api-calc stopped defaulting the
+    coordinates in 2.141.0; the model stopped supplying them here."""
+    with pytest.raises(ValueError):
+        BirthData(date="1990-07-14", time="14:30:00")
+
+
+def test_birth_data_refuses_a_timezone_in_minutes() -> None:
+    """Bounded to -14..14 hours in api-calc 2.143.0. 330 used to be accepted and
+    answered with a chart for a moment nobody asked about."""
+    with pytest.raises(ValueError):
+        BirthData(date="1990-07-14", time="14:30:00", timezone_offset=330, latitude=50.45, longitude=30.52)
 
 
 def test_birth_data_omits_unset_optional_fields_on_dump() -> None:
-    b = BirthData(date="1990-07-14", time="14:30:00")
+    b = BirthData(date="1990-07-14", time="14:30:00", latitude=50.45, longitude=30.52)
     payload = b.model_dump(by_alias=True, exclude_none=True)
     assert "name" not in payload
     assert "city" not in payload
@@ -168,7 +185,7 @@ async def test_async_namespace_accepts_pydantic_input() -> None:
     transport = _AsyncRecorder()
     async with AsyncAstroway(api_key="aw_test_x", transport=transport) as aw:
         await aw.chart.compute(  # type: ignore[attr-defined]
-            BirthData(date="1990-07-14", time="14:30:00", timezone_offset=3)
+            BirthData(date="1990-07-14", time="14:30:00", timezone_offset=3, latitude=50.45, longitude=30.52)
         )
     body = json.loads(transport.requests[0].content.decode("utf-8"))
     assert body["timezoneOffset"] == 3

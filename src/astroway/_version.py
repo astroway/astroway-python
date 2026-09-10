@@ -1,3 +1,3 @@
 """SDK version. Mirror of pyproject.toml `version`. Bumped together."""
 
-SDK_VERSION = "1.4.1"
+SDK_VERSION = "1.6.0"

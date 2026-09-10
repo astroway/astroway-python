@@ -21,6 +21,10 @@ class _AcgNamespace:
     def __init__(self, client: Astroway) -> None:
         self._client = client
 
+    def best_places(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
+        """Best places for a life category (POST /acg/best-places)"""
+        return self._client.request("POST", "/acg/best-places", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
+
     def by_category(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
         """A*C*G by Life Category (POST /acg/by-category)"""
         return self._client.request("POST", "/acg/by-category", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
@@ -32,6 +36,10 @@ class _AcgNamespace:
     def compute(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
         """Astrocartography (A*C*G) (POST /acg)"""
         return self._client.request("POST", "/acg", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
+
+    def countries_get(self, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None) -> Any:
+        """Countries available for ranking (GET /acg/countries)"""
+        return self._client.request("GET", "/acg/countries", params=params, headers=headers)
 
     def line_report(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
         """A*C*G Line Report (POST /acg/line-report)"""
@@ -49,6 +57,19 @@ class _AcgZonesNamespace:
     def compute(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
         """A*C*G Lines Near a Point (POST /acg-zones)"""
         return self._client.request("POST", "/acg-zones", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
+
+
+class _AgentNamespace:
+    """Sync namespace for `agent.*` endpoints."""
+
+    __slots__ = ("_client",)
+
+    def __init__(self, client: Astroway) -> None:
+        self._client = client
+
+    def tools_get(self, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None) -> Any:
+        """Agent tool definitions (GET /agent/tools)"""
+        return self._client.request("GET", "/agent/tools", params=params, headers=headers)
 
 
 class _AiNamespace:
@@ -328,9 +349,17 @@ class _ChineseNamespace:
     def __init__(self, client: Astroway) -> None:
         self._client = client
 
+    def feng_shui_annual_stars(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
+        """Annual flying stars and afflictions (POST /chinese/feng-shui/annual-stars)"""
+        return self._client.request("POST", "/chinese/feng-shui/annual-stars", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
+
     def feng_shui_bagua(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
         """Bagua Life Areas (POST /chinese/feng-shui/bagua)"""
         return self._client.request("POST", "/chinese/feng-shui/bagua", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
+
+    def feng_shui_flying_star(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
+        """Flying Star natal chart (Xuan Kong Fei Xing) (POST /chinese/feng-shui/flying-star)"""
+        return self._client.request("POST", "/chinese/feng-shui/flying-star", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def feng_shui_kua(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
         """Kua Number (POST /chinese/feng-shui/kua)"""
@@ -339,6 +368,22 @@ class _ChineseNamespace:
     def feng_shui_lucky_directions(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
         """Lucky / Unlucky Directions (POST /chinese/feng-shui/lucky-directions)"""
         return self._client.request("POST", "/chinese/feng-shui/lucky-directions", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
+
+    def lunar_date(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
+        """Gregorian to Lunar Date (POST /chinese/lunar-date)"""
+        return self._client.request("POST", "/chinese/lunar-date", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
+
+    def solar_terms(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
+        """24 Solar Terms (節氣) (POST /chinese/solar-terms)"""
+        return self._client.request("POST", "/chinese/solar-terms", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
+
+    def tong_shu(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
+        """Tong Shu day: officer and mansion (POST /chinese/tong-shu)"""
+        return self._client.request("POST", "/chinese/tong-shu", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
+
+    def tong_shu_select(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
+        """Tong Shu date selection (POST /chinese/tong-shu/select)"""
+        return self._client.request("POST", "/chinese/tong-shu/select", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def zodiac_animal(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
         """Chinese Zodiac Animal (POST /chinese/zodiac/animal)"""
@@ -471,7 +516,7 @@ class _DestinyMatrixNamespace:
         self._client = client
 
     def ladini(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Destiny Matrix - Ladini Method (POST /destiny-matrix/ladini)"""
+        """Destiny Matrix: Ladini Method (POST /destiny-matrix/ladini)"""
         return self._client.request("POST", "/destiny-matrix/ladini", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
 
@@ -501,7 +546,7 @@ class _DjamaspaNamespace:
         self._client = client
 
     def compute(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Djamaspa (DEPRECATED - RED quality, sunset 2027-06-15) (POST /djamaspa)"""
+        """Djamaspa (DEPRECATED: RED quality, sunset 2027-06-15) (POST /djamaspa)"""
         return self._client.request("POST", "/djamaspa", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
 
@@ -570,7 +615,7 @@ class _EsotericNamespace:
         return self._client.request("POST", "/esoteric/angel-numbers/decode", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def angel_numbers_get(self, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None) -> Any:
-        """Angel Numbers - Catalogue (GET /esoteric/angel-numbers)"""
+        """Angel Numbers: Catalogue (GET /esoteric/angel-numbers)"""
         return self._client.request("GET", "/esoteric/angel-numbers", params=params, headers=headers)
 
     def angel_numbers_today_get(self, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None) -> Any:
@@ -578,7 +623,7 @@ class _EsotericNamespace:
         return self._client.request("GET", "/esoteric/angel-numbers/today", params=params, headers=headers)
 
     def crystals_get(self, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None) -> Any:
-        """Crystals - Full Directory (GET /esoteric/crystals)"""
+        """Crystals: Full Directory (GET /esoteric/crystals)"""
         return self._client.request("GET", "/esoteric/crystals", params=params, headers=headers)
 
     def crystals_recommend(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
@@ -739,6 +784,10 @@ class _FixedStarsNamespace:
     def __init__(self, client: Astroway) -> None:
         self._client = client
 
+    def catalog_get(self, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None) -> Any:
+        """Fixed star catalogue (GET /fixed-stars/catalog)"""
+        return self._client.request("GET", "/fixed-stars/catalog", params=params, headers=headers)
+
     def compute(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
         """Fixed Stars (POST /fixed-stars)"""
         return self._client.request("POST", "/fixed-stars", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
@@ -792,15 +841,15 @@ class _GeomancyNamespace:
         self._client = client
 
     def acquisitio(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Acquisitio - Gain (POST /geomancy/acquisitio)"""
+        """Acquisitio: Gain (POST /geomancy/acquisitio)"""
         return self._client.request("POST", "/geomancy/acquisitio", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def albus(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Albus - White (POST /geomancy/albus)"""
+        """Albus: White (POST /geomancy/albus)"""
         return self._client.request("POST", "/geomancy/albus", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def amissio(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Amissio - Loss (POST /geomancy/amissio)"""
+        """Amissio: Loss (POST /geomancy/amissio)"""
         return self._client.request("POST", "/geomancy/amissio", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def caput_draconis(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
@@ -808,7 +857,7 @@ class _GeomancyNamespace:
         return self._client.request("POST", "/geomancy/caput-draconis", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def carcer(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Carcer - Prison (POST /geomancy/carcer)"""
+        """Carcer: Prison (POST /geomancy/carcer)"""
         return self._client.request("POST", "/geomancy/carcer", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def cauda_draconis(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
@@ -816,7 +865,7 @@ class _GeomancyNamespace:
         return self._client.request("POST", "/geomancy/cauda-draconis", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def coniunctio(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Coniunctio - Conjunction (POST /geomancy/coniunctio)"""
+        """Coniunctio: Conjunction (POST /geomancy/coniunctio)"""
         return self._client.request("POST", "/geomancy/coniunctio", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def fortuna_major(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
@@ -828,31 +877,31 @@ class _GeomancyNamespace:
         return self._client.request("POST", "/geomancy/fortuna-minor", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def laetitia(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Laetitia - Joy (POST /geomancy/laetitia)"""
+        """Laetitia: Joy (POST /geomancy/laetitia)"""
         return self._client.request("POST", "/geomancy/laetitia", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def populus(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Populus - The People (POST /geomancy/populus)"""
+        """Populus: The People (POST /geomancy/populus)"""
         return self._client.request("POST", "/geomancy/populus", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def puella(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Puella - Girl (POST /geomancy/puella)"""
+        """Puella: Girl (POST /geomancy/puella)"""
         return self._client.request("POST", "/geomancy/puella", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def puer(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Puer - Boy (POST /geomancy/puer)"""
+        """Puer: Boy (POST /geomancy/puer)"""
         return self._client.request("POST", "/geomancy/puer", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def rubeus(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Rubeus - Red (POST /geomancy/rubeus)"""
+        """Rubeus: Red (POST /geomancy/rubeus)"""
         return self._client.request("POST", "/geomancy/rubeus", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def tristitia(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Tristitia - Sorrow (POST /geomancy/tristitia)"""
+        """Tristitia: Sorrow (POST /geomancy/tristitia)"""
         return self._client.request("POST", "/geomancy/tristitia", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def via(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Via - The Way (POST /geomancy/via)"""
+        """Via: The Way (POST /geomancy/via)"""
         return self._client.request("POST", "/geomancy/via", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
 
@@ -1244,7 +1293,7 @@ class _IchingNamespace:
         return self._client.request("POST", "/iching/by-question", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def compute(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """I Ching Hexagram (DEPRECATED - use /iching/throw-coins) (POST /iching)"""
+        """I Ching Hexagram (DEPRECATED: use /iching/throw-coins) (POST /iching)"""
         return self._client.request("POST", "/iching", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def daily(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
@@ -1300,6 +1349,27 @@ class _InterpretNamespace:
     def transits(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
         """Transits Interpretation (POST /interpret/transits)"""
         return self._client.request("POST", "/interpret/transits", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
+
+
+class _KabbalahNamespace:
+    """Sync namespace for `kabbalah.*` endpoints."""
+
+    __slots__ = ("_client",)
+
+    def __init__(self, client: Astroway) -> None:
+        self._client = client
+
+    def gematria(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
+        """Gematria ciphers (POST /kabbalah/gematria)"""
+        return self._client.request("POST", "/kabbalah/gematria", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
+
+    def sephiroth_get(self, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None) -> Any:
+        """The ten sephirot (GET /kabbalah/sephiroth)"""
+        return self._client.request("GET", "/kabbalah/sephiroth", params=params, headers=headers)
+
+    def shem_names_get(self, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None) -> Any:
+        """The seventy-two names (Shem HaMephorash) (GET /kabbalah/shem-names)"""
+        return self._client.request("GET", "/kabbalah/shem-names", params=params, headers=headers)
 
 
 class _LocalSpaceNamespace:
@@ -1488,63 +1558,63 @@ class _ModernNamespace:
         self._client = client
 
     def arroyo_cycle_of_becoming(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Arroyo - Cycle of Becoming (POST /modern/arroyo/cycle-of-becoming)"""
+        """Arroyo: Cycle of Becoming (POST /modern/arroyo/cycle-of-becoming)"""
         return self._client.request("POST", "/modern/arroyo/cycle-of-becoming", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def arroyo_element_balance(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Arroyo - Element Balance (POST /modern/arroyo/element-balance)"""
+        """Arroyo: Element Balance (POST /modern/arroyo/element-balance)"""
         return self._client.request("POST", "/modern/arroyo/element-balance", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def arroyo_element_integration(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Arroyo - Element Integration (POST /modern/arroyo/element-integration)"""
+        """Arroyo: Element Integration (POST /modern/arroyo/element-integration)"""
         return self._client.request("POST", "/modern/arroyo/element-integration", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def arroyo_relational_element_map(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Arroyo - Relational Map (POST /modern/arroyo/relational-element-map)"""
+        """Arroyo: Relational Map (POST /modern/arroyo/relational-element-map)"""
         return self._client.request("POST", "/modern/arroyo/relational-element-map", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def arroyo_water_houses_trauma(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Arroyo - Water Houses Trauma (POST /modern/arroyo/water-houses-trauma)"""
+        """Arroyo: Water Houses Trauma (POST /modern/arroyo/water-houses-trauma)"""
         return self._client.request("POST", "/modern/arroyo/water-houses-trauma", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def greene_archetypal_figures(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Greene - Archetypal Figures (POST /modern/greene/archetypal-figures)"""
+        """Greene: Archetypal Figures (POST /modern/greene/archetypal-figures)"""
         return self._client.request("POST", "/modern/greene/archetypal-figures", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def greene_individuation_path(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Greene - Individuation Path (POST /modern/greene/individuation-path)"""
+        """Greene: Individuation Path (POST /modern/greene/individuation-path)"""
         return self._client.request("POST", "/modern/greene/individuation-path", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def greene_lunar_myth(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Greene - Lunar Myth (POST /modern/greene/lunar-myth)"""
+        """Greene: Lunar Myth (POST /modern/greene/lunar-myth)"""
         return self._client.request("POST", "/modern/greene/lunar-myth", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def greene_parental_imagos(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Greene - Parental Imagos (POST /modern/greene/parental-imagos)"""
+        """Greene: Parental Imagos (POST /modern/greene/parental-imagos)"""
         return self._client.request("POST", "/modern/greene/parental-imagos", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def greene_saturn_shadow(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Greene - Saturn Shadow (POST /modern/greene/saturn-shadow)"""
+        """Greene: Saturn Shadow (POST /modern/greene/saturn-shadow)"""
         return self._client.request("POST", "/modern/greene/saturn-shadow", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def rudhyar_cycles_of_becoming(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Rudhyar - Cycles of Becoming (POST /modern/rudhyar/cycles-of-becoming)"""
+        """Rudhyar: Cycles of Becoming (POST /modern/rudhyar/cycles-of-becoming)"""
         return self._client.request("POST", "/modern/rudhyar/cycles-of-becoming", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def rudhyar_lunation_phase(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Rudhyar - Lunation Phase (POST /modern/rudhyar/lunation-phase)"""
+        """Rudhyar: Lunation Phase (POST /modern/rudhyar/lunation-phase)"""
         return self._client.request("POST", "/modern/rudhyar/lunation-phase", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def rudhyar_personality_keynote(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Rudhyar - Personality Keynote (POST /modern/rudhyar/personality-keynote)"""
+        """Rudhyar: Personality Keynote (POST /modern/rudhyar/personality-keynote)"""
         return self._client.request("POST", "/modern/rudhyar/personality-keynote", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def rudhyar_symbolic_degrees(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Rudhyar - Symbolic Degrees (POST /modern/rudhyar/symbolic-degrees)"""
+        """Rudhyar: Symbolic Degrees (POST /modern/rudhyar/symbolic-degrees)"""
         return self._client.request("POST", "/modern/rudhyar/symbolic-degrees", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def rudhyar_transits_as_rebirth(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Rudhyar - Transits as Rebirth (POST /modern/rudhyar/transits-as-rebirth)"""
+        """Rudhyar: Transits as Rebirth (POST /modern/rudhyar/transits-as-rebirth)"""
         return self._client.request("POST", "/modern/rudhyar/transits-as-rebirth", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
 
@@ -1596,7 +1666,7 @@ class _MuhurtaNamespace:
         self._client = client
 
     def types_get(self, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None) -> Any:
-        """Muhurat - activity catalogue (GET /muhurta/types)"""
+        """Muhurat: activity catalogue (GET /muhurta/types)"""
         return self._client.request("GET", "/muhurta/types", params=params, headers=headers)
 
 
@@ -1875,6 +1945,10 @@ class _ParansNamespace:
     def compute(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
         """Parans (POST /parans)"""
         return self._client.request("POST", "/parans", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
+
+    def star(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
+        """Star-planet parans (Brady) (POST /parans/star)"""
+        return self._client.request("POST", "/parans/star", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
 
 class _PetNamespace:
@@ -2192,7 +2266,7 @@ class _RenderNamespace:
         return self._client.request("POST", "/render/composite", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def cosmogram(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Cosmogram - Hamburg School 90° dial (SVG) (POST /render/cosmogram)"""
+        """Cosmogram: Hamburg School 90° dial (SVG) (POST /render/cosmogram)"""
         return self._client.request("POST", "/render/cosmogram", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def eclipse_path(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
@@ -2216,15 +2290,15 @@ class _RenderNamespace:
         return self._client.request("POST", "/render/tri-wheel", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def wheel_vedic_east(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Vedic Wheel - East Indian (SVG) (POST /render/wheel-vedic-east)"""
+        """Vedic Wheel: East Indian (SVG) (POST /render/wheel-vedic-east)"""
         return self._client.request("POST", "/render/wheel-vedic-east", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def wheel_vedic_north(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Vedic Wheel - North Indian (SVG) (POST /render/wheel-vedic-north)"""
+        """Vedic Wheel: North Indian (SVG) (POST /render/wheel-vedic-north)"""
         return self._client.request("POST", "/render/wheel-vedic-north", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def wheel_vedic_south(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Vedic Wheel - South Indian (SVG) (POST /render/wheel-vedic-south)"""
+        """Vedic Wheel: South Indian (SVG) (POST /render/wheel-vedic-south)"""
         return self._client.request("POST", "/render/wheel-vedic-south", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def wheel_western(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
@@ -2272,8 +2346,12 @@ class _ReportsNamespace:
         """Generate Child Astrology Report (PDF or HTML) (POST /reports/child)"""
         return self._client.request("POST", "/reports/child", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
+    def gemstone(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
+        """Generate Gemstone Report (PDF or HTML) (POST /reports/gemstone)"""
+        return self._client.request("POST", "/reports/gemstone", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
+
     def generate(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Generate Report - Unified Dispatcher (V2) (POST /reports/generate)"""
+        """Generate Report: Unified Dispatcher (V2) (POST /reports/generate)"""
         return self._client.request("POST", "/reports/generate", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def history_get(self, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None) -> Any:
@@ -2303,6 +2381,10 @@ class _ReportsNamespace:
     def natal(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
         """Generate Natal Report (PDF or HTML) (POST /reports/natal)"""
         return self._client.request("POST", "/reports/natal", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
+
+    def relocation(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
+        """Generate Relocation Report (PDF or HTML) (POST /reports/relocation)"""
+        return self._client.request("POST", "/reports/relocation", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def stellaforge(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
         """Generate Stellaforge Birth-Chart Poster (PDF or HTML) (POST /reports/stellaforge)"""
@@ -2519,231 +2601,231 @@ class _TarotNamespace:
         self._client = client
 
     def lenormand_cards_get(self, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None) -> Any:
-        """Lenormand - All Cards (GET /tarot/lenormand/cards)"""
+        """Lenormand: All Cards (GET /tarot/lenormand/cards)"""
         return self._client.request("GET", "/tarot/lenormand/cards", params=params, headers=headers)
 
     def lenormand_daily(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Lenormand - Daily Cards (POST /tarot/lenormand/daily)"""
+        """Lenormand: Daily Cards (POST /tarot/lenormand/daily)"""
         return self._client.request("POST", "/tarot/lenormand/daily", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def lenormand_draw_9_card_square(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Lenormand - 9-Card Square (POST /tarot/lenormand/draw/9-card-square)"""
+        """Lenormand: 9-Card Square (POST /tarot/lenormand/draw/9-card-square)"""
         return self._client.request("POST", "/tarot/lenormand/draw/9-card-square", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def lenormand_draw_celtic_cross_lenormand(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Lenormand - Celtic Cross (POST /tarot/lenormand/draw/celtic-cross-lenormand)"""
+        """Lenormand: Celtic Cross (POST /tarot/lenormand/draw/celtic-cross-lenormand)"""
         return self._client.request("POST", "/tarot/lenormand/draw/celtic-cross-lenormand", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def lenormand_draw_grand_tableau(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Lenormand - Grand Tableau (POST /tarot/lenormand/draw/grand-tableau)"""
+        """Lenormand: Grand Tableau (POST /tarot/lenormand/draw/grand-tableau)"""
         return self._client.request("POST", "/tarot/lenormand/draw/grand-tableau", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def lenormand_draw_line_of_five(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Lenormand - Line of Five (POST /tarot/lenormand/draw/line-of-five)"""
+        """Lenormand: Line of Five (POST /tarot/lenormand/draw/line-of-five)"""
         return self._client.request("POST", "/tarot/lenormand/draw/line-of-five", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def lenormand_draw_relationship(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Lenormand - Relationship (POST /tarot/lenormand/draw/relationship)"""
+        """Lenormand: Relationship (POST /tarot/lenormand/draw/relationship)"""
         return self._client.request("POST", "/tarot/lenormand/draw/relationship", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def lenormand_draw_three_card(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Lenormand - Three-Card (POST /tarot/lenormand/draw/three-card)"""
+        """Lenormand: Three-Card (POST /tarot/lenormand/draw/three-card)"""
         return self._client.request("POST", "/tarot/lenormand/draw/three-card", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def lenormand_houses_get(self, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None) -> Any:
-        """Lenormand - 36 Houses (GET /tarot/lenormand/houses)"""
+        """Lenormand: 36 Houses (GET /tarot/lenormand/houses)"""
         return self._client.request("GET", "/tarot/lenormand/houses", params=params, headers=headers)
 
     def marseille_birth_card(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Marseille - Birth Card (POST /tarot/marseille/birth-card)"""
+        """Marseille: Birth Card (POST /tarot/marseille/birth-card)"""
         return self._client.request("POST", "/tarot/marseille/birth-card", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def marseille_cards_get(self, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None) -> Any:
-        """Marseille - All Cards (GET /tarot/marseille/cards)"""
+        """Marseille: All Cards (GET /tarot/marseille/cards)"""
         return self._client.request("GET", "/tarot/marseille/cards", params=params, headers=headers)
 
     def marseille_clarify(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Marseille - Clarifier (POST /tarot/marseille/clarify)"""
+        """Marseille: Clarifier (POST /tarot/marseille/clarify)"""
         return self._client.request("POST", "/tarot/marseille/clarify", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def marseille_daily(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Marseille - Daily Card (POST /tarot/marseille/daily)"""
+        """Marseille: Daily Card (POST /tarot/marseille/daily)"""
         return self._client.request("POST", "/tarot/marseille/daily", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def marseille_draw_career(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Marseille - Career (POST /tarot/marseille/draw/career)"""
+        """Marseille: Career (POST /tarot/marseille/draw/career)"""
         return self._client.request("POST", "/tarot/marseille/draw/career", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def marseille_draw_celtic_cross(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Marseille - Celtic Cross (POST /tarot/marseille/draw/celtic-cross)"""
+        """Marseille: Celtic Cross (POST /tarot/marseille/draw/celtic-cross)"""
         return self._client.request("POST", "/tarot/marseille/draw/celtic-cross", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def marseille_draw_cross(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Marseille - Tirage Réduit (Jodorowsky Reduced Cross) (POST /tarot/marseille/draw/cross)"""
+        """Marseille: Tirage Réduit (Jodorowsky Reduced Cross) (POST /tarot/marseille/draw/cross)"""
         return self._client.request("POST", "/tarot/marseille/draw/cross", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def marseille_draw_decision(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Marseille - Yes/No (POST /tarot/marseille/draw/decision)"""
+        """Marseille: Yes/No (POST /tarot/marseille/draw/decision)"""
         return self._client.request("POST", "/tarot/marseille/draw/decision", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def marseille_draw_hero(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Marseille - Tirage du Héros (Hero's Journey) (POST /tarot/marseille/draw/hero)"""
+        """Marseille: Tirage du Héros (Hero's Journey) (POST /tarot/marseille/draw/hero)"""
         return self._client.request("POST", "/tarot/marseille/draw/hero", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def marseille_draw_love(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Marseille - Love (POST /tarot/marseille/draw/love)"""
+        """Marseille: Love (POST /tarot/marseille/draw/love)"""
         return self._client.request("POST", "/tarot/marseille/draw/love", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def marseille_draw_seven_card(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Marseille - Seven-Card (POST /tarot/marseille/draw/seven-card)"""
+        """Marseille: Seven-Card (POST /tarot/marseille/draw/seven-card)"""
         return self._client.request("POST", "/tarot/marseille/draw/seven-card", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def marseille_draw_single(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Marseille - Single Card (POST /tarot/marseille/draw/single)"""
+        """Marseille: Single Card (POST /tarot/marseille/draw/single)"""
         return self._client.request("POST", "/tarot/marseille/draw/single", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def marseille_draw_spiritual(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Marseille - Spiritual (POST /tarot/marseille/draw/spiritual)"""
+        """Marseille: Spiritual (POST /tarot/marseille/draw/spiritual)"""
         return self._client.request("POST", "/tarot/marseille/draw/spiritual", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def marseille_draw_three_card(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Marseille - Three-Card (POST /tarot/marseille/draw/three-card)"""
+        """Marseille: Three-Card (POST /tarot/marseille/draw/three-card)"""
         return self._client.request("POST", "/tarot/marseille/draw/three-card", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def marseille_interpret(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Marseille - Interpret (POST /tarot/marseille/interpret)"""
+        """Marseille: Interpret (POST /tarot/marseille/interpret)"""
         return self._client.request("POST", "/tarot/marseille/interpret", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def marseille_majors_get(self, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None) -> Any:
-        """Marseille - 22 Majors (GET /tarot/marseille/majors)"""
+        """Marseille: 22 Majors (GET /tarot/marseille/majors)"""
         return self._client.request("GET", "/tarot/marseille/majors", params=params, headers=headers)
 
     def marseille_spreads_get(self, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None) -> Any:
-        """Marseille - All Spreads (GET /tarot/marseille/spreads)"""
+        """Marseille: All Spreads (GET /tarot/marseille/spreads)"""
         return self._client.request("GET", "/tarot/marseille/spreads", params=params, headers=headers)
 
     def marseille_timing(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Marseille - Timing (POST /tarot/marseille/timing)"""
+        """Marseille: Timing (POST /tarot/marseille/timing)"""
         return self._client.request("POST", "/tarot/marseille/timing", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def marseille_year_card(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Marseille - Year Card (POST /tarot/marseille/year-card)"""
+        """Marseille: Year Card (POST /tarot/marseille/year-card)"""
         return self._client.request("POST", "/tarot/marseille/year-card", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def rider_waite_advice(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """RWS - Advice Card (POST /tarot/rider-waite/advice)"""
+        """RWS: Advice Card (POST /tarot/rider-waite/advice)"""
         return self._client.request("POST", "/tarot/rider-waite/advice", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def rider_waite_birth_card(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """RWS - Birth Card (POST /tarot/rider-waite/birth-card)"""
+        """RWS: Birth Card (POST /tarot/rider-waite/birth-card)"""
         return self._client.request("POST", "/tarot/rider-waite/birth-card", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def rider_waite_cards_get(self, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None) -> Any:
-        """RWS - All Cards (GET /tarot/rider-waite/cards)"""
+        """RWS: All Cards (GET /tarot/rider-waite/cards)"""
         return self._client.request("GET", "/tarot/rider-waite/cards", params=params, headers=headers)
 
     def rider_waite_clarify(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """RWS - Clarifier Card (POST /tarot/rider-waite/clarify)"""
+        """RWS: Clarifier Card (POST /tarot/rider-waite/clarify)"""
         return self._client.request("POST", "/tarot/rider-waite/clarify", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def rider_waite_courts_get(self, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None) -> Any:
-        """RWS - 16 Court Cards (GET /tarot/rider-waite/courts)"""
+        """RWS: 16 Court Cards (GET /tarot/rider-waite/courts)"""
         return self._client.request("GET", "/tarot/rider-waite/courts", params=params, headers=headers)
 
     def rider_waite_cross_sum(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """RWS - Court Card Cross-Sum (POST /tarot/rider-waite/cross-sum)"""
+        """RWS: Court Card Cross-Sum (POST /tarot/rider-waite/cross-sum)"""
         return self._client.request("POST", "/tarot/rider-waite/cross-sum", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def rider_waite_daily(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """RWS - Daily Card (POST /tarot/rider-waite/daily)"""
+        """RWS: Daily Card (POST /tarot/rider-waite/daily)"""
         return self._client.request("POST", "/tarot/rider-waite/daily", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def rider_waite_draw_career(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """RWS - Career (POST /tarot/rider-waite/draw/career)"""
+        """RWS: Career (POST /tarot/rider-waite/draw/career)"""
         return self._client.request("POST", "/tarot/rider-waite/draw/career", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def rider_waite_draw_celtic_cross(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """RWS - Celtic Cross (POST /tarot/rider-waite/draw/celtic-cross)"""
+        """RWS: Celtic Cross (POST /tarot/rider-waite/draw/celtic-cross)"""
         return self._client.request("POST", "/tarot/rider-waite/draw/celtic-cross", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def rider_waite_draw_chakra(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """RWS - Chakra (POST /tarot/rider-waite/draw/chakra)"""
+        """RWS: Chakra (POST /tarot/rider-waite/draw/chakra)"""
         return self._client.request("POST", "/tarot/rider-waite/draw/chakra", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def rider_waite_draw_decision(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """RWS - Yes/No (POST /tarot/rider-waite/draw/decision)"""
+        """RWS: Yes/No (POST /tarot/rider-waite/draw/decision)"""
         return self._client.request("POST", "/tarot/rider-waite/draw/decision", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def rider_waite_draw_horseshoe(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """RWS - Horseshoe (POST /tarot/rider-waite/draw/horseshoe)"""
+        """RWS: Horseshoe (POST /tarot/rider-waite/draw/horseshoe)"""
         return self._client.request("POST", "/tarot/rider-waite/draw/horseshoe", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def rider_waite_draw_love_triangle(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """RWS - Love Triangle (POST /tarot/rider-waite/draw/love-triangle)"""
+        """RWS: Love Triangle (POST /tarot/rider-waite/draw/love-triangle)"""
         return self._client.request("POST", "/tarot/rider-waite/draw/love-triangle", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def rider_waite_draw_relationship(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """RWS - Relationship (POST /tarot/rider-waite/draw/relationship)"""
+        """RWS: Relationship (POST /tarot/rider-waite/draw/relationship)"""
         return self._client.request("POST", "/tarot/rider-waite/draw/relationship", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def rider_waite_draw_shadow_work(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """RWS - Shadow Work (POST /tarot/rider-waite/draw/shadow-work)"""
+        """RWS: Shadow Work (POST /tarot/rider-waite/draw/shadow-work)"""
         return self._client.request("POST", "/tarot/rider-waite/draw/shadow-work", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def rider_waite_draw_single(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """RWS - Single Card Draw (POST /tarot/rider-waite/draw/single)"""
+        """RWS: Single Card Draw (POST /tarot/rider-waite/draw/single)"""
         return self._client.request("POST", "/tarot/rider-waite/draw/single", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def rider_waite_draw_spiritual_path(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """RWS - Spiritual Path (POST /tarot/rider-waite/draw/spiritual-path)"""
+        """RWS: Spiritual Path (POST /tarot/rider-waite/draw/spiritual-path)"""
         return self._client.request("POST", "/tarot/rider-waite/draw/spiritual-path", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def rider_waite_draw_three_card(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """RWS - Three-Card Draw (POST /tarot/rider-waite/draw/three-card)"""
+        """RWS: Three-Card Draw (POST /tarot/rider-waite/draw/three-card)"""
         return self._client.request("POST", "/tarot/rider-waite/draw/three-card", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def rider_waite_draw_year_ahead(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """RWS - Year Ahead (POST /tarot/rider-waite/draw/year-ahead)"""
+        """RWS: Year Ahead (POST /tarot/rider-waite/draw/year-ahead)"""
         return self._client.request("POST", "/tarot/rider-waite/draw/year-ahead", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def rider_waite_interpret(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """RWS - Interpret a Hand (POST /tarot/rider-waite/interpret)"""
+        """RWS: Interpret a Hand (POST /tarot/rider-waite/interpret)"""
         return self._client.request("POST", "/tarot/rider-waite/interpret", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def rider_waite_majors_get(self, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None) -> Any:
-        """RWS - 22 Majors (GET /tarot/rider-waite/majors)"""
+        """RWS: 22 Majors (GET /tarot/rider-waite/majors)"""
         return self._client.request("GET", "/tarot/rider-waite/majors", params=params, headers=headers)
 
     def rider_waite_minors_get(self, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None) -> Any:
-        """RWS - 40 Minors (GET /tarot/rider-waite/minors)"""
+        """RWS: 40 Minors (GET /tarot/rider-waite/minors)"""
         return self._client.request("GET", "/tarot/rider-waite/minors", params=params, headers=headers)
 
     def rider_waite_missing_info(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """RWS - Missing Info Card (POST /tarot/rider-waite/missing-info)"""
+        """RWS: Missing Info Card (POST /tarot/rider-waite/missing-info)"""
         return self._client.request("POST", "/tarot/rider-waite/missing-info", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def rider_waite_outcome(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """RWS - Outcome Card (POST /tarot/rider-waite/outcome)"""
+        """RWS: Outcome Card (POST /tarot/rider-waite/outcome)"""
         return self._client.request("POST", "/tarot/rider-waite/outcome", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def rider_waite_shadow_card(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """RWS - Shadow Card (POST /tarot/rider-waite/shadow-card)"""
+        """RWS: Shadow Card (POST /tarot/rider-waite/shadow-card)"""
         return self._client.request("POST", "/tarot/rider-waite/shadow-card", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def rider_waite_soul_personality_card(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """RWS - Soul + Personality (POST /tarot/rider-waite/soul-personality-card)"""
+        """RWS: Soul + Personality (POST /tarot/rider-waite/soul-personality-card)"""
         return self._client.request("POST", "/tarot/rider-waite/soul-personality-card", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def rider_waite_spreads_get(self, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None) -> Any:
-        """RWS - All Spreads (GET /tarot/rider-waite/spreads)"""
+        """RWS: All Spreads (GET /tarot/rider-waite/spreads)"""
         return self._client.request("GET", "/tarot/rider-waite/spreads", params=params, headers=headers)
 
     def rider_waite_timing(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """RWS - Timing Card (POST /tarot/rider-waite/timing)"""
+        """RWS: Timing Card (POST /tarot/rider-waite/timing)"""
         return self._client.request("POST", "/tarot/rider-waite/timing", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def rider_waite_year_card(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """RWS - Year Card (POST /tarot/rider-waite/year-card)"""
+        """RWS: Year Card (POST /tarot/rider-waite/year-card)"""
         return self._client.request("POST", "/tarot/rider-waite/year-card", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
 
@@ -2815,672 +2897,688 @@ class _VedicNamespace:
     def __init__(self, client: Astroway) -> None:
         self._client = client
 
+    def bhavabala(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
+        """Bhava Bala: house strength (POST /vedic/bhavabala)"""
+        return self._client.request("POST", "/vedic/bhavabala", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
+
     def compatibility_ashtakoot(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Compatibility - Ashtakoot Guna Milan (8-fold 36-point) (POST /vedic/compatibility/ashtakoot)"""
+        """Compatibility: Ashtakoot Guna Milan (8-fold 36-point) (POST /vedic/compatibility/ashtakoot)"""
         return self._client.request("POST", "/vedic/compatibility/ashtakoot", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def compatibility_bhrigu_match(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Compatibility - Bhrigu-match (7H placement) (POST /vedic/compatibility/bhrigu-match)"""
+        """Compatibility: Bhrigu-match (7H placement) (POST /vedic/compatibility/bhrigu-match)"""
         return self._client.request("POST", "/vedic/compatibility/bhrigu-match", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def compatibility_dashakoota(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Compatibility - Dashakoota (10-fold 39-point) (POST /vedic/compatibility/dashakoota)"""
+        """Compatibility: Dashakoota (10-fold 39-point) (POST /vedic/compatibility/dashakoota)"""
         return self._client.request("POST", "/vedic/compatibility/dashakoota", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def compatibility_full(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Compatibility - Parashara full report (POST /vedic/compatibility/full)"""
+        """Compatibility: Parashara full report (POST /vedic/compatibility/full)"""
         return self._client.request("POST", "/vedic/compatibility/full", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def compatibility_mangal_match(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Compatibility - Mangal-match (Manglik between partners) (POST /vedic/compatibility/mangal-match)"""
+        """Compatibility: Mangal-match (Manglik between partners) (POST /vedic/compatibility/mangal-match)"""
         return self._client.request("POST", "/vedic/compatibility/mangal-match", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def compatibility_manglik_check(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Compatibility - Manglik check (single chart) (POST /vedic/compatibility/manglik-check)"""
+        """Compatibility: Manglik check (single chart) (POST /vedic/compatibility/manglik-check)"""
         return self._client.request("POST", "/vedic/compatibility/manglik-check", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def dashas_ashtottari_antar(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Dashas - Ashtottari Antardasha (POST /vedic/dashas/ashtottari/antar)"""
+        """Dashas: Ashtottari Antardasha (POST /vedic/dashas/ashtottari/antar)"""
         return self._client.request("POST", "/vedic/dashas/ashtottari/antar", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def dashas_ashtottari_maha(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Dashas - Ashtottari Mahadasha (POST /vedic/dashas/ashtottari/maha)"""
+        """Dashas: Ashtottari Mahadasha (POST /vedic/dashas/ashtottari/maha)"""
         return self._client.request("POST", "/vedic/dashas/ashtottari/maha", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def dashas_ashtottari_prana(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Dashas - Ashtottari Pranadasha (POST /vedic/dashas/ashtottari/prana)"""
+        """Dashas: Ashtottari Pranadasha (POST /vedic/dashas/ashtottari/prana)"""
         return self._client.request("POST", "/vedic/dashas/ashtottari/prana", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def dashas_ashtottari_pratyantar(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Dashas - Ashtottari Pratyantardasha (POST /vedic/dashas/ashtottari/pratyantar)"""
+        """Dashas: Ashtottari Pratyantardasha (POST /vedic/dashas/ashtottari/pratyantar)"""
         return self._client.request("POST", "/vedic/dashas/ashtottari/pratyantar", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def dashas_ashtottari_sookshma(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Dashas - Ashtottari Sookshmadasha (POST /vedic/dashas/ashtottari/sookshma)"""
+        """Dashas: Ashtottari Sookshmadasha (POST /vedic/dashas/ashtottari/sookshma)"""
         return self._client.request("POST", "/vedic/dashas/ashtottari/sookshma", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def dashas_chara_antar(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Dashas - Chara Antardasha (POST /vedic/dashas/chara/antar)"""
+        """Dashas: Chara Antardasha (POST /vedic/dashas/chara/antar)"""
         return self._client.request("POST", "/vedic/dashas/chara/antar", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def dashas_chara_maha(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Dashas - Chara Mahadasha (POST /vedic/dashas/chara/maha)"""
+        """Dashas: Chara Mahadasha (POST /vedic/dashas/chara/maha)"""
         return self._client.request("POST", "/vedic/dashas/chara/maha", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def dashas_chara_prana(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Dashas - Chara Pranadasha (POST /vedic/dashas/chara/prana)"""
+        """Dashas: Chara Pranadasha (POST /vedic/dashas/chara/prana)"""
         return self._client.request("POST", "/vedic/dashas/chara/prana", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def dashas_chara_pratyantar(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Dashas - Chara Pratyantardasha (POST /vedic/dashas/chara/pratyantar)"""
+        """Dashas: Chara Pratyantardasha (POST /vedic/dashas/chara/pratyantar)"""
         return self._client.request("POST", "/vedic/dashas/chara/pratyantar", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def dashas_chara_sookshma(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Dashas - Chara Sookshmadasha (POST /vedic/dashas/chara/sookshma)"""
+        """Dashas: Chara Sookshmadasha (POST /vedic/dashas/chara/sookshma)"""
         return self._client.request("POST", "/vedic/dashas/chara/sookshma", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def dashas_kalachakra_antar(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Dashas - Kalachakra Antardasha (POST /vedic/dashas/kalachakra/antar)"""
+        """Dashas: Kalachakra Antardasha (POST /vedic/dashas/kalachakra/antar)"""
         return self._client.request("POST", "/vedic/dashas/kalachakra/antar", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def dashas_kalachakra_maha(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Dashas - Kalachakra Mahadasha (POST /vedic/dashas/kalachakra/maha)"""
+        """Dashas: Kalachakra Mahadasha (POST /vedic/dashas/kalachakra/maha)"""
         return self._client.request("POST", "/vedic/dashas/kalachakra/maha", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def dashas_kalachakra_prana(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Dashas - Kalachakra Pranadasha (POST /vedic/dashas/kalachakra/prana)"""
+        """Dashas: Kalachakra Pranadasha (POST /vedic/dashas/kalachakra/prana)"""
         return self._client.request("POST", "/vedic/dashas/kalachakra/prana", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def dashas_kalachakra_pratyantar(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Dashas - Kalachakra Pratyantardasha (POST /vedic/dashas/kalachakra/pratyantar)"""
+        """Dashas: Kalachakra Pratyantardasha (POST /vedic/dashas/kalachakra/pratyantar)"""
         return self._client.request("POST", "/vedic/dashas/kalachakra/pratyantar", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def dashas_kalachakra_sookshma(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Dashas - Kalachakra Sookshmadasha (POST /vedic/dashas/kalachakra/sookshma)"""
+        """Dashas: Kalachakra Sookshmadasha (POST /vedic/dashas/kalachakra/sookshma)"""
         return self._client.request("POST", "/vedic/dashas/kalachakra/sookshma", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def dashas_shatabdika_antar(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Dashas - Shatabdika Antardasha (POST /vedic/dashas/shatabdika/antar)"""
+        """Dashas: Shatabdika Antardasha (POST /vedic/dashas/shatabdika/antar)"""
         return self._client.request("POST", "/vedic/dashas/shatabdika/antar", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def dashas_shatabdika_maha(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Dashas - Shatabdika Mahadasha (POST /vedic/dashas/shatabdika/maha)"""
+        """Dashas: Shatabdika Mahadasha (POST /vedic/dashas/shatabdika/maha)"""
         return self._client.request("POST", "/vedic/dashas/shatabdika/maha", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def dashas_shatabdika_prana(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Dashas - Shatabdika Pranadasha (POST /vedic/dashas/shatabdika/prana)"""
+        """Dashas: Shatabdika Pranadasha (POST /vedic/dashas/shatabdika/prana)"""
         return self._client.request("POST", "/vedic/dashas/shatabdika/prana", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def dashas_shatabdika_pratyantar(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Dashas - Shatabdika Pratyantardasha (POST /vedic/dashas/shatabdika/pratyantar)"""
+        """Dashas: Shatabdika Pratyantardasha (POST /vedic/dashas/shatabdika/pratyantar)"""
         return self._client.request("POST", "/vedic/dashas/shatabdika/pratyantar", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def dashas_shatabdika_sookshma(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Dashas - Shatabdika Sookshmadasha (POST /vedic/dashas/shatabdika/sookshma)"""
+        """Dashas: Shatabdika Sookshmadasha (POST /vedic/dashas/shatabdika/sookshma)"""
         return self._client.request("POST", "/vedic/dashas/shatabdika/sookshma", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def dashas_shodashottari_antar(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Dashas - Shodashottari Antardasha (POST /vedic/dashas/shodashottari/antar)"""
+        """Dashas: Shodashottari Antardasha (POST /vedic/dashas/shodashottari/antar)"""
         return self._client.request("POST", "/vedic/dashas/shodashottari/antar", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def dashas_shodashottari_maha(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Dashas - Shodashottari Mahadasha (POST /vedic/dashas/shodashottari/maha)"""
+        """Dashas: Shodashottari Mahadasha (POST /vedic/dashas/shodashottari/maha)"""
         return self._client.request("POST", "/vedic/dashas/shodashottari/maha", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def dashas_shodashottari_prana(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Dashas - Shodashottari Pranadasha (POST /vedic/dashas/shodashottari/prana)"""
+        """Dashas: Shodashottari Pranadasha (POST /vedic/dashas/shodashottari/prana)"""
         return self._client.request("POST", "/vedic/dashas/shodashottari/prana", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def dashas_shodashottari_pratyantar(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Dashas - Shodashottari Pratyantardasha (POST /vedic/dashas/shodashottari/pratyantar)"""
+        """Dashas: Shodashottari Pratyantardasha (POST /vedic/dashas/shodashottari/pratyantar)"""
         return self._client.request("POST", "/vedic/dashas/shodashottari/pratyantar", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def dashas_shodashottari_sookshma(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Dashas - Shodashottari Sookshmadasha (POST /vedic/dashas/shodashottari/sookshma)"""
+        """Dashas: Shodashottari Sookshmadasha (POST /vedic/dashas/shodashottari/sookshma)"""
         return self._client.request("POST", "/vedic/dashas/shodashottari/sookshma", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def dashas_shoola_antar(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Dashas - Shoola Antardasha (POST /vedic/dashas/shoola/antar)"""
+        """Dashas: Shoola Antardasha (POST /vedic/dashas/shoola/antar)"""
         return self._client.request("POST", "/vedic/dashas/shoola/antar", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def dashas_shoola_maha(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Dashas - Shoola Mahadasha (POST /vedic/dashas/shoola/maha)"""
+        """Dashas: Shoola Mahadasha (POST /vedic/dashas/shoola/maha)"""
         return self._client.request("POST", "/vedic/dashas/shoola/maha", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def dashas_shoola_prana(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Dashas - Shoola Pranadasha (POST /vedic/dashas/shoola/prana)"""
+        """Dashas: Shoola Pranadasha (POST /vedic/dashas/shoola/prana)"""
         return self._client.request("POST", "/vedic/dashas/shoola/prana", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def dashas_shoola_pratyantar(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Dashas - Shoola Pratyantardasha (POST /vedic/dashas/shoola/pratyantar)"""
+        """Dashas: Shoola Pratyantardasha (POST /vedic/dashas/shoola/pratyantar)"""
         return self._client.request("POST", "/vedic/dashas/shoola/pratyantar", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def dashas_shoola_sookshma(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Dashas - Shoola Sookshmadasha (POST /vedic/dashas/shoola/sookshma)"""
+        """Dashas: Shoola Sookshmadasha (POST /vedic/dashas/shoola/sookshma)"""
         return self._client.request("POST", "/vedic/dashas/shoola/sookshma", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def dashas_sthira_antar(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Dashas - Sthira Antardasha (POST /vedic/dashas/sthira/antar)"""
+        """Dashas: Sthira Antardasha (POST /vedic/dashas/sthira/antar)"""
         return self._client.request("POST", "/vedic/dashas/sthira/antar", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def dashas_sthira_maha(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Dashas - Sthira Mahadasha (POST /vedic/dashas/sthira/maha)"""
+        """Dashas: Sthira Mahadasha (POST /vedic/dashas/sthira/maha)"""
         return self._client.request("POST", "/vedic/dashas/sthira/maha", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def dashas_sthira_prana(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Dashas - Sthira Pranadasha (POST /vedic/dashas/sthira/prana)"""
+        """Dashas: Sthira Pranadasha (POST /vedic/dashas/sthira/prana)"""
         return self._client.request("POST", "/vedic/dashas/sthira/prana", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def dashas_sthira_pratyantar(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Dashas - Sthira Pratyantardasha (POST /vedic/dashas/sthira/pratyantar)"""
+        """Dashas: Sthira Pratyantardasha (POST /vedic/dashas/sthira/pratyantar)"""
         return self._client.request("POST", "/vedic/dashas/sthira/pratyantar", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def dashas_sthira_sookshma(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Dashas - Sthira Sookshmadasha (POST /vedic/dashas/sthira/sookshma)"""
+        """Dashas: Sthira Sookshmadasha (POST /vedic/dashas/sthira/sookshma)"""
         return self._client.request("POST", "/vedic/dashas/sthira/sookshma", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def dashas_tribhagi_antar(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Dashas - Tribhagi Antardasha (POST /vedic/dashas/tribhagi/antar)"""
+        """Dashas: Tribhagi Antardasha (POST /vedic/dashas/tribhagi/antar)"""
         return self._client.request("POST", "/vedic/dashas/tribhagi/antar", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def dashas_tribhagi_maha(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Dashas - Tribhagi Mahadasha (POST /vedic/dashas/tribhagi/maha)"""
+        """Dashas: Tribhagi Mahadasha (POST /vedic/dashas/tribhagi/maha)"""
         return self._client.request("POST", "/vedic/dashas/tribhagi/maha", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def dashas_tribhagi_prana(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Dashas - Tribhagi Pranadasha (POST /vedic/dashas/tribhagi/prana)"""
+        """Dashas: Tribhagi Pranadasha (POST /vedic/dashas/tribhagi/prana)"""
         return self._client.request("POST", "/vedic/dashas/tribhagi/prana", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def dashas_tribhagi_pratyantar(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Dashas - Tribhagi Pratyantardasha (POST /vedic/dashas/tribhagi/pratyantar)"""
+        """Dashas: Tribhagi Pratyantardasha (POST /vedic/dashas/tribhagi/pratyantar)"""
         return self._client.request("POST", "/vedic/dashas/tribhagi/pratyantar", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def dashas_tribhagi_sookshma(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Dashas - Tribhagi Sookshmadasha (POST /vedic/dashas/tribhagi/sookshma)"""
+        """Dashas: Tribhagi Sookshmadasha (POST /vedic/dashas/tribhagi/sookshma)"""
         return self._client.request("POST", "/vedic/dashas/tribhagi/sookshma", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def dashas_vimshottari_antar(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Dashas - Vimshottari Antardasha (POST /vedic/dashas/vimshottari/antar)"""
+        """Dashas: Vimshottari Antardasha (POST /vedic/dashas/vimshottari/antar)"""
         return self._client.request("POST", "/vedic/dashas/vimshottari/antar", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def dashas_vimshottari_maha(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Dashas - Vimshottari Mahadasha (POST /vedic/dashas/vimshottari/maha)"""
+        """Dashas: Vimshottari Mahadasha (POST /vedic/dashas/vimshottari/maha)"""
         return self._client.request("POST", "/vedic/dashas/vimshottari/maha", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def dashas_vimshottari_prana(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Dashas - Vimshottari Pranadasha (POST /vedic/dashas/vimshottari/prana)"""
+        """Dashas: Vimshottari Pranadasha (POST /vedic/dashas/vimshottari/prana)"""
         return self._client.request("POST", "/vedic/dashas/vimshottari/prana", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def dashas_vimshottari_pratyantar(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Dashas - Vimshottari Pratyantardasha (POST /vedic/dashas/vimshottari/pratyantar)"""
+        """Dashas: Vimshottari Pratyantardasha (POST /vedic/dashas/vimshottari/pratyantar)"""
         return self._client.request("POST", "/vedic/dashas/vimshottari/pratyantar", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def dashas_vimshottari_sookshma(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Dashas - Vimshottari Sookshmadasha (POST /vedic/dashas/vimshottari/sookshma)"""
+        """Dashas: Vimshottari Sookshmadasha (POST /vedic/dashas/vimshottari/sookshma)"""
         return self._client.request("POST", "/vedic/dashas/vimshottari/sookshma", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def dashas_yogini_antar(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Dashas - Yogini Antardasha (POST /vedic/dashas/yogini/antar)"""
+        """Dashas: Yogini Antardasha (POST /vedic/dashas/yogini/antar)"""
         return self._client.request("POST", "/vedic/dashas/yogini/antar", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def dashas_yogini_maha(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Dashas - Yogini Mahadasha (POST /vedic/dashas/yogini/maha)"""
+        """Dashas: Yogini Mahadasha (POST /vedic/dashas/yogini/maha)"""
         return self._client.request("POST", "/vedic/dashas/yogini/maha", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def dashas_yogini_prana(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Dashas - Yogini Pranadasha (POST /vedic/dashas/yogini/prana)"""
+        """Dashas: Yogini Pranadasha (POST /vedic/dashas/yogini/prana)"""
         return self._client.request("POST", "/vedic/dashas/yogini/prana", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def dashas_yogini_pratyantar(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Dashas - Yogini Pratyantardasha (POST /vedic/dashas/yogini/pratyantar)"""
+        """Dashas: Yogini Pratyantardasha (POST /vedic/dashas/yogini/pratyantar)"""
         return self._client.request("POST", "/vedic/dashas/yogini/pratyantar", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def dashas_yogini_sookshma(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Dashas - Yogini Sookshmadasha (POST /vedic/dashas/yogini/sookshma)"""
+        """Dashas: Yogini Sookshmadasha (POST /vedic/dashas/yogini/sookshma)"""
         return self._client.request("POST", "/vedic/dashas/yogini/sookshma", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def doshas_kp_full(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Doshas - KP full summary (POST /vedic/doshas/kp/full)"""
+        """Doshas: KP full summary (POST /vedic/doshas/kp/full)"""
         return self._client.request("POST", "/vedic/doshas/kp/full", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def doshas_kp_kalasarpa(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Doshas - KP Kalasarpa (POST /vedic/doshas/kp/kalasarpa)"""
+        """Doshas: KP Kalasarpa (POST /vedic/doshas/kp/kalasarpa)"""
         return self._client.request("POST", "/vedic/doshas/kp/kalasarpa", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def doshas_kp_kemadruma(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Doshas - KP Kemadruma (POST /vedic/doshas/kp/kemadruma)"""
+        """Doshas: KP Kemadruma (POST /vedic/doshas/kp/kemadruma)"""
         return self._client.request("POST", "/vedic/doshas/kp/kemadruma", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def doshas_kp_manglik(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Doshas - KP Manglik (POST /vedic/doshas/kp/manglik)"""
+        """Doshas: KP Manglik (POST /vedic/doshas/kp/manglik)"""
         return self._client.request("POST", "/vedic/doshas/kp/manglik", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def doshas_kp_pitra(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Doshas - KP Pitra (POST /vedic/doshas/kp/pitra)"""
+        """Doshas: KP Pitra (POST /vedic/doshas/kp/pitra)"""
         return self._client.request("POST", "/vedic/doshas/kp/pitra", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def doshas_kp_sade_sati(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Doshas - KP Sade Sati (POST /vedic/doshas/kp/sade-sati)"""
+        """Doshas: KP Sade Sati (POST /vedic/doshas/kp/sade-sati)"""
         return self._client.request("POST", "/vedic/doshas/kp/sade-sati", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def doshas_lal_kitab_full(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Doshas - Lal Kitab full summary (POST /vedic/doshas/lal-kitab/full)"""
+        """Doshas: Lal Kitab full summary (POST /vedic/doshas/lal-kitab/full)"""
         return self._client.request("POST", "/vedic/doshas/lal-kitab/full", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def doshas_lal_kitab_kalsarpa(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Doshas - Lal Kitab Kalsarpa (POST /vedic/doshas/lal-kitab/kalsarpa)"""
+        """Doshas: Lal Kitab Kalsarpa (POST /vedic/doshas/lal-kitab/kalsarpa)"""
         return self._client.request("POST", "/vedic/doshas/lal-kitab/kalsarpa", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def doshas_lal_kitab_manglik(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Doshas - Lal Kitab Manglik (POST /vedic/doshas/lal-kitab/manglik)"""
+        """Doshas: Lal Kitab Manglik (POST /vedic/doshas/lal-kitab/manglik)"""
         return self._client.request("POST", "/vedic/doshas/lal-kitab/manglik", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def doshas_lal_kitab_pitra(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Doshas - Lal Kitab Pitra (POST /vedic/doshas/lal-kitab/pitra)"""
+        """Doshas: Lal Kitab Pitra (POST /vedic/doshas/lal-kitab/pitra)"""
         return self._client.request("POST", "/vedic/doshas/lal-kitab/pitra", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def doshas_lal_kitab_rin(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Doshas - Lal Kitab Rin (6 ancestral debts) (POST /vedic/doshas/lal-kitab/rin)"""
+        """Doshas: Lal Kitab Rin (6 ancestral debts) (POST /vedic/doshas/lal-kitab/rin)"""
         return self._client.request("POST", "/vedic/doshas/lal-kitab/rin", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def doshas_lal_kitab_shrapit(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Doshas - Lal Kitab Shrapit (POST /vedic/doshas/lal-kitab/shrapit)"""
+        """Doshas: Lal Kitab Shrapit (POST /vedic/doshas/lal-kitab/shrapit)"""
         return self._client.request("POST", "/vedic/doshas/lal-kitab/shrapit", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def doshas_parashara_full(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Doshas - Parashara full report (POST /vedic/doshas/parashara/full)"""
+        """Doshas: Parashara full report (POST /vedic/doshas/parashara/full)"""
         return self._client.request("POST", "/vedic/doshas/parashara/full", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def doshas_parashara_grahan(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Doshas - Grahan (eclipse-like) (POST /vedic/doshas/parashara/grahan)"""
+        """Doshas: Grahan (eclipse-like) (POST /vedic/doshas/parashara/grahan)"""
         return self._client.request("POST", "/vedic/doshas/parashara/grahan", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def doshas_parashara_guru_chandal(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Doshas - Guru-Chandal (POST /vedic/doshas/parashara/guru-chandal)"""
+        """Doshas: Guru-Chandal (POST /vedic/doshas/parashara/guru-chandal)"""
         return self._client.request("POST", "/vedic/doshas/parashara/guru-chandal", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def doshas_parashara_kaal_sarp(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Doshas - Kaal Sarp (POST /vedic/doshas/parashara/kaal-sarp)"""
+        """Doshas: Kaal Sarp (POST /vedic/doshas/parashara/kaal-sarp)"""
         return self._client.request("POST", "/vedic/doshas/parashara/kaal-sarp", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def doshas_parashara_mangal(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Doshas - Mangal (Mars affliction) (POST /vedic/doshas/parashara/mangal)"""
+        """Doshas: Mangal (Mars affliction) (POST /vedic/doshas/parashara/mangal)"""
         return self._client.request("POST", "/vedic/doshas/parashara/mangal", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def doshas_parashara_pitru(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Doshas - Pitru (ancestral) (POST /vedic/doshas/parashara/pitru)"""
+        """Doshas: Pitru (ancestral) (POST /vedic/doshas/parashara/pitru)"""
         return self._client.request("POST", "/vedic/doshas/parashara/pitru", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def doshas_parashara_shrapit(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Doshas - Shrapit (curse) (POST /vedic/doshas/parashara/shrapit)"""
+        """Doshas: Shrapit (curse) (POST /vedic/doshas/parashara/shrapit)"""
         return self._client.request("POST", "/vedic/doshas/parashara/shrapit", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
+    def gemstones(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
+        """Gemstone (ratna) recommendation (POST /vedic/gemstones)"""
+        return self._client.request("POST", "/vedic/gemstones", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
+
+    def gemstones_navaratna_get(self, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None) -> Any:
+        """Navaratna reference table (GET /vedic/gemstones/navaratna)"""
+        return self._client.request("GET", "/vedic/gemstones/navaratna", params=params, headers=headers)
+
     def jaimini_argala_analysis(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Jaimini - Argala / Virodhargala scan (POST /vedic/jaimini/argala-analysis)"""
+        """Jaimini: Argala / Virodhargala scan (POST /vedic/jaimini/argala-analysis)"""
         return self._client.request("POST", "/vedic/jaimini/argala-analysis", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def jaimini_aspects(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Jaimini - Aspects (Rasi + Graha drishti) (POST /vedic/jaimini/aspects)"""
+        """Jaimini: Aspects (Rasi + Graha drishti) (POST /vedic/jaimini/aspects)"""
         return self._client.request("POST", "/vedic/jaimini/aspects", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def jaimini_atmakaraka_navamsa(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Jaimini - Karakamsa (AK in Navamsa) (POST /vedic/jaimini/atmakaraka-navamsa)"""
+        """Jaimini: Karakamsa (AK in Navamsa) (POST /vedic/jaimini/atmakaraka-navamsa)"""
         return self._client.request("POST", "/vedic/jaimini/atmakaraka-navamsa", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def jaimini_atmakaraka_rotation(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Jaimini - Atmakaraka rotation (timeline) (POST /vedic/jaimini/atmakaraka-rotation)"""
+        """Jaimini: Atmakaraka rotation (timeline) (POST /vedic/jaimini/atmakaraka-rotation)"""
         return self._client.request("POST", "/vedic/jaimini/atmakaraka-rotation", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def jaimini_chara_karakas(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Jaimini - Chara Karakas (detailed) (POST /vedic/jaimini/chara-karakas)"""
+        """Jaimini: Chara Karakas (detailed) (POST /vedic/jaimini/chara-karakas)"""
         return self._client.request("POST", "/vedic/jaimini/chara-karakas", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def jaimini_dasha_summary(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Jaimini - Running Dasha Summary (POST /vedic/jaimini/dasha-summary)"""
+        """Jaimini: Running Dasha Summary (POST /vedic/jaimini/dasha-summary)"""
         return self._client.request("POST", "/vedic/jaimini/dasha-summary", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def jaimini_drishti_graha(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Jaimini - Graha Drishti (planet aspects) (POST /vedic/jaimini/drishti-graha)"""
+        """Jaimini: Graha Drishti (planet aspects) (POST /vedic/jaimini/drishti-graha)"""
         return self._client.request("POST", "/vedic/jaimini/drishti-graha", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def jaimini_drishti_rasi(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Jaimini - Rasi Drishti (sign aspects) (POST /vedic/jaimini/drishti-rasi)"""
+        """Jaimini: Rasi Drishti (sign aspects) (POST /vedic/jaimini/drishti-rasi)"""
         return self._client.request("POST", "/vedic/jaimini/drishti-rasi", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def jaimini_karakas(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Jaimini - Karakas (Chara + Naisargika) (POST /vedic/jaimini/karakas)"""
+        """Jaimini: Karakas (Chara + Naisargika) (POST /vedic/jaimini/karakas)"""
         return self._client.request("POST", "/vedic/jaimini/karakas", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def jaimini_padas(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Jaimini - Padas (Bhava/Surya/Chandra/Graha Arudhas) (POST /vedic/jaimini/padas)"""
+        """Jaimini: Padas (Bhava/Surya/Chandra/Graha Arudhas) (POST /vedic/jaimini/padas)"""
         return self._client.request("POST", "/vedic/jaimini/padas", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def jaimini_upapada(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Jaimini - Upapada Lagna (UL) (POST /vedic/jaimini/upapada)"""
+        """Jaimini: Upapada Lagna (UL) (POST /vedic/jaimini/upapada)"""
         return self._client.request("POST", "/vedic/jaimini/upapada", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def jaimini_yogas(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Jaimini - Yogas (basic AK/DK/PK set) (POST /vedic/jaimini/yogas)"""
+        """Jaimini: Yogas (basic AK/DK/PK set) (POST /vedic/jaimini/yogas)"""
         return self._client.request("POST", "/vedic/jaimini/yogas", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def kp_asc_sub(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """KP - Ascendant sub-lord (POST /vedic/kp/asc-sub)"""
+        """KP: Ascendant sub-lord (POST /vedic/kp/asc-sub)"""
         return self._client.request("POST", "/vedic/kp/asc-sub", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def kp_cusps(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """KP - Placidus cusps with sub-lord chain (POST /vedic/kp/cusps)"""
+        """KP: Placidus cusps with sub-lord chain (POST /vedic/kp/cusps)"""
         return self._client.request("POST", "/vedic/kp/cusps", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def kp_fortuna(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """KP - Part of Fortune (POST /vedic/kp/fortuna)"""
+        """KP: Part of Fortune (POST /vedic/kp/fortuna)"""
         return self._client.request("POST", "/vedic/kp/fortuna", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def kp_horary(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """KP - Horary chart (1..249) (POST /vedic/kp/horary)"""
+        """KP: Horary chart (1..249) (POST /vedic/kp/horary)"""
         return self._client.request("POST", "/vedic/kp/horary", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def kp_planet_cuspal_position(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """KP - Planet cuspal positions (POST /vedic/kp/planet-cuspal-position)"""
+        """KP: Planet cuspal positions (POST /vedic/kp/planet-cuspal-position)"""
         return self._client.request("POST", "/vedic/kp/planet-cuspal-position", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def kp_ruling_planets(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """KP - Ruling Planets (POST /vedic/kp/ruling-planets)"""
+        """KP: Ruling Planets (POST /vedic/kp/ruling-planets)"""
         return self._client.request("POST", "/vedic/kp/ruling-planets", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def kp_significators(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """KP - Significators (primary/secondary/tertiary) (POST /vedic/kp/significators)"""
+        """KP: Significators (primary/secondary/tertiary) (POST /vedic/kp/significators)"""
         return self._client.request("POST", "/vedic/kp/significators", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def kp_sub_lords(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """KP - Sub-lords (cusps + planets) (POST /vedic/kp/sub-lords)"""
+        """KP: Sub-lords (cusps + planets) (POST /vedic/kp/sub-lords)"""
         return self._client.request("POST", "/vedic/kp/sub-lords", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def kp_sub_sub_lord(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """KP - Sub-sub-lord lookup (POST /vedic/kp/sub-sub-lord)"""
+        """KP: Sub-sub-lord lookup (POST /vedic/kp/sub-sub-lord)"""
         return self._client.request("POST", "/vedic/kp/sub-sub-lord", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def kp_transit_kp(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """KP - Transit positions (POST /vedic/kp/transit-kp)"""
+        """KP: Transit positions (POST /vedic/kp/transit-kp)"""
         return self._client.request("POST", "/vedic/kp/transit-kp", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def lal_kitab_blind_house(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Lal Kitab - Blind houses (Andha bhava) (POST /vedic/lal-kitab/blind-house)"""
+        """Lal Kitab: Blind houses (Andha bhava) (POST /vedic/lal-kitab/blind-house)"""
         return self._client.request("POST", "/vedic/lal-kitab/blind-house", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def lal_kitab_dasha(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Lal Kitab - Dasha (35-year cycle) (POST /vedic/lal-kitab/dasha)"""
+        """Lal Kitab: Dasha (35-year cycle) (POST /vedic/lal-kitab/dasha)"""
         return self._client.request("POST", "/vedic/lal-kitab/dasha", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def lal_kitab_debts(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Lal Kitab - Rin (6 ancestral debts) (POST /vedic/lal-kitab/debts)"""
+        """Lal Kitab: Rin (6 ancestral debts) (POST /vedic/lal-kitab/debts)"""
         return self._client.request("POST", "/vedic/lal-kitab/debts", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def lal_kitab_kismat(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Lal Kitab - Kismat (fortune indicator) (POST /vedic/lal-kitab/kismat)"""
+        """Lal Kitab: Kismat (fortune indicator) (POST /vedic/lal-kitab/kismat)"""
         return self._client.request("POST", "/vedic/lal-kitab/kismat", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def lal_kitab_lal_kundali(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Lal Kitab - Kundali (12-house grid) (POST /vedic/lal-kitab/lal-kundali)"""
+        """Lal Kitab: Kundali (12-house grid) (POST /vedic/lal-kitab/lal-kundali)"""
         return self._client.request("POST", "/vedic/lal-kitab/lal-kundali", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def lal_kitab_life_graph(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Lal Kitab - Life graph (age-by-age) (POST /vedic/lal-kitab/life-graph)"""
+        """Lal Kitab: Life graph (age-by-age) (POST /vedic/lal-kitab/life-graph)"""
         return self._client.request("POST", "/vedic/lal-kitab/life-graph", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def lal_kitab_planet_house_effect(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Lal Kitab - Planet-in-house effect (POST /vedic/lal-kitab/planet-house-effect)"""
+        """Lal Kitab: Planet-in-house effect (POST /vedic/lal-kitab/planet-house-effect)"""
         return self._client.request("POST", "/vedic/lal-kitab/planet-house-effect", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def lal_kitab_prosperity(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Lal Kitab - Sukh (prosperity yoga) (POST /vedic/lal-kitab/prosperity)"""
+        """Lal Kitab: Sukh (prosperity yoga) (POST /vedic/lal-kitab/prosperity)"""
         return self._client.request("POST", "/vedic/lal-kitab/prosperity", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def lal_kitab_remedies(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Lal Kitab - Remedies (Upayas) (POST /vedic/lal-kitab/remedies)"""
+        """Lal Kitab: Remedies (Upayas) (POST /vedic/lal-kitab/remedies)"""
         return self._client.request("POST", "/vedic/lal-kitab/remedies", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def lal_kitab_sleeping_house(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Lal Kitab - Sleeping houses (POST /vedic/lal-kitab/sleeping-house)"""
+        """Lal Kitab: Sleeping houses (POST /vedic/lal-kitab/sleeping-house)"""
         return self._client.request("POST", "/vedic/lal-kitab/sleeping-house", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def lal_kitab_teva(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Lal Kitab - Teva (fixed-house chart) (POST /vedic/lal-kitab/teva)"""
+        """Lal Kitab: Teva (fixed-house chart) (POST /vedic/lal-kitab/teva)"""
         return self._client.request("POST", "/vedic/lal-kitab/teva", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def lal_kitab_varshphal(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Lal Kitab - Varshphal (annual) (POST /vedic/lal-kitab/varshphal)"""
+        """Lal Kitab: Varshphal (annual) (POST /vedic/lal-kitab/varshphal)"""
         return self._client.request("POST", "/vedic/lal-kitab/varshphal", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def muhurat_business_start(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Muhurat - Business start (Vyapara) (POST /vedic/muhurat/business-start)"""
+        """Muhurat: Business start (Vyapara) (POST /vedic/muhurat/business-start)"""
         return self._client.request("POST", "/vedic/muhurat/business-start", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def muhurat_education_start(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Muhurat - Education start (Vidyarambha) (POST /vedic/muhurat/education-start)"""
+        """Muhurat: Education start (Vidyarambha) (POST /vedic/muhurat/education-start)"""
         return self._client.request("POST", "/vedic/muhurat/education-start", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def muhurat_general_auspicious(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Muhurat - General auspicious window (POST /vedic/muhurat/general-auspicious)"""
+        """Muhurat: General auspicious window (POST /vedic/muhurat/general-auspicious)"""
         return self._client.request("POST", "/vedic/muhurat/general-auspicious", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def muhurat_investment(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Muhurat - Investment / Dhana Sthapana (POST /vedic/muhurat/investment)"""
+        """Muhurat: Investment / Dhana Sthapana (POST /vedic/muhurat/investment)"""
         return self._client.request("POST", "/vedic/muhurat/investment", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def muhurat_journey_long(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Muhurat - Long journey (multi-day Yatra) (POST /vedic/muhurat/journey-long)"""
+        """Muhurat: Long journey (multi-day Yatra) (POST /vedic/muhurat/journey-long)"""
         return self._client.request("POST", "/vedic/muhurat/journey-long", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def muhurat_marriage(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Muhurat - Marriage (Vivah) (POST /vedic/muhurat/marriage)"""
+        """Muhurat: Marriage (Vivah) (POST /vedic/muhurat/marriage)"""
         return self._client.request("POST", "/vedic/muhurat/marriage", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def muhurat_name_change(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Muhurat - Name change (POST /vedic/muhurat/name-change)"""
+        """Muhurat: Name change (POST /vedic/muhurat/name-change)"""
         return self._client.request("POST", "/vedic/muhurat/name-change", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def muhurat_naming_ceremony(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Muhurat - Naming ceremony (Namkaran) (POST /vedic/muhurat/naming-ceremony)"""
+        """Muhurat: Naming ceremony (Namkaran) (POST /vedic/muhurat/naming-ceremony)"""
         return self._client.request("POST", "/vedic/muhurat/naming-ceremony", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def muhurat_property_purchase(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Muhurat - Property purchase / Griha Pravesh (POST /vedic/muhurat/property-purchase)"""
+        """Muhurat: Property purchase / Griha Pravesh (POST /vedic/muhurat/property-purchase)"""
         return self._client.request("POST", "/vedic/muhurat/property-purchase", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def muhurat_surgery(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Muhurat - Surgery (Shastrakarma) (POST /vedic/muhurat/surgery)"""
+        """Muhurat: Surgery (Shastrakarma) (POST /vedic/muhurat/surgery)"""
         return self._client.request("POST", "/vedic/muhurat/surgery", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def muhurat_travel(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Muhurat - Travel (short Yatra) (POST /vedic/muhurat/travel)"""
+        """Muhurat: Travel (short Yatra) (POST /vedic/muhurat/travel)"""
         return self._client.request("POST", "/vedic/muhurat/travel", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def muhurat_vehicle_purchase(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Muhurat - Vehicle purchase (POST /vedic/muhurat/vehicle-purchase)"""
+        """Muhurat: Vehicle purchase (POST /vedic/muhurat/vehicle-purchase)"""
         return self._client.request("POST", "/vedic/muhurat/vehicle-purchase", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def panchang_choghadia(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Panchang - Choghadia (POST /vedic/panchang/choghadia)"""
+        """Panchang: Choghadia (POST /vedic/panchang/choghadia)"""
         return self._client.request("POST", "/vedic/panchang/choghadia", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def panchang_full(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Panchang - full (POST /vedic/panchang/full)"""
+        """Panchang: full (POST /vedic/panchang/full)"""
         return self._client.request("POST", "/vedic/panchang/full", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def panchang_hora(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Panchang - Hora (POST /vedic/panchang/hora)"""
+        """Panchang: Hora (POST /vedic/panchang/hora)"""
         return self._client.request("POST", "/vedic/panchang/hora", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def panchang_karana(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Panchang - Karana (POST /vedic/panchang/karana)"""
+        """Panchang: Karana (POST /vedic/panchang/karana)"""
         return self._client.request("POST", "/vedic/panchang/karana", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def panchang_nakshatra_of_day(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Panchang - Nakshatra of Day (POST /vedic/panchang/nakshatra-of-day)"""
+        """Panchang: Nakshatra of Day (POST /vedic/panchang/nakshatra-of-day)"""
         return self._client.request("POST", "/vedic/panchang/nakshatra-of-day", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def panchang_rahu_kaal(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Panchang - Rahu Kaal block (POST /vedic/panchang/rahu-kaal)"""
+        """Panchang: Rahu Kaal block (POST /vedic/panchang/rahu-kaal)"""
         return self._client.request("POST", "/vedic/panchang/rahu-kaal", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def panchang_tithi(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Panchang - Tithi (POST /vedic/panchang/tithi)"""
+        """Panchang: Tithi (POST /vedic/panchang/tithi)"""
         return self._client.request("POST", "/vedic/panchang/tithi", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def panchang_yoga(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Panchang - Yoga (POST /vedic/panchang/yoga)"""
+        """Panchang: Yoga (POST /vedic/panchang/yoga)"""
         return self._client.request("POST", "/vedic/panchang/yoga", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def shadbala_cheshta(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Shadbala - Cheshta (motional) (POST /vedic/shadbala/cheshta)"""
+        """Shadbala: Cheshta (motional) (POST /vedic/shadbala/cheshta)"""
         return self._client.request("POST", "/vedic/shadbala/cheshta", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def shadbala_dig(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Shadbala - Dig (directional) (POST /vedic/shadbala/dig)"""
+        """Shadbala: Dig (directional) (POST /vedic/shadbala/dig)"""
         return self._client.request("POST", "/vedic/shadbala/dig", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def shadbala_drik(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Shadbala - Drik (aspectual) (POST /vedic/shadbala/drik)"""
+        """Shadbala: Drik (aspectual) (POST /vedic/shadbala/drik)"""
         return self._client.request("POST", "/vedic/shadbala/drik", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def shadbala_full(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Shadbala - full summary (POST /vedic/shadbala/full)"""
+        """Shadbala: full summary (POST /vedic/shadbala/full)"""
         return self._client.request("POST", "/vedic/shadbala/full", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def shadbala_kala(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Shadbala - Kala (temporal) (POST /vedic/shadbala/kala)"""
+        """Shadbala: Kala (temporal) (POST /vedic/shadbala/kala)"""
         return self._client.request("POST", "/vedic/shadbala/kala", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def shadbala_naisargika(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Shadbala - Naisargika (natural) (POST /vedic/shadbala/naisargika)"""
+        """Shadbala: Naisargika (natural) (POST /vedic/shadbala/naisargika)"""
         return self._client.request("POST", "/vedic/shadbala/naisargika", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def shadbala_sthana(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Shadbala - Sthana (positional) (POST /vedic/shadbala/sthana)"""
+        """Shadbala: Sthana (positional) (POST /vedic/shadbala/sthana)"""
         return self._client.request("POST", "/vedic/shadbala/sthana", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def varga_d1(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Varga D1 - Rashi (POST /vedic/varga/D1)"""
+        """Varga D1: Rashi (POST /vedic/varga/D1)"""
         return self._client.request("POST", "/vedic/varga/D1", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def varga_d10(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Varga D10 - Dasamsa (POST /vedic/varga/D10)"""
+        """Varga D10: Dasamsa (POST /vedic/varga/D10)"""
         return self._client.request("POST", "/vedic/varga/D10", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def varga_d12(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Varga D12 - Dwadasamsa (POST /vedic/varga/D12)"""
+        """Varga D12: Dwadasamsa (POST /vedic/varga/D12)"""
         return self._client.request("POST", "/vedic/varga/D12", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def varga_d16(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Varga D16 - Shodasamsa (POST /vedic/varga/D16)"""
+        """Varga D16: Shodasamsa (POST /vedic/varga/D16)"""
         return self._client.request("POST", "/vedic/varga/D16", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def varga_d2(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Varga D2 - Hora (POST /vedic/varga/D2)"""
+        """Varga D2: Hora (POST /vedic/varga/D2)"""
         return self._client.request("POST", "/vedic/varga/D2", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def varga_d20(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Varga D20 - Vimsamsa (POST /vedic/varga/D20)"""
+        """Varga D20: Vimsamsa (POST /vedic/varga/D20)"""
         return self._client.request("POST", "/vedic/varga/D20", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def varga_d24(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Varga D24 - Chaturvimsamsa (POST /vedic/varga/D24)"""
+        """Varga D24: Chaturvimsamsa (POST /vedic/varga/D24)"""
         return self._client.request("POST", "/vedic/varga/D24", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def varga_d27(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Varga D27 - Saptavimsamsa (POST /vedic/varga/D27)"""
+        """Varga D27: Saptavimsamsa (POST /vedic/varga/D27)"""
         return self._client.request("POST", "/vedic/varga/D27", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def varga_d3(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Varga D3 - Drekkana (POST /vedic/varga/D3)"""
+        """Varga D3: Drekkana (POST /vedic/varga/D3)"""
         return self._client.request("POST", "/vedic/varga/D3", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def varga_d30(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Varga D30 - Trimsamsa (POST /vedic/varga/D30)"""
+        """Varga D30: Trimsamsa (POST /vedic/varga/D30)"""
         return self._client.request("POST", "/vedic/varga/D30", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def varga_d4(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Varga D4 - Chaturthamsa (POST /vedic/varga/D4)"""
+        """Varga D4: Chaturthamsa (POST /vedic/varga/D4)"""
         return self._client.request("POST", "/vedic/varga/D4", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def varga_d40(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Varga D40 - Khavedamsa (POST /vedic/varga/D40)"""
+        """Varga D40: Khavedamsa (POST /vedic/varga/D40)"""
         return self._client.request("POST", "/vedic/varga/D40", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def varga_d45(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Varga D45 - Akshavedamsa (POST /vedic/varga/D45)"""
+        """Varga D45: Akshavedamsa (POST /vedic/varga/D45)"""
         return self._client.request("POST", "/vedic/varga/D45", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def varga_d60(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Varga D60 - Shashtiamsa (POST /vedic/varga/D60)"""
+        """Varga D60: Shashtiamsa (POST /vedic/varga/D60)"""
         return self._client.request("POST", "/vedic/varga/D60", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def varga_d7(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Varga D7 - Saptamsa (POST /vedic/varga/D7)"""
+        """Varga D7: Saptamsa (POST /vedic/varga/D7)"""
         return self._client.request("POST", "/vedic/varga/D7", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def varga_d9(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Varga D9 - Navamsa (POST /vedic/varga/D9)"""
+        """Varga D9: Navamsa (POST /vedic/varga/D9)"""
         return self._client.request("POST", "/vedic/varga/D9", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
+    def varshaphal(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
+        """Varshaphal: Tajika annual chart (POST /vedic/varshaphal)"""
+        return self._client.request("POST", "/vedic/varshaphal", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
+
     def yogas_jaimini_daridra(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Yogas - Jaimini Daridra yoga (POST /vedic/yogas/jaimini/daridra)"""
+        """Yogas: Jaimini Daridra yoga (POST /vedic/yogas/jaimini/daridra)"""
         return self._client.request("POST", "/vedic/yogas/jaimini/daridra", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def yogas_jaimini_dhana(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Yogas - Jaimini Dhana yoga (POST /vedic/yogas/jaimini/dhana)"""
+        """Yogas: Jaimini Dhana yoga (POST /vedic/yogas/jaimini/dhana)"""
         return self._client.request("POST", "/vedic/yogas/jaimini/dhana", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def yogas_jaimini_full(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Yogas - Jaimini full summary (POST /vedic/yogas/jaimini/full)"""
+        """Yogas: Jaimini full summary (POST /vedic/yogas/jaimini/full)"""
         return self._client.request("POST", "/vedic/yogas/jaimini/full", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def yogas_jaimini_karaka_yoga(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Yogas - Jaimini Karaka yoga (all 8 karakas) (POST /vedic/yogas/jaimini/karaka-yoga)"""
+        """Yogas: Jaimini Karaka yoga (all 8 karakas) (POST /vedic/yogas/jaimini/karaka-yoga)"""
         return self._client.request("POST", "/vedic/yogas/jaimini/karaka-yoga", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def yogas_jaimini_karakamsa(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Yogas - Karakamsa chart (12-house projection) (POST /vedic/yogas/jaimini/karakamsa)"""
+        """Yogas: Karakamsa chart (12-house projection) (POST /vedic/yogas/jaimini/karakamsa)"""
         return self._client.request("POST", "/vedic/yogas/jaimini/karakamsa", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def yogas_jaimini_raja(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Yogas - Jaimini Raja yoga (POST /vedic/yogas/jaimini/raja)"""
+        """Yogas: Jaimini Raja yoga (POST /vedic/yogas/jaimini/raja)"""
         return self._client.request("POST", "/vedic/yogas/jaimini/raja", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def yogas_jaimini_shubha_graha(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Yogas - Shubha-graha (functional natures) (POST /vedic/yogas/jaimini/shubha-graha)"""
+        """Yogas: Shubha-graha (functional natures) (POST /vedic/yogas/jaimini/shubha-graha)"""
         return self._client.request("POST", "/vedic/yogas/jaimini/shubha-graha", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def yogas_jaimini_viparita(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Yogas - Jaimini Viparita Raja yoga (POST /vedic/yogas/jaimini/viparita)"""
+        """Yogas: Jaimini Viparita Raja yoga (POST /vedic/yogas/jaimini/viparita)"""
         return self._client.request("POST", "/vedic/yogas/jaimini/viparita", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def yogas_parashara_adhi(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Yogas - Adhi (POST /vedic/yogas/parashara/adhi)"""
+        """Yogas: Adhi (POST /vedic/yogas/parashara/adhi)"""
         return self._client.request("POST", "/vedic/yogas/parashara/adhi", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def yogas_parashara_dhana(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Yogas - Dhana (wealth) (POST /vedic/yogas/parashara/dhana)"""
+        """Yogas: Dhana (wealth) (POST /vedic/yogas/parashara/dhana)"""
         return self._client.request("POST", "/vedic/yogas/parashara/dhana", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def yogas_parashara_dharma_karmadhipati(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Yogas - Dharma-Karmadhipati (POST /vedic/yogas/parashara/dharma-karmadhipati)"""
+        """Yogas: Dharma-Karmadhipati (POST /vedic/yogas/parashara/dharma-karmadhipati)"""
         return self._client.request("POST", "/vedic/yogas/parashara/dharma-karmadhipati", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def yogas_parashara_full(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Yogas - Parashara full report (POST /vedic/yogas/parashara/full)"""
+        """Yogas: Parashara full report (POST /vedic/yogas/parashara/full)"""
         return self._client.request("POST", "/vedic/yogas/parashara/full", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def yogas_parashara_gajakesari(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Yogas - Gajakesari (POST /vedic/yogas/parashara/gajakesari)"""
+        """Yogas: Gajakesari (POST /vedic/yogas/parashara/gajakesari)"""
         return self._client.request("POST", "/vedic/yogas/parashara/gajakesari", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def yogas_parashara_pancha_mahapurusha(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Yogas - Pancha Mahapurusha (5 great) (POST /vedic/yogas/parashara/pancha-mahapurusha)"""
+        """Yogas: Pancha Mahapurusha (5 great) (POST /vedic/yogas/parashara/pancha-mahapurusha)"""
         return self._client.request("POST", "/vedic/yogas/parashara/pancha-mahapurusha", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def yogas_parashara_raja(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Yogas - Raja (royal) (POST /vedic/yogas/parashara/raja)"""
+        """Yogas: Raja (royal) (POST /vedic/yogas/parashara/raja)"""
         return self._client.request("POST", "/vedic/yogas/parashara/raja", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
 
@@ -3493,7 +3591,7 @@ class _VedicDivisionalNamespace:
         self._client = client
 
     def compute(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Vedic Divisional Chart (DEPRECATED - use /vedic/varga/{D}<*>) (POST /vedic-divisional)"""
+        """Vedic Divisional Chart (DEPRECATED: use /vedic/varga/{D}<*>) (POST /vedic-divisional)"""
         return self._client.request("POST", "/vedic-divisional", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
 
@@ -3561,6 +3659,10 @@ class _WellnessNamespace:
 
     def __init__(self, client: Astroway) -> None:
         self._client = client
+
+    def biorhythm(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
+        """Biorhythm (JSON) (POST /wellness/biorhythm)"""
+        return self._client.request("POST", "/wellness/biorhythm", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def crystals(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
         """Healing Crystals by Sign (POST /wellness/crystals)"""
@@ -3645,6 +3747,10 @@ class _ZiweiNamespace:
     def __init__(self, client: Astroway) -> None:
         self._client = client
 
+    def four_transformations(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
+        """Four Transformations (四化) (POST /ziwei/four-transformations)"""
+        return self._client.request("POST", "/ziwei/four-transformations", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
+
     def full_chart(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
         """Full Chart (MVP) (POST /ziwei/full-chart)"""
         return self._client.request("POST", "/ziwei/full-chart", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
@@ -3666,7 +3772,7 @@ class _ZiweiNamespace:
         return self._client.request("POST", "/ziwei/palace-destiny", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def palace_health(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Health Palace (Jie\'e) (POST /ziwei/palace-health)"""
+        """Health Palace (Ji'e) (POST /ziwei/palace-health)"""
         return self._client.request("POST", "/ziwei/palace-health", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def palace_property(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
@@ -3703,51 +3809,51 @@ class _ZodiacNamespace:
         self._client = client
 
     def aquarius_get(self, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None) -> Any:
-        """Aquarius - Fixed Air (GET /zodiac/aquarius)"""
+        """Aquarius: Fixed Air (GET /zodiac/aquarius)"""
         return self._client.request("GET", "/zodiac/aquarius", params=params, headers=headers)
 
     def aries_get(self, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None) -> Any:
-        """Aries - Cardinal Fire (GET /zodiac/aries)"""
+        """Aries: Cardinal Fire (GET /zodiac/aries)"""
         return self._client.request("GET", "/zodiac/aries", params=params, headers=headers)
 
     def cancer_get(self, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None) -> Any:
-        """Cancer - Cardinal Water (GET /zodiac/cancer)"""
+        """Cancer: Cardinal Water (GET /zodiac/cancer)"""
         return self._client.request("GET", "/zodiac/cancer", params=params, headers=headers)
 
     def capricorn_get(self, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None) -> Any:
-        """Capricorn - Cardinal Earth (GET /zodiac/capricorn)"""
+        """Capricorn: Cardinal Earth (GET /zodiac/capricorn)"""
         return self._client.request("GET", "/zodiac/capricorn", params=params, headers=headers)
 
     def gemini_get(self, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None) -> Any:
-        """Gemini - Mutable Air (GET /zodiac/gemini)"""
+        """Gemini: Mutable Air (GET /zodiac/gemini)"""
         return self._client.request("GET", "/zodiac/gemini", params=params, headers=headers)
 
     def leo_get(self, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None) -> Any:
-        """Leo - Fixed Fire (GET /zodiac/leo)"""
+        """Leo: Fixed Fire (GET /zodiac/leo)"""
         return self._client.request("GET", "/zodiac/leo", params=params, headers=headers)
 
     def libra_get(self, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None) -> Any:
-        """Libra - Cardinal Air (GET /zodiac/libra)"""
+        """Libra: Cardinal Air (GET /zodiac/libra)"""
         return self._client.request("GET", "/zodiac/libra", params=params, headers=headers)
 
     def pisces_get(self, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None) -> Any:
-        """Pisces - Mutable Water (GET /zodiac/pisces)"""
+        """Pisces: Mutable Water (GET /zodiac/pisces)"""
         return self._client.request("GET", "/zodiac/pisces", params=params, headers=headers)
 
     def sagittarius_get(self, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None) -> Any:
-        """Sagittarius - Mutable Fire (GET /zodiac/sagittarius)"""
+        """Sagittarius: Mutable Fire (GET /zodiac/sagittarius)"""
         return self._client.request("GET", "/zodiac/sagittarius", params=params, headers=headers)
 
     def scorpio_get(self, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None) -> Any:
-        """Scorpio - Fixed Water (GET /zodiac/scorpio)"""
+        """Scorpio: Fixed Water (GET /zodiac/scorpio)"""
         return self._client.request("GET", "/zodiac/scorpio", params=params, headers=headers)
 
     def taurus_get(self, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None) -> Any:
-        """Taurus - Fixed Earth (GET /zodiac/taurus)"""
+        """Taurus: Fixed Earth (GET /zodiac/taurus)"""
         return self._client.request("GET", "/zodiac/taurus", params=params, headers=headers)
 
     def virgo_get(self, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None) -> Any:
-        """Virgo - Mutable Earth (GET /zodiac/virgo)"""
+        """Virgo: Mutable Earth (GET /zodiac/virgo)"""
         return self._client.request("GET", "/zodiac/virgo", params=params, headers=headers)
 
 
@@ -3758,6 +3864,10 @@ class _AcgAsyncNamespace:
 
     def __init__(self, client: AsyncAstroway) -> None:
         self._client = client
+
+    async def best_places(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
+        """Best places for a life category (POST /acg/best-places)"""
+        return await self._client.request("POST", "/acg/best-places", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def by_category(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
         """A*C*G by Life Category (POST /acg/by-category)"""
@@ -3770,6 +3880,10 @@ class _AcgAsyncNamespace:
     async def compute(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
         """Astrocartography (A*C*G) (POST /acg)"""
         return await self._client.request("POST", "/acg", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
+
+    async def countries_get(self, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None) -> Any:
+        """Countries available for ranking (GET /acg/countries)"""
+        return await self._client.request("GET", "/acg/countries", params=params, headers=headers)
 
     async def line_report(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
         """A*C*G Line Report (POST /acg/line-report)"""
@@ -3787,6 +3901,19 @@ class _AcgZonesAsyncNamespace:
     async def compute(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
         """A*C*G Lines Near a Point (POST /acg-zones)"""
         return await self._client.request("POST", "/acg-zones", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
+
+
+class _AgentAsyncNamespace:
+    """Async namespace for `agent.*` endpoints."""
+
+    __slots__ = ("_client",)
+
+    def __init__(self, client: AsyncAstroway) -> None:
+        self._client = client
+
+    async def tools_get(self, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None) -> Any:
+        """Agent tool definitions (GET /agent/tools)"""
+        return await self._client.request("GET", "/agent/tools", params=params, headers=headers)
 
 
 class _AiAsyncNamespace:
@@ -4066,9 +4193,17 @@ class _ChineseAsyncNamespace:
     def __init__(self, client: AsyncAstroway) -> None:
         self._client = client
 
+    async def feng_shui_annual_stars(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
+        """Annual flying stars and afflictions (POST /chinese/feng-shui/annual-stars)"""
+        return await self._client.request("POST", "/chinese/feng-shui/annual-stars", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
+
     async def feng_shui_bagua(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
         """Bagua Life Areas (POST /chinese/feng-shui/bagua)"""
         return await self._client.request("POST", "/chinese/feng-shui/bagua", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
+
+    async def feng_shui_flying_star(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
+        """Flying Star natal chart (Xuan Kong Fei Xing) (POST /chinese/feng-shui/flying-star)"""
+        return await self._client.request("POST", "/chinese/feng-shui/flying-star", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def feng_shui_kua(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
         """Kua Number (POST /chinese/feng-shui/kua)"""
@@ -4077,6 +4212,22 @@ class _ChineseAsyncNamespace:
     async def feng_shui_lucky_directions(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
         """Lucky / Unlucky Directions (POST /chinese/feng-shui/lucky-directions)"""
         return await self._client.request("POST", "/chinese/feng-shui/lucky-directions", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
+
+    async def lunar_date(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
+        """Gregorian to Lunar Date (POST /chinese/lunar-date)"""
+        return await self._client.request("POST", "/chinese/lunar-date", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
+
+    async def solar_terms(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
+        """24 Solar Terms (節氣) (POST /chinese/solar-terms)"""
+        return await self._client.request("POST", "/chinese/solar-terms", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
+
+    async def tong_shu(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
+        """Tong Shu day: officer and mansion (POST /chinese/tong-shu)"""
+        return await self._client.request("POST", "/chinese/tong-shu", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
+
+    async def tong_shu_select(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
+        """Tong Shu date selection (POST /chinese/tong-shu/select)"""
+        return await self._client.request("POST", "/chinese/tong-shu/select", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def zodiac_animal(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
         """Chinese Zodiac Animal (POST /chinese/zodiac/animal)"""
@@ -4209,7 +4360,7 @@ class _DestinyMatrixAsyncNamespace:
         self._client = client
 
     async def ladini(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Destiny Matrix - Ladini Method (POST /destiny-matrix/ladini)"""
+        """Destiny Matrix: Ladini Method (POST /destiny-matrix/ladini)"""
         return await self._client.request("POST", "/destiny-matrix/ladini", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
 
@@ -4239,7 +4390,7 @@ class _DjamaspaAsyncNamespace:
         self._client = client
 
     async def compute(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Djamaspa (DEPRECATED - RED quality, sunset 2027-06-15) (POST /djamaspa)"""
+        """Djamaspa (DEPRECATED: RED quality, sunset 2027-06-15) (POST /djamaspa)"""
         return await self._client.request("POST", "/djamaspa", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
 
@@ -4308,7 +4459,7 @@ class _EsotericAsyncNamespace:
         return await self._client.request("POST", "/esoteric/angel-numbers/decode", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def angel_numbers_get(self, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None) -> Any:
-        """Angel Numbers - Catalogue (GET /esoteric/angel-numbers)"""
+        """Angel Numbers: Catalogue (GET /esoteric/angel-numbers)"""
         return await self._client.request("GET", "/esoteric/angel-numbers", params=params, headers=headers)
 
     async def angel_numbers_today_get(self, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None) -> Any:
@@ -4316,7 +4467,7 @@ class _EsotericAsyncNamespace:
         return await self._client.request("GET", "/esoteric/angel-numbers/today", params=params, headers=headers)
 
     async def crystals_get(self, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None) -> Any:
-        """Crystals - Full Directory (GET /esoteric/crystals)"""
+        """Crystals: Full Directory (GET /esoteric/crystals)"""
         return await self._client.request("GET", "/esoteric/crystals", params=params, headers=headers)
 
     async def crystals_recommend(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
@@ -4477,6 +4628,10 @@ class _FixedStarsAsyncNamespace:
     def __init__(self, client: AsyncAstroway) -> None:
         self._client = client
 
+    async def catalog_get(self, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None) -> Any:
+        """Fixed star catalogue (GET /fixed-stars/catalog)"""
+        return await self._client.request("GET", "/fixed-stars/catalog", params=params, headers=headers)
+
     async def compute(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
         """Fixed Stars (POST /fixed-stars)"""
         return await self._client.request("POST", "/fixed-stars", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
@@ -4530,15 +4685,15 @@ class _GeomancyAsyncNamespace:
         self._client = client
 
     async def acquisitio(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Acquisitio - Gain (POST /geomancy/acquisitio)"""
+        """Acquisitio: Gain (POST /geomancy/acquisitio)"""
         return await self._client.request("POST", "/geomancy/acquisitio", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def albus(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Albus - White (POST /geomancy/albus)"""
+        """Albus: White (POST /geomancy/albus)"""
         return await self._client.request("POST", "/geomancy/albus", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def amissio(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Amissio - Loss (POST /geomancy/amissio)"""
+        """Amissio: Loss (POST /geomancy/amissio)"""
         return await self._client.request("POST", "/geomancy/amissio", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def caput_draconis(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
@@ -4546,7 +4701,7 @@ class _GeomancyAsyncNamespace:
         return await self._client.request("POST", "/geomancy/caput-draconis", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def carcer(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Carcer - Prison (POST /geomancy/carcer)"""
+        """Carcer: Prison (POST /geomancy/carcer)"""
         return await self._client.request("POST", "/geomancy/carcer", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def cauda_draconis(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
@@ -4554,7 +4709,7 @@ class _GeomancyAsyncNamespace:
         return await self._client.request("POST", "/geomancy/cauda-draconis", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def coniunctio(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Coniunctio - Conjunction (POST /geomancy/coniunctio)"""
+        """Coniunctio: Conjunction (POST /geomancy/coniunctio)"""
         return await self._client.request("POST", "/geomancy/coniunctio", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def fortuna_major(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
@@ -4566,31 +4721,31 @@ class _GeomancyAsyncNamespace:
         return await self._client.request("POST", "/geomancy/fortuna-minor", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def laetitia(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Laetitia - Joy (POST /geomancy/laetitia)"""
+        """Laetitia: Joy (POST /geomancy/laetitia)"""
         return await self._client.request("POST", "/geomancy/laetitia", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def populus(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Populus - The People (POST /geomancy/populus)"""
+        """Populus: The People (POST /geomancy/populus)"""
         return await self._client.request("POST", "/geomancy/populus", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def puella(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Puella - Girl (POST /geomancy/puella)"""
+        """Puella: Girl (POST /geomancy/puella)"""
         return await self._client.request("POST", "/geomancy/puella", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def puer(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Puer - Boy (POST /geomancy/puer)"""
+        """Puer: Boy (POST /geomancy/puer)"""
         return await self._client.request("POST", "/geomancy/puer", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def rubeus(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Rubeus - Red (POST /geomancy/rubeus)"""
+        """Rubeus: Red (POST /geomancy/rubeus)"""
         return await self._client.request("POST", "/geomancy/rubeus", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def tristitia(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Tristitia - Sorrow (POST /geomancy/tristitia)"""
+        """Tristitia: Sorrow (POST /geomancy/tristitia)"""
         return await self._client.request("POST", "/geomancy/tristitia", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def via(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Via - The Way (POST /geomancy/via)"""
+        """Via: The Way (POST /geomancy/via)"""
         return await self._client.request("POST", "/geomancy/via", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
 
@@ -4982,7 +5137,7 @@ class _IchingAsyncNamespace:
         return await self._client.request("POST", "/iching/by-question", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def compute(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """I Ching Hexagram (DEPRECATED - use /iching/throw-coins) (POST /iching)"""
+        """I Ching Hexagram (DEPRECATED: use /iching/throw-coins) (POST /iching)"""
         return await self._client.request("POST", "/iching", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def daily(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
@@ -5038,6 +5193,27 @@ class _InterpretAsyncNamespace:
     async def transits(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
         """Transits Interpretation (POST /interpret/transits)"""
         return await self._client.request("POST", "/interpret/transits", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
+
+
+class _KabbalahAsyncNamespace:
+    """Async namespace for `kabbalah.*` endpoints."""
+
+    __slots__ = ("_client",)
+
+    def __init__(self, client: AsyncAstroway) -> None:
+        self._client = client
+
+    async def gematria(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
+        """Gematria ciphers (POST /kabbalah/gematria)"""
+        return await self._client.request("POST", "/kabbalah/gematria", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
+
+    async def sephiroth_get(self, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None) -> Any:
+        """The ten sephirot (GET /kabbalah/sephiroth)"""
+        return await self._client.request("GET", "/kabbalah/sephiroth", params=params, headers=headers)
+
+    async def shem_names_get(self, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None) -> Any:
+        """The seventy-two names (Shem HaMephorash) (GET /kabbalah/shem-names)"""
+        return await self._client.request("GET", "/kabbalah/shem-names", params=params, headers=headers)
 
 
 class _LocalSpaceAsyncNamespace:
@@ -5226,63 +5402,63 @@ class _ModernAsyncNamespace:
         self._client = client
 
     async def arroyo_cycle_of_becoming(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Arroyo - Cycle of Becoming (POST /modern/arroyo/cycle-of-becoming)"""
+        """Arroyo: Cycle of Becoming (POST /modern/arroyo/cycle-of-becoming)"""
         return await self._client.request("POST", "/modern/arroyo/cycle-of-becoming", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def arroyo_element_balance(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Arroyo - Element Balance (POST /modern/arroyo/element-balance)"""
+        """Arroyo: Element Balance (POST /modern/arroyo/element-balance)"""
         return await self._client.request("POST", "/modern/arroyo/element-balance", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def arroyo_element_integration(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Arroyo - Element Integration (POST /modern/arroyo/element-integration)"""
+        """Arroyo: Element Integration (POST /modern/arroyo/element-integration)"""
         return await self._client.request("POST", "/modern/arroyo/element-integration", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def arroyo_relational_element_map(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Arroyo - Relational Map (POST /modern/arroyo/relational-element-map)"""
+        """Arroyo: Relational Map (POST /modern/arroyo/relational-element-map)"""
         return await self._client.request("POST", "/modern/arroyo/relational-element-map", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def arroyo_water_houses_trauma(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Arroyo - Water Houses Trauma (POST /modern/arroyo/water-houses-trauma)"""
+        """Arroyo: Water Houses Trauma (POST /modern/arroyo/water-houses-trauma)"""
         return await self._client.request("POST", "/modern/arroyo/water-houses-trauma", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def greene_archetypal_figures(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Greene - Archetypal Figures (POST /modern/greene/archetypal-figures)"""
+        """Greene: Archetypal Figures (POST /modern/greene/archetypal-figures)"""
         return await self._client.request("POST", "/modern/greene/archetypal-figures", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def greene_individuation_path(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Greene - Individuation Path (POST /modern/greene/individuation-path)"""
+        """Greene: Individuation Path (POST /modern/greene/individuation-path)"""
         return await self._client.request("POST", "/modern/greene/individuation-path", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def greene_lunar_myth(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Greene - Lunar Myth (POST /modern/greene/lunar-myth)"""
+        """Greene: Lunar Myth (POST /modern/greene/lunar-myth)"""
         return await self._client.request("POST", "/modern/greene/lunar-myth", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def greene_parental_imagos(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Greene - Parental Imagos (POST /modern/greene/parental-imagos)"""
+        """Greene: Parental Imagos (POST /modern/greene/parental-imagos)"""
         return await self._client.request("POST", "/modern/greene/parental-imagos", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def greene_saturn_shadow(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Greene - Saturn Shadow (POST /modern/greene/saturn-shadow)"""
+        """Greene: Saturn Shadow (POST /modern/greene/saturn-shadow)"""
         return await self._client.request("POST", "/modern/greene/saturn-shadow", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def rudhyar_cycles_of_becoming(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Rudhyar - Cycles of Becoming (POST /modern/rudhyar/cycles-of-becoming)"""
+        """Rudhyar: Cycles of Becoming (POST /modern/rudhyar/cycles-of-becoming)"""
         return await self._client.request("POST", "/modern/rudhyar/cycles-of-becoming", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def rudhyar_lunation_phase(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Rudhyar - Lunation Phase (POST /modern/rudhyar/lunation-phase)"""
+        """Rudhyar: Lunation Phase (POST /modern/rudhyar/lunation-phase)"""
         return await self._client.request("POST", "/modern/rudhyar/lunation-phase", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def rudhyar_personality_keynote(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Rudhyar - Personality Keynote (POST /modern/rudhyar/personality-keynote)"""
+        """Rudhyar: Personality Keynote (POST /modern/rudhyar/personality-keynote)"""
         return await self._client.request("POST", "/modern/rudhyar/personality-keynote", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def rudhyar_symbolic_degrees(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Rudhyar - Symbolic Degrees (POST /modern/rudhyar/symbolic-degrees)"""
+        """Rudhyar: Symbolic Degrees (POST /modern/rudhyar/symbolic-degrees)"""
         return await self._client.request("POST", "/modern/rudhyar/symbolic-degrees", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def rudhyar_transits_as_rebirth(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Rudhyar - Transits as Rebirth (POST /modern/rudhyar/transits-as-rebirth)"""
+        """Rudhyar: Transits as Rebirth (POST /modern/rudhyar/transits-as-rebirth)"""
         return await self._client.request("POST", "/modern/rudhyar/transits-as-rebirth", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
 
@@ -5334,7 +5510,7 @@ class _MuhurtaAsyncNamespace:
         self._client = client
 
     async def types_get(self, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None) -> Any:
-        """Muhurat - activity catalogue (GET /muhurta/types)"""
+        """Muhurat: activity catalogue (GET /muhurta/types)"""
         return await self._client.request("GET", "/muhurta/types", params=params, headers=headers)
 
 
@@ -5613,6 +5789,10 @@ class _ParansAsyncNamespace:
     async def compute(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
         """Parans (POST /parans)"""
         return await self._client.request("POST", "/parans", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
+
+    async def star(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
+        """Star-planet parans (Brady) (POST /parans/star)"""
+        return await self._client.request("POST", "/parans/star", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
 
 class _PetAsyncNamespace:
@@ -5930,7 +6110,7 @@ class _RenderAsyncNamespace:
         return await self._client.request("POST", "/render/composite", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def cosmogram(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Cosmogram - Hamburg School 90° dial (SVG) (POST /render/cosmogram)"""
+        """Cosmogram: Hamburg School 90° dial (SVG) (POST /render/cosmogram)"""
         return await self._client.request("POST", "/render/cosmogram", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def eclipse_path(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
@@ -5954,15 +6134,15 @@ class _RenderAsyncNamespace:
         return await self._client.request("POST", "/render/tri-wheel", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def wheel_vedic_east(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Vedic Wheel - East Indian (SVG) (POST /render/wheel-vedic-east)"""
+        """Vedic Wheel: East Indian (SVG) (POST /render/wheel-vedic-east)"""
         return await self._client.request("POST", "/render/wheel-vedic-east", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def wheel_vedic_north(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Vedic Wheel - North Indian (SVG) (POST /render/wheel-vedic-north)"""
+        """Vedic Wheel: North Indian (SVG) (POST /render/wheel-vedic-north)"""
         return await self._client.request("POST", "/render/wheel-vedic-north", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def wheel_vedic_south(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Vedic Wheel - South Indian (SVG) (POST /render/wheel-vedic-south)"""
+        """Vedic Wheel: South Indian (SVG) (POST /render/wheel-vedic-south)"""
         return await self._client.request("POST", "/render/wheel-vedic-south", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def wheel_western(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
@@ -6010,8 +6190,12 @@ class _ReportsAsyncNamespace:
         """Generate Child Astrology Report (PDF or HTML) (POST /reports/child)"""
         return await self._client.request("POST", "/reports/child", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
+    async def gemstone(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
+        """Generate Gemstone Report (PDF or HTML) (POST /reports/gemstone)"""
+        return await self._client.request("POST", "/reports/gemstone", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
+
     async def generate(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Generate Report - Unified Dispatcher (V2) (POST /reports/generate)"""
+        """Generate Report: Unified Dispatcher (V2) (POST /reports/generate)"""
         return await self._client.request("POST", "/reports/generate", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def history_get(self, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None) -> Any:
@@ -6041,6 +6225,10 @@ class _ReportsAsyncNamespace:
     async def natal(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
         """Generate Natal Report (PDF or HTML) (POST /reports/natal)"""
         return await self._client.request("POST", "/reports/natal", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
+
+    async def relocation(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
+        """Generate Relocation Report (PDF or HTML) (POST /reports/relocation)"""
+        return await self._client.request("POST", "/reports/relocation", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def stellaforge(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
         """Generate Stellaforge Birth-Chart Poster (PDF or HTML) (POST /reports/stellaforge)"""
@@ -6257,231 +6445,231 @@ class _TarotAsyncNamespace:
         self._client = client
 
     async def lenormand_cards_get(self, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None) -> Any:
-        """Lenormand - All Cards (GET /tarot/lenormand/cards)"""
+        """Lenormand: All Cards (GET /tarot/lenormand/cards)"""
         return await self._client.request("GET", "/tarot/lenormand/cards", params=params, headers=headers)
 
     async def lenormand_daily(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Lenormand - Daily Cards (POST /tarot/lenormand/daily)"""
+        """Lenormand: Daily Cards (POST /tarot/lenormand/daily)"""
         return await self._client.request("POST", "/tarot/lenormand/daily", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def lenormand_draw_9_card_square(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Lenormand - 9-Card Square (POST /tarot/lenormand/draw/9-card-square)"""
+        """Lenormand: 9-Card Square (POST /tarot/lenormand/draw/9-card-square)"""
         return await self._client.request("POST", "/tarot/lenormand/draw/9-card-square", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def lenormand_draw_celtic_cross_lenormand(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Lenormand - Celtic Cross (POST /tarot/lenormand/draw/celtic-cross-lenormand)"""
+        """Lenormand: Celtic Cross (POST /tarot/lenormand/draw/celtic-cross-lenormand)"""
         return await self._client.request("POST", "/tarot/lenormand/draw/celtic-cross-lenormand", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def lenormand_draw_grand_tableau(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Lenormand - Grand Tableau (POST /tarot/lenormand/draw/grand-tableau)"""
+        """Lenormand: Grand Tableau (POST /tarot/lenormand/draw/grand-tableau)"""
         return await self._client.request("POST", "/tarot/lenormand/draw/grand-tableau", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def lenormand_draw_line_of_five(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Lenormand - Line of Five (POST /tarot/lenormand/draw/line-of-five)"""
+        """Lenormand: Line of Five (POST /tarot/lenormand/draw/line-of-five)"""
         return await self._client.request("POST", "/tarot/lenormand/draw/line-of-five", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def lenormand_draw_relationship(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Lenormand - Relationship (POST /tarot/lenormand/draw/relationship)"""
+        """Lenormand: Relationship (POST /tarot/lenormand/draw/relationship)"""
         return await self._client.request("POST", "/tarot/lenormand/draw/relationship", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def lenormand_draw_three_card(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Lenormand - Three-Card (POST /tarot/lenormand/draw/three-card)"""
+        """Lenormand: Three-Card (POST /tarot/lenormand/draw/three-card)"""
         return await self._client.request("POST", "/tarot/lenormand/draw/three-card", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def lenormand_houses_get(self, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None) -> Any:
-        """Lenormand - 36 Houses (GET /tarot/lenormand/houses)"""
+        """Lenormand: 36 Houses (GET /tarot/lenormand/houses)"""
         return await self._client.request("GET", "/tarot/lenormand/houses", params=params, headers=headers)
 
     async def marseille_birth_card(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Marseille - Birth Card (POST /tarot/marseille/birth-card)"""
+        """Marseille: Birth Card (POST /tarot/marseille/birth-card)"""
         return await self._client.request("POST", "/tarot/marseille/birth-card", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def marseille_cards_get(self, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None) -> Any:
-        """Marseille - All Cards (GET /tarot/marseille/cards)"""
+        """Marseille: All Cards (GET /tarot/marseille/cards)"""
         return await self._client.request("GET", "/tarot/marseille/cards", params=params, headers=headers)
 
     async def marseille_clarify(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Marseille - Clarifier (POST /tarot/marseille/clarify)"""
+        """Marseille: Clarifier (POST /tarot/marseille/clarify)"""
         return await self._client.request("POST", "/tarot/marseille/clarify", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def marseille_daily(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Marseille - Daily Card (POST /tarot/marseille/daily)"""
+        """Marseille: Daily Card (POST /tarot/marseille/daily)"""
         return await self._client.request("POST", "/tarot/marseille/daily", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def marseille_draw_career(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Marseille - Career (POST /tarot/marseille/draw/career)"""
+        """Marseille: Career (POST /tarot/marseille/draw/career)"""
         return await self._client.request("POST", "/tarot/marseille/draw/career", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def marseille_draw_celtic_cross(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Marseille - Celtic Cross (POST /tarot/marseille/draw/celtic-cross)"""
+        """Marseille: Celtic Cross (POST /tarot/marseille/draw/celtic-cross)"""
         return await self._client.request("POST", "/tarot/marseille/draw/celtic-cross", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def marseille_draw_cross(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Marseille - Tirage Réduit (Jodorowsky Reduced Cross) (POST /tarot/marseille/draw/cross)"""
+        """Marseille: Tirage Réduit (Jodorowsky Reduced Cross) (POST /tarot/marseille/draw/cross)"""
         return await self._client.request("POST", "/tarot/marseille/draw/cross", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def marseille_draw_decision(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Marseille - Yes/No (POST /tarot/marseille/draw/decision)"""
+        """Marseille: Yes/No (POST /tarot/marseille/draw/decision)"""
         return await self._client.request("POST", "/tarot/marseille/draw/decision", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def marseille_draw_hero(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Marseille - Tirage du Héros (Hero's Journey) (POST /tarot/marseille/draw/hero)"""
+        """Marseille: Tirage du Héros (Hero's Journey) (POST /tarot/marseille/draw/hero)"""
         return await self._client.request("POST", "/tarot/marseille/draw/hero", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def marseille_draw_love(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Marseille - Love (POST /tarot/marseille/draw/love)"""
+        """Marseille: Love (POST /tarot/marseille/draw/love)"""
         return await self._client.request("POST", "/tarot/marseille/draw/love", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def marseille_draw_seven_card(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Marseille - Seven-Card (POST /tarot/marseille/draw/seven-card)"""
+        """Marseille: Seven-Card (POST /tarot/marseille/draw/seven-card)"""
         return await self._client.request("POST", "/tarot/marseille/draw/seven-card", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def marseille_draw_single(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Marseille - Single Card (POST /tarot/marseille/draw/single)"""
+        """Marseille: Single Card (POST /tarot/marseille/draw/single)"""
         return await self._client.request("POST", "/tarot/marseille/draw/single", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def marseille_draw_spiritual(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Marseille - Spiritual (POST /tarot/marseille/draw/spiritual)"""
+        """Marseille: Spiritual (POST /tarot/marseille/draw/spiritual)"""
         return await self._client.request("POST", "/tarot/marseille/draw/spiritual", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def marseille_draw_three_card(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Marseille - Three-Card (POST /tarot/marseille/draw/three-card)"""
+        """Marseille: Three-Card (POST /tarot/marseille/draw/three-card)"""
         return await self._client.request("POST", "/tarot/marseille/draw/three-card", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def marseille_interpret(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Marseille - Interpret (POST /tarot/marseille/interpret)"""
+        """Marseille: Interpret (POST /tarot/marseille/interpret)"""
         return await self._client.request("POST", "/tarot/marseille/interpret", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def marseille_majors_get(self, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None) -> Any:
-        """Marseille - 22 Majors (GET /tarot/marseille/majors)"""
+        """Marseille: 22 Majors (GET /tarot/marseille/majors)"""
         return await self._client.request("GET", "/tarot/marseille/majors", params=params, headers=headers)
 
     async def marseille_spreads_get(self, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None) -> Any:
-        """Marseille - All Spreads (GET /tarot/marseille/spreads)"""
+        """Marseille: All Spreads (GET /tarot/marseille/spreads)"""
         return await self._client.request("GET", "/tarot/marseille/spreads", params=params, headers=headers)
 
     async def marseille_timing(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Marseille - Timing (POST /tarot/marseille/timing)"""
+        """Marseille: Timing (POST /tarot/marseille/timing)"""
         return await self._client.request("POST", "/tarot/marseille/timing", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def marseille_year_card(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Marseille - Year Card (POST /tarot/marseille/year-card)"""
+        """Marseille: Year Card (POST /tarot/marseille/year-card)"""
         return await self._client.request("POST", "/tarot/marseille/year-card", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def rider_waite_advice(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """RWS - Advice Card (POST /tarot/rider-waite/advice)"""
+        """RWS: Advice Card (POST /tarot/rider-waite/advice)"""
         return await self._client.request("POST", "/tarot/rider-waite/advice", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def rider_waite_birth_card(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """RWS - Birth Card (POST /tarot/rider-waite/birth-card)"""
+        """RWS: Birth Card (POST /tarot/rider-waite/birth-card)"""
         return await self._client.request("POST", "/tarot/rider-waite/birth-card", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def rider_waite_cards_get(self, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None) -> Any:
-        """RWS - All Cards (GET /tarot/rider-waite/cards)"""
+        """RWS: All Cards (GET /tarot/rider-waite/cards)"""
         return await self._client.request("GET", "/tarot/rider-waite/cards", params=params, headers=headers)
 
     async def rider_waite_clarify(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """RWS - Clarifier Card (POST /tarot/rider-waite/clarify)"""
+        """RWS: Clarifier Card (POST /tarot/rider-waite/clarify)"""
         return await self._client.request("POST", "/tarot/rider-waite/clarify", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def rider_waite_courts_get(self, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None) -> Any:
-        """RWS - 16 Court Cards (GET /tarot/rider-waite/courts)"""
+        """RWS: 16 Court Cards (GET /tarot/rider-waite/courts)"""
         return await self._client.request("GET", "/tarot/rider-waite/courts", params=params, headers=headers)
 
     async def rider_waite_cross_sum(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """RWS - Court Card Cross-Sum (POST /tarot/rider-waite/cross-sum)"""
+        """RWS: Court Card Cross-Sum (POST /tarot/rider-waite/cross-sum)"""
         return await self._client.request("POST", "/tarot/rider-waite/cross-sum", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def rider_waite_daily(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """RWS - Daily Card (POST /tarot/rider-waite/daily)"""
+        """RWS: Daily Card (POST /tarot/rider-waite/daily)"""
         return await self._client.request("POST", "/tarot/rider-waite/daily", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def rider_waite_draw_career(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """RWS - Career (POST /tarot/rider-waite/draw/career)"""
+        """RWS: Career (POST /tarot/rider-waite/draw/career)"""
         return await self._client.request("POST", "/tarot/rider-waite/draw/career", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def rider_waite_draw_celtic_cross(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """RWS - Celtic Cross (POST /tarot/rider-waite/draw/celtic-cross)"""
+        """RWS: Celtic Cross (POST /tarot/rider-waite/draw/celtic-cross)"""
         return await self._client.request("POST", "/tarot/rider-waite/draw/celtic-cross", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def rider_waite_draw_chakra(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """RWS - Chakra (POST /tarot/rider-waite/draw/chakra)"""
+        """RWS: Chakra (POST /tarot/rider-waite/draw/chakra)"""
         return await self._client.request("POST", "/tarot/rider-waite/draw/chakra", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def rider_waite_draw_decision(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """RWS - Yes/No (POST /tarot/rider-waite/draw/decision)"""
+        """RWS: Yes/No (POST /tarot/rider-waite/draw/decision)"""
         return await self._client.request("POST", "/tarot/rider-waite/draw/decision", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def rider_waite_draw_horseshoe(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """RWS - Horseshoe (POST /tarot/rider-waite/draw/horseshoe)"""
+        """RWS: Horseshoe (POST /tarot/rider-waite/draw/horseshoe)"""
         return await self._client.request("POST", "/tarot/rider-waite/draw/horseshoe", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def rider_waite_draw_love_triangle(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """RWS - Love Triangle (POST /tarot/rider-waite/draw/love-triangle)"""
+        """RWS: Love Triangle (POST /tarot/rider-waite/draw/love-triangle)"""
         return await self._client.request("POST", "/tarot/rider-waite/draw/love-triangle", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def rider_waite_draw_relationship(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """RWS - Relationship (POST /tarot/rider-waite/draw/relationship)"""
+        """RWS: Relationship (POST /tarot/rider-waite/draw/relationship)"""
         return await self._client.request("POST", "/tarot/rider-waite/draw/relationship", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def rider_waite_draw_shadow_work(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """RWS - Shadow Work (POST /tarot/rider-waite/draw/shadow-work)"""
+        """RWS: Shadow Work (POST /tarot/rider-waite/draw/shadow-work)"""
         return await self._client.request("POST", "/tarot/rider-waite/draw/shadow-work", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def rider_waite_draw_single(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """RWS - Single Card Draw (POST /tarot/rider-waite/draw/single)"""
+        """RWS: Single Card Draw (POST /tarot/rider-waite/draw/single)"""
         return await self._client.request("POST", "/tarot/rider-waite/draw/single", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def rider_waite_draw_spiritual_path(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """RWS - Spiritual Path (POST /tarot/rider-waite/draw/spiritual-path)"""
+        """RWS: Spiritual Path (POST /tarot/rider-waite/draw/spiritual-path)"""
         return await self._client.request("POST", "/tarot/rider-waite/draw/spiritual-path", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def rider_waite_draw_three_card(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """RWS - Three-Card Draw (POST /tarot/rider-waite/draw/three-card)"""
+        """RWS: Three-Card Draw (POST /tarot/rider-waite/draw/three-card)"""
         return await self._client.request("POST", "/tarot/rider-waite/draw/three-card", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def rider_waite_draw_year_ahead(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """RWS - Year Ahead (POST /tarot/rider-waite/draw/year-ahead)"""
+        """RWS: Year Ahead (POST /tarot/rider-waite/draw/year-ahead)"""
         return await self._client.request("POST", "/tarot/rider-waite/draw/year-ahead", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def rider_waite_interpret(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """RWS - Interpret a Hand (POST /tarot/rider-waite/interpret)"""
+        """RWS: Interpret a Hand (POST /tarot/rider-waite/interpret)"""
         return await self._client.request("POST", "/tarot/rider-waite/interpret", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def rider_waite_majors_get(self, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None) -> Any:
-        """RWS - 22 Majors (GET /tarot/rider-waite/majors)"""
+        """RWS: 22 Majors (GET /tarot/rider-waite/majors)"""
         return await self._client.request("GET", "/tarot/rider-waite/majors", params=params, headers=headers)
 
     async def rider_waite_minors_get(self, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None) -> Any:
-        """RWS - 40 Minors (GET /tarot/rider-waite/minors)"""
+        """RWS: 40 Minors (GET /tarot/rider-waite/minors)"""
         return await self._client.request("GET", "/tarot/rider-waite/minors", params=params, headers=headers)
 
     async def rider_waite_missing_info(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """RWS - Missing Info Card (POST /tarot/rider-waite/missing-info)"""
+        """RWS: Missing Info Card (POST /tarot/rider-waite/missing-info)"""
         return await self._client.request("POST", "/tarot/rider-waite/missing-info", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def rider_waite_outcome(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """RWS - Outcome Card (POST /tarot/rider-waite/outcome)"""
+        """RWS: Outcome Card (POST /tarot/rider-waite/outcome)"""
         return await self._client.request("POST", "/tarot/rider-waite/outcome", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def rider_waite_shadow_card(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """RWS - Shadow Card (POST /tarot/rider-waite/shadow-card)"""
+        """RWS: Shadow Card (POST /tarot/rider-waite/shadow-card)"""
         return await self._client.request("POST", "/tarot/rider-waite/shadow-card", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def rider_waite_soul_personality_card(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """RWS - Soul + Personality (POST /tarot/rider-waite/soul-personality-card)"""
+        """RWS: Soul + Personality (POST /tarot/rider-waite/soul-personality-card)"""
         return await self._client.request("POST", "/tarot/rider-waite/soul-personality-card", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def rider_waite_spreads_get(self, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None) -> Any:
-        """RWS - All Spreads (GET /tarot/rider-waite/spreads)"""
+        """RWS: All Spreads (GET /tarot/rider-waite/spreads)"""
         return await self._client.request("GET", "/tarot/rider-waite/spreads", params=params, headers=headers)
 
     async def rider_waite_timing(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """RWS - Timing Card (POST /tarot/rider-waite/timing)"""
+        """RWS: Timing Card (POST /tarot/rider-waite/timing)"""
         return await self._client.request("POST", "/tarot/rider-waite/timing", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def rider_waite_year_card(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """RWS - Year Card (POST /tarot/rider-waite/year-card)"""
+        """RWS: Year Card (POST /tarot/rider-waite/year-card)"""
         return await self._client.request("POST", "/tarot/rider-waite/year-card", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
 
@@ -6553,672 +6741,688 @@ class _VedicAsyncNamespace:
     def __init__(self, client: AsyncAstroway) -> None:
         self._client = client
 
+    async def bhavabala(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
+        """Bhava Bala: house strength (POST /vedic/bhavabala)"""
+        return await self._client.request("POST", "/vedic/bhavabala", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
+
     async def compatibility_ashtakoot(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Compatibility - Ashtakoot Guna Milan (8-fold 36-point) (POST /vedic/compatibility/ashtakoot)"""
+        """Compatibility: Ashtakoot Guna Milan (8-fold 36-point) (POST /vedic/compatibility/ashtakoot)"""
         return await self._client.request("POST", "/vedic/compatibility/ashtakoot", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def compatibility_bhrigu_match(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Compatibility - Bhrigu-match (7H placement) (POST /vedic/compatibility/bhrigu-match)"""
+        """Compatibility: Bhrigu-match (7H placement) (POST /vedic/compatibility/bhrigu-match)"""
         return await self._client.request("POST", "/vedic/compatibility/bhrigu-match", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def compatibility_dashakoota(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Compatibility - Dashakoota (10-fold 39-point) (POST /vedic/compatibility/dashakoota)"""
+        """Compatibility: Dashakoota (10-fold 39-point) (POST /vedic/compatibility/dashakoota)"""
         return await self._client.request("POST", "/vedic/compatibility/dashakoota", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def compatibility_full(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Compatibility - Parashara full report (POST /vedic/compatibility/full)"""
+        """Compatibility: Parashara full report (POST /vedic/compatibility/full)"""
         return await self._client.request("POST", "/vedic/compatibility/full", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def compatibility_mangal_match(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Compatibility - Mangal-match (Manglik between partners) (POST /vedic/compatibility/mangal-match)"""
+        """Compatibility: Mangal-match (Manglik between partners) (POST /vedic/compatibility/mangal-match)"""
         return await self._client.request("POST", "/vedic/compatibility/mangal-match", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def compatibility_manglik_check(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Compatibility - Manglik check (single chart) (POST /vedic/compatibility/manglik-check)"""
+        """Compatibility: Manglik check (single chart) (POST /vedic/compatibility/manglik-check)"""
         return await self._client.request("POST", "/vedic/compatibility/manglik-check", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def dashas_ashtottari_antar(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Dashas - Ashtottari Antardasha (POST /vedic/dashas/ashtottari/antar)"""
+        """Dashas: Ashtottari Antardasha (POST /vedic/dashas/ashtottari/antar)"""
         return await self._client.request("POST", "/vedic/dashas/ashtottari/antar", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def dashas_ashtottari_maha(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Dashas - Ashtottari Mahadasha (POST /vedic/dashas/ashtottari/maha)"""
+        """Dashas: Ashtottari Mahadasha (POST /vedic/dashas/ashtottari/maha)"""
         return await self._client.request("POST", "/vedic/dashas/ashtottari/maha", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def dashas_ashtottari_prana(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Dashas - Ashtottari Pranadasha (POST /vedic/dashas/ashtottari/prana)"""
+        """Dashas: Ashtottari Pranadasha (POST /vedic/dashas/ashtottari/prana)"""
         return await self._client.request("POST", "/vedic/dashas/ashtottari/prana", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def dashas_ashtottari_pratyantar(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Dashas - Ashtottari Pratyantardasha (POST /vedic/dashas/ashtottari/pratyantar)"""
+        """Dashas: Ashtottari Pratyantardasha (POST /vedic/dashas/ashtottari/pratyantar)"""
         return await self._client.request("POST", "/vedic/dashas/ashtottari/pratyantar", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def dashas_ashtottari_sookshma(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Dashas - Ashtottari Sookshmadasha (POST /vedic/dashas/ashtottari/sookshma)"""
+        """Dashas: Ashtottari Sookshmadasha (POST /vedic/dashas/ashtottari/sookshma)"""
         return await self._client.request("POST", "/vedic/dashas/ashtottari/sookshma", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def dashas_chara_antar(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Dashas - Chara Antardasha (POST /vedic/dashas/chara/antar)"""
+        """Dashas: Chara Antardasha (POST /vedic/dashas/chara/antar)"""
         return await self._client.request("POST", "/vedic/dashas/chara/antar", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def dashas_chara_maha(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Dashas - Chara Mahadasha (POST /vedic/dashas/chara/maha)"""
+        """Dashas: Chara Mahadasha (POST /vedic/dashas/chara/maha)"""
         return await self._client.request("POST", "/vedic/dashas/chara/maha", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def dashas_chara_prana(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Dashas - Chara Pranadasha (POST /vedic/dashas/chara/prana)"""
+        """Dashas: Chara Pranadasha (POST /vedic/dashas/chara/prana)"""
         return await self._client.request("POST", "/vedic/dashas/chara/prana", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def dashas_chara_pratyantar(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Dashas - Chara Pratyantardasha (POST /vedic/dashas/chara/pratyantar)"""
+        """Dashas: Chara Pratyantardasha (POST /vedic/dashas/chara/pratyantar)"""
         return await self._client.request("POST", "/vedic/dashas/chara/pratyantar", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def dashas_chara_sookshma(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Dashas - Chara Sookshmadasha (POST /vedic/dashas/chara/sookshma)"""
+        """Dashas: Chara Sookshmadasha (POST /vedic/dashas/chara/sookshma)"""
         return await self._client.request("POST", "/vedic/dashas/chara/sookshma", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def dashas_kalachakra_antar(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Dashas - Kalachakra Antardasha (POST /vedic/dashas/kalachakra/antar)"""
+        """Dashas: Kalachakra Antardasha (POST /vedic/dashas/kalachakra/antar)"""
         return await self._client.request("POST", "/vedic/dashas/kalachakra/antar", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def dashas_kalachakra_maha(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Dashas - Kalachakra Mahadasha (POST /vedic/dashas/kalachakra/maha)"""
+        """Dashas: Kalachakra Mahadasha (POST /vedic/dashas/kalachakra/maha)"""
         return await self._client.request("POST", "/vedic/dashas/kalachakra/maha", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def dashas_kalachakra_prana(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Dashas - Kalachakra Pranadasha (POST /vedic/dashas/kalachakra/prana)"""
+        """Dashas: Kalachakra Pranadasha (POST /vedic/dashas/kalachakra/prana)"""
         return await self._client.request("POST", "/vedic/dashas/kalachakra/prana", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def dashas_kalachakra_pratyantar(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Dashas - Kalachakra Pratyantardasha (POST /vedic/dashas/kalachakra/pratyantar)"""
+        """Dashas: Kalachakra Pratyantardasha (POST /vedic/dashas/kalachakra/pratyantar)"""
         return await self._client.request("POST", "/vedic/dashas/kalachakra/pratyantar", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def dashas_kalachakra_sookshma(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Dashas - Kalachakra Sookshmadasha (POST /vedic/dashas/kalachakra/sookshma)"""
+        """Dashas: Kalachakra Sookshmadasha (POST /vedic/dashas/kalachakra/sookshma)"""
         return await self._client.request("POST", "/vedic/dashas/kalachakra/sookshma", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def dashas_shatabdika_antar(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Dashas - Shatabdika Antardasha (POST /vedic/dashas/shatabdika/antar)"""
+        """Dashas: Shatabdika Antardasha (POST /vedic/dashas/shatabdika/antar)"""
         return await self._client.request("POST", "/vedic/dashas/shatabdika/antar", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def dashas_shatabdika_maha(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Dashas - Shatabdika Mahadasha (POST /vedic/dashas/shatabdika/maha)"""
+        """Dashas: Shatabdika Mahadasha (POST /vedic/dashas/shatabdika/maha)"""
         return await self._client.request("POST", "/vedic/dashas/shatabdika/maha", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def dashas_shatabdika_prana(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Dashas - Shatabdika Pranadasha (POST /vedic/dashas/shatabdika/prana)"""
+        """Dashas: Shatabdika Pranadasha (POST /vedic/dashas/shatabdika/prana)"""
         return await self._client.request("POST", "/vedic/dashas/shatabdika/prana", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def dashas_shatabdika_pratyantar(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Dashas - Shatabdika Pratyantardasha (POST /vedic/dashas/shatabdika/pratyantar)"""
+        """Dashas: Shatabdika Pratyantardasha (POST /vedic/dashas/shatabdika/pratyantar)"""
         return await self._client.request("POST", "/vedic/dashas/shatabdika/pratyantar", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def dashas_shatabdika_sookshma(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Dashas - Shatabdika Sookshmadasha (POST /vedic/dashas/shatabdika/sookshma)"""
+        """Dashas: Shatabdika Sookshmadasha (POST /vedic/dashas/shatabdika/sookshma)"""
         return await self._client.request("POST", "/vedic/dashas/shatabdika/sookshma", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def dashas_shodashottari_antar(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Dashas - Shodashottari Antardasha (POST /vedic/dashas/shodashottari/antar)"""
+        """Dashas: Shodashottari Antardasha (POST /vedic/dashas/shodashottari/antar)"""
         return await self._client.request("POST", "/vedic/dashas/shodashottari/antar", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def dashas_shodashottari_maha(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Dashas - Shodashottari Mahadasha (POST /vedic/dashas/shodashottari/maha)"""
+        """Dashas: Shodashottari Mahadasha (POST /vedic/dashas/shodashottari/maha)"""
         return await self._client.request("POST", "/vedic/dashas/shodashottari/maha", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def dashas_shodashottari_prana(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Dashas - Shodashottari Pranadasha (POST /vedic/dashas/shodashottari/prana)"""
+        """Dashas: Shodashottari Pranadasha (POST /vedic/dashas/shodashottari/prana)"""
         return await self._client.request("POST", "/vedic/dashas/shodashottari/prana", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def dashas_shodashottari_pratyantar(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Dashas - Shodashottari Pratyantardasha (POST /vedic/dashas/shodashottari/pratyantar)"""
+        """Dashas: Shodashottari Pratyantardasha (POST /vedic/dashas/shodashottari/pratyantar)"""
         return await self._client.request("POST", "/vedic/dashas/shodashottari/pratyantar", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def dashas_shodashottari_sookshma(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Dashas - Shodashottari Sookshmadasha (POST /vedic/dashas/shodashottari/sookshma)"""
+        """Dashas: Shodashottari Sookshmadasha (POST /vedic/dashas/shodashottari/sookshma)"""
         return await self._client.request("POST", "/vedic/dashas/shodashottari/sookshma", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def dashas_shoola_antar(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Dashas - Shoola Antardasha (POST /vedic/dashas/shoola/antar)"""
+        """Dashas: Shoola Antardasha (POST /vedic/dashas/shoola/antar)"""
         return await self._client.request("POST", "/vedic/dashas/shoola/antar", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def dashas_shoola_maha(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Dashas - Shoola Mahadasha (POST /vedic/dashas/shoola/maha)"""
+        """Dashas: Shoola Mahadasha (POST /vedic/dashas/shoola/maha)"""
         return await self._client.request("POST", "/vedic/dashas/shoola/maha", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def dashas_shoola_prana(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Dashas - Shoola Pranadasha (POST /vedic/dashas/shoola/prana)"""
+        """Dashas: Shoola Pranadasha (POST /vedic/dashas/shoola/prana)"""
         return await self._client.request("POST", "/vedic/dashas/shoola/prana", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def dashas_shoola_pratyantar(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Dashas - Shoola Pratyantardasha (POST /vedic/dashas/shoola/pratyantar)"""
+        """Dashas: Shoola Pratyantardasha (POST /vedic/dashas/shoola/pratyantar)"""
         return await self._client.request("POST", "/vedic/dashas/shoola/pratyantar", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def dashas_shoola_sookshma(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Dashas - Shoola Sookshmadasha (POST /vedic/dashas/shoola/sookshma)"""
+        """Dashas: Shoola Sookshmadasha (POST /vedic/dashas/shoola/sookshma)"""
         return await self._client.request("POST", "/vedic/dashas/shoola/sookshma", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def dashas_sthira_antar(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Dashas - Sthira Antardasha (POST /vedic/dashas/sthira/antar)"""
+        """Dashas: Sthira Antardasha (POST /vedic/dashas/sthira/antar)"""
         return await self._client.request("POST", "/vedic/dashas/sthira/antar", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def dashas_sthira_maha(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Dashas - Sthira Mahadasha (POST /vedic/dashas/sthira/maha)"""
+        """Dashas: Sthira Mahadasha (POST /vedic/dashas/sthira/maha)"""
         return await self._client.request("POST", "/vedic/dashas/sthira/maha", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def dashas_sthira_prana(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Dashas - Sthira Pranadasha (POST /vedic/dashas/sthira/prana)"""
+        """Dashas: Sthira Pranadasha (POST /vedic/dashas/sthira/prana)"""
         return await self._client.request("POST", "/vedic/dashas/sthira/prana", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def dashas_sthira_pratyantar(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Dashas - Sthira Pratyantardasha (POST /vedic/dashas/sthira/pratyantar)"""
+        """Dashas: Sthira Pratyantardasha (POST /vedic/dashas/sthira/pratyantar)"""
         return await self._client.request("POST", "/vedic/dashas/sthira/pratyantar", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def dashas_sthira_sookshma(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Dashas - Sthira Sookshmadasha (POST /vedic/dashas/sthira/sookshma)"""
+        """Dashas: Sthira Sookshmadasha (POST /vedic/dashas/sthira/sookshma)"""
         return await self._client.request("POST", "/vedic/dashas/sthira/sookshma", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def dashas_tribhagi_antar(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Dashas - Tribhagi Antardasha (POST /vedic/dashas/tribhagi/antar)"""
+        """Dashas: Tribhagi Antardasha (POST /vedic/dashas/tribhagi/antar)"""
         return await self._client.request("POST", "/vedic/dashas/tribhagi/antar", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def dashas_tribhagi_maha(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Dashas - Tribhagi Mahadasha (POST /vedic/dashas/tribhagi/maha)"""
+        """Dashas: Tribhagi Mahadasha (POST /vedic/dashas/tribhagi/maha)"""
         return await self._client.request("POST", "/vedic/dashas/tribhagi/maha", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def dashas_tribhagi_prana(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Dashas - Tribhagi Pranadasha (POST /vedic/dashas/tribhagi/prana)"""
+        """Dashas: Tribhagi Pranadasha (POST /vedic/dashas/tribhagi/prana)"""
         return await self._client.request("POST", "/vedic/dashas/tribhagi/prana", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def dashas_tribhagi_pratyantar(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Dashas - Tribhagi Pratyantardasha (POST /vedic/dashas/tribhagi/pratyantar)"""
+        """Dashas: Tribhagi Pratyantardasha (POST /vedic/dashas/tribhagi/pratyantar)"""
         return await self._client.request("POST", "/vedic/dashas/tribhagi/pratyantar", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def dashas_tribhagi_sookshma(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Dashas - Tribhagi Sookshmadasha (POST /vedic/dashas/tribhagi/sookshma)"""
+        """Dashas: Tribhagi Sookshmadasha (POST /vedic/dashas/tribhagi/sookshma)"""
         return await self._client.request("POST", "/vedic/dashas/tribhagi/sookshma", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def dashas_vimshottari_antar(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Dashas - Vimshottari Antardasha (POST /vedic/dashas/vimshottari/antar)"""
+        """Dashas: Vimshottari Antardasha (POST /vedic/dashas/vimshottari/antar)"""
         return await self._client.request("POST", "/vedic/dashas/vimshottari/antar", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def dashas_vimshottari_maha(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Dashas - Vimshottari Mahadasha (POST /vedic/dashas/vimshottari/maha)"""
+        """Dashas: Vimshottari Mahadasha (POST /vedic/dashas/vimshottari/maha)"""
         return await self._client.request("POST", "/vedic/dashas/vimshottari/maha", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def dashas_vimshottari_prana(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Dashas - Vimshottari Pranadasha (POST /vedic/dashas/vimshottari/prana)"""
+        """Dashas: Vimshottari Pranadasha (POST /vedic/dashas/vimshottari/prana)"""
         return await self._client.request("POST", "/vedic/dashas/vimshottari/prana", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def dashas_vimshottari_pratyantar(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Dashas - Vimshottari Pratyantardasha (POST /vedic/dashas/vimshottari/pratyantar)"""
+        """Dashas: Vimshottari Pratyantardasha (POST /vedic/dashas/vimshottari/pratyantar)"""
         return await self._client.request("POST", "/vedic/dashas/vimshottari/pratyantar", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def dashas_vimshottari_sookshma(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Dashas - Vimshottari Sookshmadasha (POST /vedic/dashas/vimshottari/sookshma)"""
+        """Dashas: Vimshottari Sookshmadasha (POST /vedic/dashas/vimshottari/sookshma)"""
         return await self._client.request("POST", "/vedic/dashas/vimshottari/sookshma", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def dashas_yogini_antar(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Dashas - Yogini Antardasha (POST /vedic/dashas/yogini/antar)"""
+        """Dashas: Yogini Antardasha (POST /vedic/dashas/yogini/antar)"""
         return await self._client.request("POST", "/vedic/dashas/yogini/antar", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def dashas_yogini_maha(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Dashas - Yogini Mahadasha (POST /vedic/dashas/yogini/maha)"""
+        """Dashas: Yogini Mahadasha (POST /vedic/dashas/yogini/maha)"""
         return await self._client.request("POST", "/vedic/dashas/yogini/maha", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def dashas_yogini_prana(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Dashas - Yogini Pranadasha (POST /vedic/dashas/yogini/prana)"""
+        """Dashas: Yogini Pranadasha (POST /vedic/dashas/yogini/prana)"""
         return await self._client.request("POST", "/vedic/dashas/yogini/prana", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def dashas_yogini_pratyantar(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Dashas - Yogini Pratyantardasha (POST /vedic/dashas/yogini/pratyantar)"""
+        """Dashas: Yogini Pratyantardasha (POST /vedic/dashas/yogini/pratyantar)"""
         return await self._client.request("POST", "/vedic/dashas/yogini/pratyantar", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def dashas_yogini_sookshma(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Dashas - Yogini Sookshmadasha (POST /vedic/dashas/yogini/sookshma)"""
+        """Dashas: Yogini Sookshmadasha (POST /vedic/dashas/yogini/sookshma)"""
         return await self._client.request("POST", "/vedic/dashas/yogini/sookshma", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def doshas_kp_full(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Doshas - KP full summary (POST /vedic/doshas/kp/full)"""
+        """Doshas: KP full summary (POST /vedic/doshas/kp/full)"""
         return await self._client.request("POST", "/vedic/doshas/kp/full", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def doshas_kp_kalasarpa(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Doshas - KP Kalasarpa (POST /vedic/doshas/kp/kalasarpa)"""
+        """Doshas: KP Kalasarpa (POST /vedic/doshas/kp/kalasarpa)"""
         return await self._client.request("POST", "/vedic/doshas/kp/kalasarpa", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def doshas_kp_kemadruma(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Doshas - KP Kemadruma (POST /vedic/doshas/kp/kemadruma)"""
+        """Doshas: KP Kemadruma (POST /vedic/doshas/kp/kemadruma)"""
         return await self._client.request("POST", "/vedic/doshas/kp/kemadruma", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def doshas_kp_manglik(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Doshas - KP Manglik (POST /vedic/doshas/kp/manglik)"""
+        """Doshas: KP Manglik (POST /vedic/doshas/kp/manglik)"""
         return await self._client.request("POST", "/vedic/doshas/kp/manglik", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def doshas_kp_pitra(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Doshas - KP Pitra (POST /vedic/doshas/kp/pitra)"""
+        """Doshas: KP Pitra (POST /vedic/doshas/kp/pitra)"""
         return await self._client.request("POST", "/vedic/doshas/kp/pitra", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def doshas_kp_sade_sati(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Doshas - KP Sade Sati (POST /vedic/doshas/kp/sade-sati)"""
+        """Doshas: KP Sade Sati (POST /vedic/doshas/kp/sade-sati)"""
         return await self._client.request("POST", "/vedic/doshas/kp/sade-sati", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def doshas_lal_kitab_full(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Doshas - Lal Kitab full summary (POST /vedic/doshas/lal-kitab/full)"""
+        """Doshas: Lal Kitab full summary (POST /vedic/doshas/lal-kitab/full)"""
         return await self._client.request("POST", "/vedic/doshas/lal-kitab/full", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def doshas_lal_kitab_kalsarpa(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Doshas - Lal Kitab Kalsarpa (POST /vedic/doshas/lal-kitab/kalsarpa)"""
+        """Doshas: Lal Kitab Kalsarpa (POST /vedic/doshas/lal-kitab/kalsarpa)"""
         return await self._client.request("POST", "/vedic/doshas/lal-kitab/kalsarpa", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def doshas_lal_kitab_manglik(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Doshas - Lal Kitab Manglik (POST /vedic/doshas/lal-kitab/manglik)"""
+        """Doshas: Lal Kitab Manglik (POST /vedic/doshas/lal-kitab/manglik)"""
         return await self._client.request("POST", "/vedic/doshas/lal-kitab/manglik", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def doshas_lal_kitab_pitra(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Doshas - Lal Kitab Pitra (POST /vedic/doshas/lal-kitab/pitra)"""
+        """Doshas: Lal Kitab Pitra (POST /vedic/doshas/lal-kitab/pitra)"""
         return await self._client.request("POST", "/vedic/doshas/lal-kitab/pitra", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def doshas_lal_kitab_rin(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Doshas - Lal Kitab Rin (6 ancestral debts) (POST /vedic/doshas/lal-kitab/rin)"""
+        """Doshas: Lal Kitab Rin (6 ancestral debts) (POST /vedic/doshas/lal-kitab/rin)"""
         return await self._client.request("POST", "/vedic/doshas/lal-kitab/rin", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def doshas_lal_kitab_shrapit(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Doshas - Lal Kitab Shrapit (POST /vedic/doshas/lal-kitab/shrapit)"""
+        """Doshas: Lal Kitab Shrapit (POST /vedic/doshas/lal-kitab/shrapit)"""
         return await self._client.request("POST", "/vedic/doshas/lal-kitab/shrapit", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def doshas_parashara_full(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Doshas - Parashara full report (POST /vedic/doshas/parashara/full)"""
+        """Doshas: Parashara full report (POST /vedic/doshas/parashara/full)"""
         return await self._client.request("POST", "/vedic/doshas/parashara/full", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def doshas_parashara_grahan(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Doshas - Grahan (eclipse-like) (POST /vedic/doshas/parashara/grahan)"""
+        """Doshas: Grahan (eclipse-like) (POST /vedic/doshas/parashara/grahan)"""
         return await self._client.request("POST", "/vedic/doshas/parashara/grahan", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def doshas_parashara_guru_chandal(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Doshas - Guru-Chandal (POST /vedic/doshas/parashara/guru-chandal)"""
+        """Doshas: Guru-Chandal (POST /vedic/doshas/parashara/guru-chandal)"""
         return await self._client.request("POST", "/vedic/doshas/parashara/guru-chandal", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def doshas_parashara_kaal_sarp(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Doshas - Kaal Sarp (POST /vedic/doshas/parashara/kaal-sarp)"""
+        """Doshas: Kaal Sarp (POST /vedic/doshas/parashara/kaal-sarp)"""
         return await self._client.request("POST", "/vedic/doshas/parashara/kaal-sarp", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def doshas_parashara_mangal(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Doshas - Mangal (Mars affliction) (POST /vedic/doshas/parashara/mangal)"""
+        """Doshas: Mangal (Mars affliction) (POST /vedic/doshas/parashara/mangal)"""
         return await self._client.request("POST", "/vedic/doshas/parashara/mangal", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def doshas_parashara_pitru(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Doshas - Pitru (ancestral) (POST /vedic/doshas/parashara/pitru)"""
+        """Doshas: Pitru (ancestral) (POST /vedic/doshas/parashara/pitru)"""
         return await self._client.request("POST", "/vedic/doshas/parashara/pitru", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def doshas_parashara_shrapit(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Doshas - Shrapit (curse) (POST /vedic/doshas/parashara/shrapit)"""
+        """Doshas: Shrapit (curse) (POST /vedic/doshas/parashara/shrapit)"""
         return await self._client.request("POST", "/vedic/doshas/parashara/shrapit", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
+    async def gemstones(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
+        """Gemstone (ratna) recommendation (POST /vedic/gemstones)"""
+        return await self._client.request("POST", "/vedic/gemstones", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
+
+    async def gemstones_navaratna_get(self, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None) -> Any:
+        """Navaratna reference table (GET /vedic/gemstones/navaratna)"""
+        return await self._client.request("GET", "/vedic/gemstones/navaratna", params=params, headers=headers)
+
     async def jaimini_argala_analysis(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Jaimini - Argala / Virodhargala scan (POST /vedic/jaimini/argala-analysis)"""
+        """Jaimini: Argala / Virodhargala scan (POST /vedic/jaimini/argala-analysis)"""
         return await self._client.request("POST", "/vedic/jaimini/argala-analysis", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def jaimini_aspects(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Jaimini - Aspects (Rasi + Graha drishti) (POST /vedic/jaimini/aspects)"""
+        """Jaimini: Aspects (Rasi + Graha drishti) (POST /vedic/jaimini/aspects)"""
         return await self._client.request("POST", "/vedic/jaimini/aspects", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def jaimini_atmakaraka_navamsa(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Jaimini - Karakamsa (AK in Navamsa) (POST /vedic/jaimini/atmakaraka-navamsa)"""
+        """Jaimini: Karakamsa (AK in Navamsa) (POST /vedic/jaimini/atmakaraka-navamsa)"""
         return await self._client.request("POST", "/vedic/jaimini/atmakaraka-navamsa", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def jaimini_atmakaraka_rotation(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Jaimini - Atmakaraka rotation (timeline) (POST /vedic/jaimini/atmakaraka-rotation)"""
+        """Jaimini: Atmakaraka rotation (timeline) (POST /vedic/jaimini/atmakaraka-rotation)"""
         return await self._client.request("POST", "/vedic/jaimini/atmakaraka-rotation", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def jaimini_chara_karakas(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Jaimini - Chara Karakas (detailed) (POST /vedic/jaimini/chara-karakas)"""
+        """Jaimini: Chara Karakas (detailed) (POST /vedic/jaimini/chara-karakas)"""
         return await self._client.request("POST", "/vedic/jaimini/chara-karakas", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def jaimini_dasha_summary(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Jaimini - Running Dasha Summary (POST /vedic/jaimini/dasha-summary)"""
+        """Jaimini: Running Dasha Summary (POST /vedic/jaimini/dasha-summary)"""
         return await self._client.request("POST", "/vedic/jaimini/dasha-summary", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def jaimini_drishti_graha(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Jaimini - Graha Drishti (planet aspects) (POST /vedic/jaimini/drishti-graha)"""
+        """Jaimini: Graha Drishti (planet aspects) (POST /vedic/jaimini/drishti-graha)"""
         return await self._client.request("POST", "/vedic/jaimini/drishti-graha", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def jaimini_drishti_rasi(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Jaimini - Rasi Drishti (sign aspects) (POST /vedic/jaimini/drishti-rasi)"""
+        """Jaimini: Rasi Drishti (sign aspects) (POST /vedic/jaimini/drishti-rasi)"""
         return await self._client.request("POST", "/vedic/jaimini/drishti-rasi", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def jaimini_karakas(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Jaimini - Karakas (Chara + Naisargika) (POST /vedic/jaimini/karakas)"""
+        """Jaimini: Karakas (Chara + Naisargika) (POST /vedic/jaimini/karakas)"""
         return await self._client.request("POST", "/vedic/jaimini/karakas", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def jaimini_padas(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Jaimini - Padas (Bhava/Surya/Chandra/Graha Arudhas) (POST /vedic/jaimini/padas)"""
+        """Jaimini: Padas (Bhava/Surya/Chandra/Graha Arudhas) (POST /vedic/jaimini/padas)"""
         return await self._client.request("POST", "/vedic/jaimini/padas", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def jaimini_upapada(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Jaimini - Upapada Lagna (UL) (POST /vedic/jaimini/upapada)"""
+        """Jaimini: Upapada Lagna (UL) (POST /vedic/jaimini/upapada)"""
         return await self._client.request("POST", "/vedic/jaimini/upapada", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def jaimini_yogas(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Jaimini - Yogas (basic AK/DK/PK set) (POST /vedic/jaimini/yogas)"""
+        """Jaimini: Yogas (basic AK/DK/PK set) (POST /vedic/jaimini/yogas)"""
         return await self._client.request("POST", "/vedic/jaimini/yogas", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def kp_asc_sub(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """KP - Ascendant sub-lord (POST /vedic/kp/asc-sub)"""
+        """KP: Ascendant sub-lord (POST /vedic/kp/asc-sub)"""
         return await self._client.request("POST", "/vedic/kp/asc-sub", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def kp_cusps(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """KP - Placidus cusps with sub-lord chain (POST /vedic/kp/cusps)"""
+        """KP: Placidus cusps with sub-lord chain (POST /vedic/kp/cusps)"""
         return await self._client.request("POST", "/vedic/kp/cusps", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def kp_fortuna(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """KP - Part of Fortune (POST /vedic/kp/fortuna)"""
+        """KP: Part of Fortune (POST /vedic/kp/fortuna)"""
         return await self._client.request("POST", "/vedic/kp/fortuna", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def kp_horary(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """KP - Horary chart (1..249) (POST /vedic/kp/horary)"""
+        """KP: Horary chart (1..249) (POST /vedic/kp/horary)"""
         return await self._client.request("POST", "/vedic/kp/horary", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def kp_planet_cuspal_position(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """KP - Planet cuspal positions (POST /vedic/kp/planet-cuspal-position)"""
+        """KP: Planet cuspal positions (POST /vedic/kp/planet-cuspal-position)"""
         return await self._client.request("POST", "/vedic/kp/planet-cuspal-position", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def kp_ruling_planets(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """KP - Ruling Planets (POST /vedic/kp/ruling-planets)"""
+        """KP: Ruling Planets (POST /vedic/kp/ruling-planets)"""
         return await self._client.request("POST", "/vedic/kp/ruling-planets", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def kp_significators(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """KP - Significators (primary/secondary/tertiary) (POST /vedic/kp/significators)"""
+        """KP: Significators (primary/secondary/tertiary) (POST /vedic/kp/significators)"""
         return await self._client.request("POST", "/vedic/kp/significators", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def kp_sub_lords(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """KP - Sub-lords (cusps + planets) (POST /vedic/kp/sub-lords)"""
+        """KP: Sub-lords (cusps + planets) (POST /vedic/kp/sub-lords)"""
         return await self._client.request("POST", "/vedic/kp/sub-lords", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def kp_sub_sub_lord(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """KP - Sub-sub-lord lookup (POST /vedic/kp/sub-sub-lord)"""
+        """KP: Sub-sub-lord lookup (POST /vedic/kp/sub-sub-lord)"""
         return await self._client.request("POST", "/vedic/kp/sub-sub-lord", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def kp_transit_kp(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """KP - Transit positions (POST /vedic/kp/transit-kp)"""
+        """KP: Transit positions (POST /vedic/kp/transit-kp)"""
         return await self._client.request("POST", "/vedic/kp/transit-kp", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def lal_kitab_blind_house(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Lal Kitab - Blind houses (Andha bhava) (POST /vedic/lal-kitab/blind-house)"""
+        """Lal Kitab: Blind houses (Andha bhava) (POST /vedic/lal-kitab/blind-house)"""
         return await self._client.request("POST", "/vedic/lal-kitab/blind-house", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def lal_kitab_dasha(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Lal Kitab - Dasha (35-year cycle) (POST /vedic/lal-kitab/dasha)"""
+        """Lal Kitab: Dasha (35-year cycle) (POST /vedic/lal-kitab/dasha)"""
         return await self._client.request("POST", "/vedic/lal-kitab/dasha", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def lal_kitab_debts(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Lal Kitab - Rin (6 ancestral debts) (POST /vedic/lal-kitab/debts)"""
+        """Lal Kitab: Rin (6 ancestral debts) (POST /vedic/lal-kitab/debts)"""
         return await self._client.request("POST", "/vedic/lal-kitab/debts", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def lal_kitab_kismat(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Lal Kitab - Kismat (fortune indicator) (POST /vedic/lal-kitab/kismat)"""
+        """Lal Kitab: Kismat (fortune indicator) (POST /vedic/lal-kitab/kismat)"""
         return await self._client.request("POST", "/vedic/lal-kitab/kismat", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def lal_kitab_lal_kundali(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Lal Kitab - Kundali (12-house grid) (POST /vedic/lal-kitab/lal-kundali)"""
+        """Lal Kitab: Kundali (12-house grid) (POST /vedic/lal-kitab/lal-kundali)"""
         return await self._client.request("POST", "/vedic/lal-kitab/lal-kundali", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def lal_kitab_life_graph(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Lal Kitab - Life graph (age-by-age) (POST /vedic/lal-kitab/life-graph)"""
+        """Lal Kitab: Life graph (age-by-age) (POST /vedic/lal-kitab/life-graph)"""
         return await self._client.request("POST", "/vedic/lal-kitab/life-graph", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def lal_kitab_planet_house_effect(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Lal Kitab - Planet-in-house effect (POST /vedic/lal-kitab/planet-house-effect)"""
+        """Lal Kitab: Planet-in-house effect (POST /vedic/lal-kitab/planet-house-effect)"""
         return await self._client.request("POST", "/vedic/lal-kitab/planet-house-effect", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def lal_kitab_prosperity(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Lal Kitab - Sukh (prosperity yoga) (POST /vedic/lal-kitab/prosperity)"""
+        """Lal Kitab: Sukh (prosperity yoga) (POST /vedic/lal-kitab/prosperity)"""
         return await self._client.request("POST", "/vedic/lal-kitab/prosperity", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def lal_kitab_remedies(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Lal Kitab - Remedies (Upayas) (POST /vedic/lal-kitab/remedies)"""
+        """Lal Kitab: Remedies (Upayas) (POST /vedic/lal-kitab/remedies)"""
         return await self._client.request("POST", "/vedic/lal-kitab/remedies", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def lal_kitab_sleeping_house(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Lal Kitab - Sleeping houses (POST /vedic/lal-kitab/sleeping-house)"""
+        """Lal Kitab: Sleeping houses (POST /vedic/lal-kitab/sleeping-house)"""
         return await self._client.request("POST", "/vedic/lal-kitab/sleeping-house", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def lal_kitab_teva(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Lal Kitab - Teva (fixed-house chart) (POST /vedic/lal-kitab/teva)"""
+        """Lal Kitab: Teva (fixed-house chart) (POST /vedic/lal-kitab/teva)"""
         return await self._client.request("POST", "/vedic/lal-kitab/teva", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def lal_kitab_varshphal(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Lal Kitab - Varshphal (annual) (POST /vedic/lal-kitab/varshphal)"""
+        """Lal Kitab: Varshphal (annual) (POST /vedic/lal-kitab/varshphal)"""
         return await self._client.request("POST", "/vedic/lal-kitab/varshphal", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def muhurat_business_start(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Muhurat - Business start (Vyapara) (POST /vedic/muhurat/business-start)"""
+        """Muhurat: Business start (Vyapara) (POST /vedic/muhurat/business-start)"""
         return await self._client.request("POST", "/vedic/muhurat/business-start", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def muhurat_education_start(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Muhurat - Education start (Vidyarambha) (POST /vedic/muhurat/education-start)"""
+        """Muhurat: Education start (Vidyarambha) (POST /vedic/muhurat/education-start)"""
         return await self._client.request("POST", "/vedic/muhurat/education-start", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def muhurat_general_auspicious(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Muhurat - General auspicious window (POST /vedic/muhurat/general-auspicious)"""
+        """Muhurat: General auspicious window (POST /vedic/muhurat/general-auspicious)"""
         return await self._client.request("POST", "/vedic/muhurat/general-auspicious", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def muhurat_investment(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Muhurat - Investment / Dhana Sthapana (POST /vedic/muhurat/investment)"""
+        """Muhurat: Investment / Dhana Sthapana (POST /vedic/muhurat/investment)"""
         return await self._client.request("POST", "/vedic/muhurat/investment", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def muhurat_journey_long(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Muhurat - Long journey (multi-day Yatra) (POST /vedic/muhurat/journey-long)"""
+        """Muhurat: Long journey (multi-day Yatra) (POST /vedic/muhurat/journey-long)"""
         return await self._client.request("POST", "/vedic/muhurat/journey-long", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def muhurat_marriage(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Muhurat - Marriage (Vivah) (POST /vedic/muhurat/marriage)"""
+        """Muhurat: Marriage (Vivah) (POST /vedic/muhurat/marriage)"""
         return await self._client.request("POST", "/vedic/muhurat/marriage", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def muhurat_name_change(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Muhurat - Name change (POST /vedic/muhurat/name-change)"""
+        """Muhurat: Name change (POST /vedic/muhurat/name-change)"""
         return await self._client.request("POST", "/vedic/muhurat/name-change", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def muhurat_naming_ceremony(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Muhurat - Naming ceremony (Namkaran) (POST /vedic/muhurat/naming-ceremony)"""
+        """Muhurat: Naming ceremony (Namkaran) (POST /vedic/muhurat/naming-ceremony)"""
         return await self._client.request("POST", "/vedic/muhurat/naming-ceremony", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def muhurat_property_purchase(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Muhurat - Property purchase / Griha Pravesh (POST /vedic/muhurat/property-purchase)"""
+        """Muhurat: Property purchase / Griha Pravesh (POST /vedic/muhurat/property-purchase)"""
         return await self._client.request("POST", "/vedic/muhurat/property-purchase", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def muhurat_surgery(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Muhurat - Surgery (Shastrakarma) (POST /vedic/muhurat/surgery)"""
+        """Muhurat: Surgery (Shastrakarma) (POST /vedic/muhurat/surgery)"""
         return await self._client.request("POST", "/vedic/muhurat/surgery", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def muhurat_travel(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Muhurat - Travel (short Yatra) (POST /vedic/muhurat/travel)"""
+        """Muhurat: Travel (short Yatra) (POST /vedic/muhurat/travel)"""
         return await self._client.request("POST", "/vedic/muhurat/travel", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def muhurat_vehicle_purchase(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Muhurat - Vehicle purchase (POST /vedic/muhurat/vehicle-purchase)"""
+        """Muhurat: Vehicle purchase (POST /vedic/muhurat/vehicle-purchase)"""
         return await self._client.request("POST", "/vedic/muhurat/vehicle-purchase", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def panchang_choghadia(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Panchang - Choghadia (POST /vedic/panchang/choghadia)"""
+        """Panchang: Choghadia (POST /vedic/panchang/choghadia)"""
         return await self._client.request("POST", "/vedic/panchang/choghadia", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def panchang_full(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Panchang - full (POST /vedic/panchang/full)"""
+        """Panchang: full (POST /vedic/panchang/full)"""
         return await self._client.request("POST", "/vedic/panchang/full", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def panchang_hora(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Panchang - Hora (POST /vedic/panchang/hora)"""
+        """Panchang: Hora (POST /vedic/panchang/hora)"""
         return await self._client.request("POST", "/vedic/panchang/hora", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def panchang_karana(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Panchang - Karana (POST /vedic/panchang/karana)"""
+        """Panchang: Karana (POST /vedic/panchang/karana)"""
         return await self._client.request("POST", "/vedic/panchang/karana", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def panchang_nakshatra_of_day(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Panchang - Nakshatra of Day (POST /vedic/panchang/nakshatra-of-day)"""
+        """Panchang: Nakshatra of Day (POST /vedic/panchang/nakshatra-of-day)"""
         return await self._client.request("POST", "/vedic/panchang/nakshatra-of-day", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def panchang_rahu_kaal(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Panchang - Rahu Kaal block (POST /vedic/panchang/rahu-kaal)"""
+        """Panchang: Rahu Kaal block (POST /vedic/panchang/rahu-kaal)"""
         return await self._client.request("POST", "/vedic/panchang/rahu-kaal", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def panchang_tithi(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Panchang - Tithi (POST /vedic/panchang/tithi)"""
+        """Panchang: Tithi (POST /vedic/panchang/tithi)"""
         return await self._client.request("POST", "/vedic/panchang/tithi", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def panchang_yoga(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Panchang - Yoga (POST /vedic/panchang/yoga)"""
+        """Panchang: Yoga (POST /vedic/panchang/yoga)"""
         return await self._client.request("POST", "/vedic/panchang/yoga", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def shadbala_cheshta(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Shadbala - Cheshta (motional) (POST /vedic/shadbala/cheshta)"""
+        """Shadbala: Cheshta (motional) (POST /vedic/shadbala/cheshta)"""
         return await self._client.request("POST", "/vedic/shadbala/cheshta", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def shadbala_dig(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Shadbala - Dig (directional) (POST /vedic/shadbala/dig)"""
+        """Shadbala: Dig (directional) (POST /vedic/shadbala/dig)"""
         return await self._client.request("POST", "/vedic/shadbala/dig", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def shadbala_drik(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Shadbala - Drik (aspectual) (POST /vedic/shadbala/drik)"""
+        """Shadbala: Drik (aspectual) (POST /vedic/shadbala/drik)"""
         return await self._client.request("POST", "/vedic/shadbala/drik", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def shadbala_full(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Shadbala - full summary (POST /vedic/shadbala/full)"""
+        """Shadbala: full summary (POST /vedic/shadbala/full)"""
         return await self._client.request("POST", "/vedic/shadbala/full", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def shadbala_kala(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Shadbala - Kala (temporal) (POST /vedic/shadbala/kala)"""
+        """Shadbala: Kala (temporal) (POST /vedic/shadbala/kala)"""
         return await self._client.request("POST", "/vedic/shadbala/kala", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def shadbala_naisargika(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Shadbala - Naisargika (natural) (POST /vedic/shadbala/naisargika)"""
+        """Shadbala: Naisargika (natural) (POST /vedic/shadbala/naisargika)"""
         return await self._client.request("POST", "/vedic/shadbala/naisargika", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def shadbala_sthana(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Shadbala - Sthana (positional) (POST /vedic/shadbala/sthana)"""
+        """Shadbala: Sthana (positional) (POST /vedic/shadbala/sthana)"""
         return await self._client.request("POST", "/vedic/shadbala/sthana", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def varga_d1(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Varga D1 - Rashi (POST /vedic/varga/D1)"""
+        """Varga D1: Rashi (POST /vedic/varga/D1)"""
         return await self._client.request("POST", "/vedic/varga/D1", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def varga_d10(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Varga D10 - Dasamsa (POST /vedic/varga/D10)"""
+        """Varga D10: Dasamsa (POST /vedic/varga/D10)"""
         return await self._client.request("POST", "/vedic/varga/D10", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def varga_d12(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Varga D12 - Dwadasamsa (POST /vedic/varga/D12)"""
+        """Varga D12: Dwadasamsa (POST /vedic/varga/D12)"""
         return await self._client.request("POST", "/vedic/varga/D12", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def varga_d16(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Varga D16 - Shodasamsa (POST /vedic/varga/D16)"""
+        """Varga D16: Shodasamsa (POST /vedic/varga/D16)"""
         return await self._client.request("POST", "/vedic/varga/D16", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def varga_d2(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Varga D2 - Hora (POST /vedic/varga/D2)"""
+        """Varga D2: Hora (POST /vedic/varga/D2)"""
         return await self._client.request("POST", "/vedic/varga/D2", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def varga_d20(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Varga D20 - Vimsamsa (POST /vedic/varga/D20)"""
+        """Varga D20: Vimsamsa (POST /vedic/varga/D20)"""
         return await self._client.request("POST", "/vedic/varga/D20", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def varga_d24(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Varga D24 - Chaturvimsamsa (POST /vedic/varga/D24)"""
+        """Varga D24: Chaturvimsamsa (POST /vedic/varga/D24)"""
         return await self._client.request("POST", "/vedic/varga/D24", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def varga_d27(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Varga D27 - Saptavimsamsa (POST /vedic/varga/D27)"""
+        """Varga D27: Saptavimsamsa (POST /vedic/varga/D27)"""
         return await self._client.request("POST", "/vedic/varga/D27", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def varga_d3(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Varga D3 - Drekkana (POST /vedic/varga/D3)"""
+        """Varga D3: Drekkana (POST /vedic/varga/D3)"""
         return await self._client.request("POST", "/vedic/varga/D3", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def varga_d30(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Varga D30 - Trimsamsa (POST /vedic/varga/D30)"""
+        """Varga D30: Trimsamsa (POST /vedic/varga/D30)"""
         return await self._client.request("POST", "/vedic/varga/D30", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def varga_d4(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Varga D4 - Chaturthamsa (POST /vedic/varga/D4)"""
+        """Varga D4: Chaturthamsa (POST /vedic/varga/D4)"""
         return await self._client.request("POST", "/vedic/varga/D4", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def varga_d40(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Varga D40 - Khavedamsa (POST /vedic/varga/D40)"""
+        """Varga D40: Khavedamsa (POST /vedic/varga/D40)"""
         return await self._client.request("POST", "/vedic/varga/D40", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def varga_d45(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Varga D45 - Akshavedamsa (POST /vedic/varga/D45)"""
+        """Varga D45: Akshavedamsa (POST /vedic/varga/D45)"""
         return await self._client.request("POST", "/vedic/varga/D45", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def varga_d60(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Varga D60 - Shashtiamsa (POST /vedic/varga/D60)"""
+        """Varga D60: Shashtiamsa (POST /vedic/varga/D60)"""
         return await self._client.request("POST", "/vedic/varga/D60", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def varga_d7(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Varga D7 - Saptamsa (POST /vedic/varga/D7)"""
+        """Varga D7: Saptamsa (POST /vedic/varga/D7)"""
         return await self._client.request("POST", "/vedic/varga/D7", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def varga_d9(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Varga D9 - Navamsa (POST /vedic/varga/D9)"""
+        """Varga D9: Navamsa (POST /vedic/varga/D9)"""
         return await self._client.request("POST", "/vedic/varga/D9", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
+    async def varshaphal(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
+        """Varshaphal: Tajika annual chart (POST /vedic/varshaphal)"""
+        return await self._client.request("POST", "/vedic/varshaphal", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
+
     async def yogas_jaimini_daridra(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Yogas - Jaimini Daridra yoga (POST /vedic/yogas/jaimini/daridra)"""
+        """Yogas: Jaimini Daridra yoga (POST /vedic/yogas/jaimini/daridra)"""
         return await self._client.request("POST", "/vedic/yogas/jaimini/daridra", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def yogas_jaimini_dhana(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Yogas - Jaimini Dhana yoga (POST /vedic/yogas/jaimini/dhana)"""
+        """Yogas: Jaimini Dhana yoga (POST /vedic/yogas/jaimini/dhana)"""
         return await self._client.request("POST", "/vedic/yogas/jaimini/dhana", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def yogas_jaimini_full(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Yogas - Jaimini full summary (POST /vedic/yogas/jaimini/full)"""
+        """Yogas: Jaimini full summary (POST /vedic/yogas/jaimini/full)"""
         return await self._client.request("POST", "/vedic/yogas/jaimini/full", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def yogas_jaimini_karaka_yoga(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Yogas - Jaimini Karaka yoga (all 8 karakas) (POST /vedic/yogas/jaimini/karaka-yoga)"""
+        """Yogas: Jaimini Karaka yoga (all 8 karakas) (POST /vedic/yogas/jaimini/karaka-yoga)"""
         return await self._client.request("POST", "/vedic/yogas/jaimini/karaka-yoga", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def yogas_jaimini_karakamsa(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Yogas - Karakamsa chart (12-house projection) (POST /vedic/yogas/jaimini/karakamsa)"""
+        """Yogas: Karakamsa chart (12-house projection) (POST /vedic/yogas/jaimini/karakamsa)"""
         return await self._client.request("POST", "/vedic/yogas/jaimini/karakamsa", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def yogas_jaimini_raja(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Yogas - Jaimini Raja yoga (POST /vedic/yogas/jaimini/raja)"""
+        """Yogas: Jaimini Raja yoga (POST /vedic/yogas/jaimini/raja)"""
         return await self._client.request("POST", "/vedic/yogas/jaimini/raja", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def yogas_jaimini_shubha_graha(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Yogas - Shubha-graha (functional natures) (POST /vedic/yogas/jaimini/shubha-graha)"""
+        """Yogas: Shubha-graha (functional natures) (POST /vedic/yogas/jaimini/shubha-graha)"""
         return await self._client.request("POST", "/vedic/yogas/jaimini/shubha-graha", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def yogas_jaimini_viparita(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Yogas - Jaimini Viparita Raja yoga (POST /vedic/yogas/jaimini/viparita)"""
+        """Yogas: Jaimini Viparita Raja yoga (POST /vedic/yogas/jaimini/viparita)"""
         return await self._client.request("POST", "/vedic/yogas/jaimini/viparita", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def yogas_parashara_adhi(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Yogas - Adhi (POST /vedic/yogas/parashara/adhi)"""
+        """Yogas: Adhi (POST /vedic/yogas/parashara/adhi)"""
         return await self._client.request("POST", "/vedic/yogas/parashara/adhi", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def yogas_parashara_dhana(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Yogas - Dhana (wealth) (POST /vedic/yogas/parashara/dhana)"""
+        """Yogas: Dhana (wealth) (POST /vedic/yogas/parashara/dhana)"""
         return await self._client.request("POST", "/vedic/yogas/parashara/dhana", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def yogas_parashara_dharma_karmadhipati(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Yogas - Dharma-Karmadhipati (POST /vedic/yogas/parashara/dharma-karmadhipati)"""
+        """Yogas: Dharma-Karmadhipati (POST /vedic/yogas/parashara/dharma-karmadhipati)"""
         return await self._client.request("POST", "/vedic/yogas/parashara/dharma-karmadhipati", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def yogas_parashara_full(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Yogas - Parashara full report (POST /vedic/yogas/parashara/full)"""
+        """Yogas: Parashara full report (POST /vedic/yogas/parashara/full)"""
         return await self._client.request("POST", "/vedic/yogas/parashara/full", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def yogas_parashara_gajakesari(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Yogas - Gajakesari (POST /vedic/yogas/parashara/gajakesari)"""
+        """Yogas: Gajakesari (POST /vedic/yogas/parashara/gajakesari)"""
         return await self._client.request("POST", "/vedic/yogas/parashara/gajakesari", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def yogas_parashara_pancha_mahapurusha(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Yogas - Pancha Mahapurusha (5 great) (POST /vedic/yogas/parashara/pancha-mahapurusha)"""
+        """Yogas: Pancha Mahapurusha (5 great) (POST /vedic/yogas/parashara/pancha-mahapurusha)"""
         return await self._client.request("POST", "/vedic/yogas/parashara/pancha-mahapurusha", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def yogas_parashara_raja(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Yogas - Raja (royal) (POST /vedic/yogas/parashara/raja)"""
+        """Yogas: Raja (royal) (POST /vedic/yogas/parashara/raja)"""
         return await self._client.request("POST", "/vedic/yogas/parashara/raja", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
 
@@ -7231,7 +7435,7 @@ class _VedicDivisionalAsyncNamespace:
         self._client = client
 
     async def compute(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Vedic Divisional Chart (DEPRECATED - use /vedic/varga/{D}<*>) (POST /vedic-divisional)"""
+        """Vedic Divisional Chart (DEPRECATED: use /vedic/varga/{D}<*>) (POST /vedic-divisional)"""
         return await self._client.request("POST", "/vedic-divisional", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
 
@@ -7299,6 +7503,10 @@ class _WellnessAsyncNamespace:
 
     def __init__(self, client: AsyncAstroway) -> None:
         self._client = client
+
+    async def biorhythm(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
+        """Biorhythm (JSON) (POST /wellness/biorhythm)"""
+        return await self._client.request("POST", "/wellness/biorhythm", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def crystals(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
         """Healing Crystals by Sign (POST /wellness/crystals)"""
@@ -7383,6 +7591,10 @@ class _ZiweiAsyncNamespace:
     def __init__(self, client: AsyncAstroway) -> None:
         self._client = client
 
+    async def four_transformations(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
+        """Four Transformations (四化) (POST /ziwei/four-transformations)"""
+        return await self._client.request("POST", "/ziwei/four-transformations", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
+
     async def full_chart(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
         """Full Chart (MVP) (POST /ziwei/full-chart)"""
         return await self._client.request("POST", "/ziwei/full-chart", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
@@ -7404,7 +7616,7 @@ class _ZiweiAsyncNamespace:
         return await self._client.request("POST", "/ziwei/palace-destiny", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def palace_health(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Health Palace (Jie\'e) (POST /ziwei/palace-health)"""
+        """Health Palace (Ji'e) (POST /ziwei/palace-health)"""
         return await self._client.request("POST", "/ziwei/palace-health", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def palace_property(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
@@ -7441,51 +7653,51 @@ class _ZodiacAsyncNamespace:
         self._client = client
 
     async def aquarius_get(self, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None) -> Any:
-        """Aquarius - Fixed Air (GET /zodiac/aquarius)"""
+        """Aquarius: Fixed Air (GET /zodiac/aquarius)"""
         return await self._client.request("GET", "/zodiac/aquarius", params=params, headers=headers)
 
     async def aries_get(self, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None) -> Any:
-        """Aries - Cardinal Fire (GET /zodiac/aries)"""
+        """Aries: Cardinal Fire (GET /zodiac/aries)"""
         return await self._client.request("GET", "/zodiac/aries", params=params, headers=headers)
 
     async def cancer_get(self, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None) -> Any:
-        """Cancer - Cardinal Water (GET /zodiac/cancer)"""
+        """Cancer: Cardinal Water (GET /zodiac/cancer)"""
         return await self._client.request("GET", "/zodiac/cancer", params=params, headers=headers)
 
     async def capricorn_get(self, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None) -> Any:
-        """Capricorn - Cardinal Earth (GET /zodiac/capricorn)"""
+        """Capricorn: Cardinal Earth (GET /zodiac/capricorn)"""
         return await self._client.request("GET", "/zodiac/capricorn", params=params, headers=headers)
 
     async def gemini_get(self, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None) -> Any:
-        """Gemini - Mutable Air (GET /zodiac/gemini)"""
+        """Gemini: Mutable Air (GET /zodiac/gemini)"""
         return await self._client.request("GET", "/zodiac/gemini", params=params, headers=headers)
 
     async def leo_get(self, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None) -> Any:
-        """Leo - Fixed Fire (GET /zodiac/leo)"""
+        """Leo: Fixed Fire (GET /zodiac/leo)"""
         return await self._client.request("GET", "/zodiac/leo", params=params, headers=headers)
 
     async def libra_get(self, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None) -> Any:
-        """Libra - Cardinal Air (GET /zodiac/libra)"""
+        """Libra: Cardinal Air (GET /zodiac/libra)"""
         return await self._client.request("GET", "/zodiac/libra", params=params, headers=headers)
 
     async def pisces_get(self, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None) -> Any:
-        """Pisces - Mutable Water (GET /zodiac/pisces)"""
+        """Pisces: Mutable Water (GET /zodiac/pisces)"""
         return await self._client.request("GET", "/zodiac/pisces", params=params, headers=headers)
 
     async def sagittarius_get(self, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None) -> Any:
-        """Sagittarius - Mutable Fire (GET /zodiac/sagittarius)"""
+        """Sagittarius: Mutable Fire (GET /zodiac/sagittarius)"""
         return await self._client.request("GET", "/zodiac/sagittarius", params=params, headers=headers)
 
     async def scorpio_get(self, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None) -> Any:
-        """Scorpio - Fixed Water (GET /zodiac/scorpio)"""
+        """Scorpio: Fixed Water (GET /zodiac/scorpio)"""
         return await self._client.request("GET", "/zodiac/scorpio", params=params, headers=headers)
 
     async def taurus_get(self, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None) -> Any:
-        """Taurus - Fixed Earth (GET /zodiac/taurus)"""
+        """Taurus: Fixed Earth (GET /zodiac/taurus)"""
         return await self._client.request("GET", "/zodiac/taurus", params=params, headers=headers)
 
     async def virgo_get(self, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None) -> Any:
-        """Virgo - Mutable Earth (GET /zodiac/virgo)"""
+        """Virgo: Mutable Earth (GET /zodiac/virgo)"""
         return await self._client.request("GET", "/zodiac/virgo", params=params, headers=headers)
 
 
@@ -7493,6 +7705,7 @@ class _ZodiacAsyncNamespace:
 def _attach_sync(client: Astroway) -> None:
     client.acg = _AcgNamespace(client)  # type: ignore[attr-defined]
     client.acg_zones = _AcgZonesNamespace(client)  # type: ignore[attr-defined]
+    client.agent = _AgentNamespace(client)  # type: ignore[attr-defined]
     client.ai = _AiNamespace(client)  # type: ignore[attr-defined]
     client.algol_minimum = _AlgolMinimumNamespace(client)  # type: ignore[attr-defined]
     client.almuten = _AlmutenNamespace(client)  # type: ignore[attr-defined]
@@ -7544,6 +7757,7 @@ def _attach_sync(client: Astroway) -> None:
     client.iching = _IchingNamespace(client)  # type: ignore[attr-defined]
     client.ingresses = _IngressesNamespace(client)  # type: ignore[attr-defined]
     client.interpret = _InterpretNamespace(client)  # type: ignore[attr-defined]
+    client.kabbalah = _KabbalahNamespace(client)  # type: ignore[attr-defined]
     client.local_space = _LocalSpaceNamespace(client)  # type: ignore[attr-defined]
     client.lunar_calendar = _LunarCalendarNamespace(client)  # type: ignore[attr-defined]
     client.lunar_return = _LunarReturnNamespace(client)  # type: ignore[attr-defined]
@@ -7606,6 +7820,7 @@ def _attach_sync(client: Astroway) -> None:
 def _attach_async(client: AsyncAstroway) -> None:
     client.acg = _AcgAsyncNamespace(client)  # type: ignore[attr-defined]
     client.acg_zones = _AcgZonesAsyncNamespace(client)  # type: ignore[attr-defined]
+    client.agent = _AgentAsyncNamespace(client)  # type: ignore[attr-defined]
     client.ai = _AiAsyncNamespace(client)  # type: ignore[attr-defined]
     client.algol_minimum = _AlgolMinimumAsyncNamespace(client)  # type: ignore[attr-defined]
     client.almuten = _AlmutenAsyncNamespace(client)  # type: ignore[attr-defined]
@@ -7657,6 +7872,7 @@ def _attach_async(client: AsyncAstroway) -> None:
     client.iching = _IchingAsyncNamespace(client)  # type: ignore[attr-defined]
     client.ingresses = _IngressesAsyncNamespace(client)  # type: ignore[attr-defined]
     client.interpret = _InterpretAsyncNamespace(client)  # type: ignore[attr-defined]
+    client.kabbalah = _KabbalahAsyncNamespace(client)  # type: ignore[attr-defined]
     client.local_space = _LocalSpaceAsyncNamespace(client)  # type: ignore[attr-defined]
     client.lunar_calendar = _LunarCalendarAsyncNamespace(client)  # type: ignore[attr-defined]
     client.lunar_return = _LunarReturnAsyncNamespace(client)  # type: ignore[attr-defined]

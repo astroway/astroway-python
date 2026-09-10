@@ -93,15 +93,12 @@ def main() -> int:
         if "{" in path:  # path-template endpoints — out of scope
             continue
         # Only endpoints answering with the JSON envelope get a typed method.
-        # The /embed/* widgets serve HTML; api-calc declares text/html for them
-        # since 2026-08-04, so this filter needs no per-path list. The explicit
-        # /embed/ skip is belt and braces until openapi.json is resynced past
-        # that date, because the frozen snapshot still claims JSON.
+        # The /embed/* widgets serve HTML; api-calc declares text/html for all
+        # 14 of them, so this filter needs no per-path list. The explicit skip
+        # that stood here went out with the 2.152.1 resync.
         responses = op.get("responses") or {}
         ok_content = ((responses.get("200") or {}).get("content") or {})
         if "application/json" not in ok_content:
-            continue
-        if path.startswith("/embed/"):
             continue
         # /public/* mirrors keyed endpoints the SDK already exposes.
         if path.startswith("/public/"):
