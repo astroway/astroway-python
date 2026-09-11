@@ -1,6 +1,6 @@
 # astroway
 
-> Official Python SDK for the [AstroWay API](https://api.astroway.info) — natal charts, synastry, transits, Vedic dashas, Tarot, Numerology, Human Design, AI horoscopes. Sync + async, type-hinted, retry-aware.
+> Official Python SDK for the [AstroWay API](https://api.astroway.info): natal charts, synastry, transits, Vedic dashas, Tarot, Numerology, Human Design, AI horoscopes. Sync + async, type-hinted, retry-aware.
 
 [![PyPI version](https://img.shields.io/pypi/v/astroway.svg?style=flat&color=blue)](https://pypi.org/project/astroway/)
 [![Python versions](https://img.shields.io/pypi/pyversions/astroway.svg)](https://pypi.org/project/astroway/)
@@ -20,7 +20,7 @@ uv add astroway
 poetry add astroway
 ```
 
-Get an API key at <https://api.astroway.info/dashboard/sign-up> — **10 000 credits/month free**, no card required. Each endpoint costs 5–500 credits depending on what it computes ([pricing](https://api.astroway.info/pricing/)).
+Get an API key at <https://api.astroway.info/dashboard/sign-up>: **10 000 credits/month free**, no card required. Each endpoint costs 5–500 credits depending on what it computes ([pricing](https://api.astroway.info/pricing/)).
 
 Requires Python 3.9+.
 
@@ -74,11 +74,11 @@ async def main() -> None:
 asyncio.run(main())
 ```
 
-The SDK exposes **103 typed namespaces / 623 methods** auto-generated from the OpenAPI spec — `aw.synastry.aspect_grid({...})`, `aw.bazi.day_master({...})`, `aw.vedic.dashas_vimshottari_maha({...})`, etc. The `{ ok, data, error }` envelope is unwrapped for you.
+The SDK exposes **103 typed namespaces / 623 methods** auto-generated from the OpenAPI spec: `aw.synastry.aspect_grid({...})`, `aw.bazi.day_master({...})`, `aw.vedic.dashas_vimshottari_maha({...})`, etc. The `{ ok, data, error }` envelope is unwrapped for you.
 
-Top-4 categories (chart, synastry, transits, vedic dashas) ship **Pydantic v2 request models** for IDE autocomplete + validation: `BirthData`, `SynastryRequest`, `TransitsRequest`, `VedicDashaRequest`. Pass either a model or a `dict` — both work everywhere.
+Top-4 categories (chart, synastry, transits, vedic dashas) ship **Pydantic v2 request models** for IDE autocomplete + validation: `BirthData`, `SynastryRequest`, `TransitsRequest`, `VedicDashaRequest`. Pass either a model or a `dict`, both work everywhere.
 
-Sync and async clients share an identical surface — both expose the same namespaces, plus low-level `aw.request(method, path, body=…)` / `aw.post(path, body=…)` escape hatches.
+Sync and async clients share an identical surface: both expose the same namespaces, plus low-level `aw.request(method, path, body=…)` / `aw.post(path, body=…)` escape hatches.
 
 ---
 
@@ -161,7 +161,7 @@ account's stored config (requires a wpUserId-bound key).
 
 ## Error handling
 
-The SDK raises typed subclasses of `ApiError`. Catch order matters — most specific first:
+The SDK raises typed subclasses of `ApiError`. Catch order matters, most specific first:
 
 ```python
 from astroway import (
@@ -192,7 +192,7 @@ Full hierarchy:
   - `PermissionDeniedError` (403)
   - `NotFoundError` (404)
   - `UnprocessableEntityError` (422)
-  - `RateLimitError` (429) — carries `retry_after_seconds`
+  - `RateLimitError` (429), carries `retry_after_seconds`
   - `InternalServerError` (5xx)
 
 ### The 400 you are most likely to hit first
@@ -227,10 +227,10 @@ Set `retry={"max_retries": 0}` to disable retries entirely.
 
 ## Authentication
 
-Two equivalent auth schemes — pick whichever your stack prefers:
+Two equivalent auth schemes, pick whichever your stack prefers:
 
-- **Header (default):** `X-Api-Key: aw_live_...` — same convention as `curl`/Postman examples.
-- **Bearer:** `Authorization: Bearer aw_live_...` — same convention as Stripe/OpenAI/Anthropic SDKs.
+- **Header (default):** `X-Api-Key: aw_live_...`, the same convention as `curl`/Postman examples.
+- **Bearer:** `Authorization: Bearer aw_live_...`, the same convention as Stripe/OpenAI/Anthropic SDKs.
 
 Set via `auth_scheme="bearer"` in the constructor.
 
@@ -261,17 +261,17 @@ Since **`1.0.0` (2026-05-11)** this package follows strict SemVer:
 
 ### Migration from `0.1.0a1` … `0.1.0rc1` to `0.1.0`
 
-`0.1.0` freezes the public surface. **No breaking changes** vs `0.1.0rc1` — every export, namespace, error class, and option added across alphas / betas / RCs ships unchanged. The freeze means future `0.1.x` patches will not narrow types or remove names; that level of change requires a `0.2.0` minor bump.
+`0.1.0` freezes the public surface. **No breaking changes** vs `0.1.0rc1`: every export, namespace, error class, and option added across alphas / betas / RCs ships unchanged. The freeze means future `0.1.x` patches will not narrow types or remove names; that level of change requires a `0.2.0` minor bump.
 
 | Coming from | Action |
 |---|---|
-| `0.1.0a1` (manual `aw.post('/chart', body=...)`) | Switch to typed namespaces — `aw.chart.compute(body)`, `aw.synastry.aspect_grid(body)`, etc. The escape hatch (`aw.request(...)`) still works. |
+| `0.1.0a1` (manual `aw.post('/chart', body=...)`) | Switch to typed namespaces: `aw.chart.compute(body)`, `aw.synastry.aspect_grid(body)`, etc. The escape hatch (`aw.request(...)`) still works. |
 | `0.1.0a2` … `a3` (no idempotency / errors) | Pick up automatic `Idempotency-Key` on POSTs, `error.request_id` / `error.credits_remaining` getters, Pydantic models for top categories. |
 | `0.1.0a4` … `a6` (no helpers) | `from astroway.helpers import BirthDateTime` for `from_city()` / `from_coordinates()`. |
 | `0.1.0b1` … `b3` (no streaming / cache / mock) | `for chunk in aw.charts.compute(...).stream()`, `Astroway(cache=MemoryCache())`, `from astroway.testing import MockAstroway`. |
 | `0.1.0rc1` (no bring-your-own httpx) | Optional: pass `http_client=httpx.Client(...)`, `limits=httpx.Limits(...)`, or `transport='aiohttp'` (with `pip install astroway[aiohttp]`). |
 
-A type-stability test suite (`tests/test_types.py`) inspects constructor signatures, error subclass tree, dataclass fields, and Literal unions — any future PR that breaks the public surface fails CI before reaching PyPI.
+A type-stability test suite (`tests/test_types.py`) inspects constructor signatures, error subclass tree, dataclass fields, and Literal unions: any future PR that breaks the public surface fails CI before reaching PyPI.
 
 ---
 
@@ -289,4 +289,4 @@ A type-stability test suite (`tests/test_types.py`) inspects constructor signatu
 
 ## License
 
-MIT — see [LICENSE](LICENSE).
+MIT, see [LICENSE](LICENSE).
