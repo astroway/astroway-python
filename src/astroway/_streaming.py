@@ -138,8 +138,26 @@ def _new_state() -> dict[str, Any]:
     return {"event": "", "data": [], "id": None, "retry": None}
 
 
+_KNOWN_EVENTS = frozenset({"text_delta", "done", "end", "message_stop", "error"})
+
+
 def _normalise(event: SSEEvent) -> StreamChunk:
-    if event.event == "text_delta":
+    """Map a raw SSE event onto a typed chunk.
+
+    Our own endpoints emit two shapes and until 2026-09-02 this matched
+    neither: ``/v1/mcp/streaming`` sends no ``event:`` line and puts the kind in
+    the payload, ``{"type": "token", "text": "..."}``, while
+    ``/v1/dev-assistant/stream`` sends ``event: token`` with ``{"delta": "..."}``.
+    Both arrived as ``StreamEvent`` and the documented ``chunk.type ==
+    "text_delta"`` matched nothing on any AstroWay stream. An event name this
+    function already knew still wins over a ``type`` in the payload.
+    """
+    payload = event.data if isinstance(event.data, dict) else {}
+    kind = event.event if event.event in _KNOWN_EVENTS else str(payload.get("type") or event.event)
+    if kind in ("token", "delta"):
+        text = payload.get("text") or payload.get("delta") or payload.get("content")
+        return TextDelta(type="text_delta", text=str(text) if text is not None else event.raw_data, raw=event)
+    if kind == "text_delta":
         if isinstance(event.data, str):
             text = event.data
         elif isinstance(event.data, dict):
@@ -147,9 +165,9 @@ def _normalise(event: SSEEvent) -> StreamChunk:
         else:
             text = event.raw_data
         return TextDelta(type="text_delta", text=text, raw=event)
-    if event.event in ("done", "end", "message_stop"):
+    if kind in ("done", "end", "message_stop"):
         return StreamDone(type="done", raw=event)
-    if event.event == "error":
+    if kind == "error":
         err = event.data if isinstance(event.data, dict) else {}
         return StreamError(
             type="error",

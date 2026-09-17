@@ -157,6 +157,23 @@ print(report["url"])  # signed PDF URL
 Pass `"whitelabel": True` instead of an object to pull branding from your
 account's stored config (requires a wpUserId-bound key).
 
+### Streaming
+
+Two endpoints answer Server-Sent Events rather than JSON, and their namespace
+methods return a stream:
+
+```python
+for chunk in aw.mcp.streaming({"message": "What is a stellium?"}):
+    if chunk.type == "text_delta":
+        print(chunk.text, end="", flush=True)
+    elif chunk.type == "done":
+        break
+```
+
+The async client returns the async variant, walked with `async for`. Any other
+SSE-capable path goes through `aw.stream_sse(path, body=...)`, which yields the
+same chunks.
+
 ---
 
 ## Error handling

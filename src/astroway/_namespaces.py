@@ -11,6 +11,7 @@ from typing import TYPE_CHECKING, Any
 if TYPE_CHECKING:
     from ._client import AsyncAstroway  # noqa: I001
     from ._client import Astroway
+    from ._streaming import AsyncSSEStream, SyncSSEStream
 
 
 class _AcgNamespace:
@@ -81,7 +82,7 @@ class _AiNamespace:
         self._client = client
 
     def chat(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """AI Chat (RAG over chart) (POST /ai/chat)"""
+        """Chart-grounded AI chat (POST /ai/chat)"""
         return self._client.request("POST", "/ai/chat", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def comparison_coach(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
@@ -1497,13 +1498,13 @@ class _McpNamespace:
         """MCP RAG Search (POST /mcp/rag-search)"""
         return self._client.request("POST", "/mcp/rag-search", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
-    def streaming(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """MCP Streaming Chat (POST /mcp/streaming)"""
-        return self._client.request("POST", "/mcp/streaming", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
+    def streaming(self, body: Any = None, *, params: Mapping[str, Any] | None = None, idempotency_key: str | None = None) -> SyncSSEStream:
+        """MCP Streaming Chat (POST /mcp/streaming, server-sent events)"""
+        return self._client.stream_sse("/mcp/streaming", body=body, params=params, idempotency_key=idempotency_key)
 
-    def tool_call_stream(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """MCP Tool-Call Stream (POST /mcp/tool-call-stream)"""
-        return self._client.request("POST", "/mcp/tool-call-stream", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
+    def tool_call_stream(self, body: Any = None, *, params: Mapping[str, Any] | None = None, idempotency_key: str | None = None) -> SyncSSEStream:
+        """MCP Tool-Call Stream (POST /mcp/tool-call-stream, server-sent events)"""
+        return self._client.stream_sse("/mcp/tool-call-stream", body=body, params=params, idempotency_key=idempotency_key)
 
     def tools_list_get(self, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None) -> Any:
         """MCP Tools List (GET /mcp/tools-list)"""
@@ -3925,7 +3926,7 @@ class _AiAsyncNamespace:
         self._client = client
 
     async def chat(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """AI Chat (RAG over chart) (POST /ai/chat)"""
+        """Chart-grounded AI chat (POST /ai/chat)"""
         return await self._client.request("POST", "/ai/chat", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def comparison_coach(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
@@ -5341,13 +5342,13 @@ class _McpAsyncNamespace:
         """MCP RAG Search (POST /mcp/rag-search)"""
         return await self._client.request("POST", "/mcp/rag-search", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
-    async def streaming(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """MCP Streaming Chat (POST /mcp/streaming)"""
-        return await self._client.request("POST", "/mcp/streaming", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
+    def streaming(self, body: Any = None, *, params: Mapping[str, Any] | None = None, idempotency_key: str | None = None) -> AsyncSSEStream:
+        """MCP Streaming Chat (POST /mcp/streaming, server-sent events)"""
+        return self._client.stream_sse("/mcp/streaming", body=body, params=params, idempotency_key=idempotency_key)
 
-    async def tool_call_stream(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """MCP Tool-Call Stream (POST /mcp/tool-call-stream)"""
-        return await self._client.request("POST", "/mcp/tool-call-stream", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
+    def tool_call_stream(self, body: Any = None, *, params: Mapping[str, Any] | None = None, idempotency_key: str | None = None) -> AsyncSSEStream:
+        """MCP Tool-Call Stream (POST /mcp/tool-call-stream, server-sent events)"""
+        return self._client.stream_sse("/mcp/tool-call-stream", body=body, params=params, idempotency_key=idempotency_key)
 
     async def tools_list_get(self, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None) -> Any:
         """MCP Tools List (GET /mcp/tools-list)"""

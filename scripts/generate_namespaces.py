@@ -98,7 +98,14 @@ def main() -> int:
         # that stood here went out with the 2.152.1 resync.
         responses = op.get("responses") or {}
         ok_content = ((responses.get("200") or {}).get("content") or {})
-        if "application/json" not in ok_content:
+        # Two endpoints answer `text/event-stream` and nothing else. The JSON
+        # filter dropped `mcp.streaming` and `mcp.tool_call_stream` the day
+        # api-calc corrected their declared media type, and neither had ever
+        # worked as a JSON method: the server has always answered SSE, so
+        # `request()` parsed a frame as a body. They are emitted as streaming
+        # methods over the client's own `stream_sse`.
+        sse_only = "text/event-stream" in ok_content and "application/json" not in ok_content
+        if "application/json" not in ok_content and not sse_only:
             continue
         # /public/* mirrors keyed endpoints the SDK already exposes.
         if path.startswith("/public/"):
@@ -115,6 +122,7 @@ def main() -> int:
             "path": path,
             "http_method": http_method,
             "summary": op.get("summary"),
+            "sse": sse_only,
         })
 
     # Detect collisions (same ns.method pointing to different paths).
@@ -151,6 +159,7 @@ def main() -> int:
     out.append("if TYPE_CHECKING:")
     out.append("    from ._client import AsyncAstroway  # noqa: I001")
     out.append("    from ._client import Astroway")
+    out.append("    from ._streaming import AsyncSSEStream, SyncSSEStream")
     out.append("")
     out.append("")
 
@@ -169,7 +178,19 @@ def main() -> int:
         for item in items:
             verb = item["http_method"]
             doc = sanitize_doc(item["summary"] or f"{verb} {item['path']}")
-            if verb == "GET":
+            if item.get("sse"):
+                # `stream_sse` takes no per-call headers, so neither does this.
+                out.append(
+                    f"    def {item['method']}(self, body: Any = None, *, "
+                    f"params: Mapping[str, Any] | None = None, "
+                    f"idempotency_key: str | None = None) -> SyncSSEStream:"
+                )
+                out.append(f'        """{doc} (POST {item["path"]}, server-sent events)"""')
+                out.append(
+                    f'        return self._client.stream_sse("{item["path"]}", '
+                    f"body=body, params=params, idempotency_key=idempotency_key)"
+                )
+            elif verb == "GET":
                 # No body, and no idempotency key: neither means anything on a read.
                 out.append(
                     f"    def {item['method']}(self, *, "
@@ -211,7 +232,20 @@ def main() -> int:
         for item in items:
             verb = item["http_method"]
             doc = sanitize_doc(item["summary"] or f"{verb} {item['path']}")
-            if verb == "GET":
+            if item.get("sse"):
+                # Not `async def`: the stream object is the awaitable surface,
+                # and `async for` walks it. An extra await would return it once.
+                out.append(
+                    f"    def {item['method']}(self, body: Any = None, *, "
+                    f"params: Mapping[str, Any] | None = None, "
+                    f"idempotency_key: str | None = None) -> AsyncSSEStream:"
+                )
+                out.append(f'        """{doc} (POST {item["path"]}, server-sent events)"""')
+                out.append(
+                    f'        return self._client.stream_sse("{item["path"]}", '
+                    f"body=body, params=params, idempotency_key=idempotency_key)"
+                )
+            elif verb == "GET":
                 out.append(
                     f"    async def {item['method']}(self, *, "
                     f"params: Mapping[str, Any] | None = None, "
