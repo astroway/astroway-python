@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "astroway"
-version = "1.7.0"
+version = "1.8.0"
 description = "Official Python SDK for the AstroWay API: natal, synastry, transits, Vedic, Human Design, Tarot, Numerology, AI horoscopes. Type-safe, retry-aware, OpenAPI 3.1 generated."
 readme = "README.md"
 license = "MIT"
@@ -35,7 +35,8 @@ dependencies = [
 ]
 
 [project.urls]
-Homepage = "https://api.astroway.info/docs/"
+Homepage = "https://api.astroway.info/"
+Documentation = "https://api.astroway.info/docs/"
 Repository = "https://github.com/astroway/astroway-python"
 Issues = "https://github.com/astroway/astroway-python/issues"
 Changelog = "https://github.com/astroway/astroway-python/blob/main/CHANGELOG.md"
@@ -58,7 +59,7 @@ dev = [
   "ruff>=0.6",
   "datamodel-code-generator[http]>=0.26",
   # Framework deps for integration tests; intentionally NOT pulling
-  # httpx-aiohttp here — test_http_client.py asserts the ImportError path
+  # httpx-aiohttp here, test_http_client.py asserts the ImportError path
   # when the optional extra is absent.
   "django>=4.2",
   "fastapi>=0.110",
@@ -67,10 +68,16 @@ dev = [
 [tool.hatch.build.targets.wheel]
 packages = ["src/astroway"]
 
+# The agent playbook has to land in site-packages, not just in the sdist, or an
+# agent that ran `pip install astroway` never sees it.
+[tool.hatch.build.targets.wheel.force-include]
+"AGENTS.md" = "astroway/AGENTS.md"
+
 [tool.hatch.build.targets.sdist]
 include = [
   "src/astroway",
   "openapi.json",
+  "AGENTS.md",
   "README.md",
   "CHANGELOG.md",
   "LICENSE",
