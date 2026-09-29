@@ -6,6 +6,7 @@ import json
 
 import httpx
 import pytest
+from pydantic import ValidationError
 
 from astroway import (
     Astroway,
@@ -152,11 +153,11 @@ def test_transits_request_inlined_birth_fields() -> None:
             timezone_offset=3,
             latitude=50.45,
             longitude=30.52,
-            target_date="2027-01-01",
+            transit_date="2027-01-01",
         )
     )
     body = json.loads(transport.requests[0].content.decode("utf-8"))
-    assert body["targetDate"] == "2027-01-01"
+    assert body["transitDate"] == "2027-01-01"
     assert body["timezoneOffset"] == 3
 
 
@@ -189,3 +190,48 @@ async def test_async_namespace_accepts_pydantic_input() -> None:
         )
     body = json.loads(transport.requests[0].content.decode("utf-8"))
     assert body["timezoneOffset"] == 3
+
+
+def test_birth_data_omits_timezone_when_unset() -> None:
+    b = BirthData(date="1990-05-15", time="14:30:00", latitude=50.45, longitude=30.52)
+    assert "timezone" not in b.model_dump(by_alias=True, exclude_none=True)
+
+
+def test_birth_data_sends_zone_name_beside_the_offset() -> None:
+    b = BirthData(
+        date="1990-05-15",
+        time="14:30:00",
+        latitude=50.45,
+        longitude=30.52,
+        timezone="Europe/Kyiv",
+    )
+    body = b.model_dump(by_alias=True, exclude_none=True)
+    assert body["timezone"] == "Europe/Kyiv"
+    assert body["timezoneOffset"] == 0
+
+
+def test_timezone_refuses_the_three_shapes_the_api_rejects() -> None:
+    for bad in ("", "   ", "+03:00", "UTC+2", "-5"):
+        with pytest.raises(ValidationError):
+            BirthData(
+                date="1990-05-15", time="14:30:00", latitude=1, longitude=1, timezone=bad
+            )
+
+
+def test_timezone_accepts_auto_and_reaches_every_birth_model() -> None:
+    assert BirthData(
+        date="1990-05-15", time="14:30:00", latitude=1, longitude=1, timezone="auto"
+    ).timezone == "auto"
+    t = TransitsRequest(
+        date="1990-05-15",
+        time="14:30:00",
+        latitude=50.45,
+        longitude=30.52,
+        transit_date="2027-01-01",
+        timezone="Europe/Kyiv",
+    )
+    assert t.model_dump(by_alias=True, exclude_none=True)["timezone"] == "Europe/Kyiv"
+    v = VedicDashaRequest(
+        date="1985-07-22", time="06:45:00", latitude=1, longitude=1, timezone="Asia/Kolkata"
+    )
+    assert v.model_dump(by_alias=True, exclude_none=True)["timezone"] == "Asia/Kolkata"

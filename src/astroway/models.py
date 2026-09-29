@@ -17,20 +17,43 @@ Example::
 
     birth = BirthData(
         date="1990-07-14", time="14:30:00",
-        timezone_offset=3, latitude=50.45, longitude=30.52,
+        timezone="Europe/Kyiv", latitude=50.45, longitude=30.52,
     )
     chart = aw.chart.compute(birth)        # accepts BirthData or dict
-    transits = aw.transits.compute(TransitsRequest(birth=birth, target_date="2027-01-01"))
+    transits = aw.transits.compute(TransitsRequest(
+        date="1990-07-14", time="14:30:00", timezone="Europe/Kyiv",
+        latitude=50.45, longitude=30.52, transit_date="2027-01-01",
+    ))
 """
 
+import re
 from typing import Optional
 
-from pydantic import BaseModel, ConfigDict, Field
+from pydantic import BaseModel, ConfigDict, Field, field_validator
 
 # All API field names are camelCase. Pydantic v2 picks them up via `alias` +
 # `populate_by_name`, so users can write either `timezone_offset=3` (Python
 # style) or `timezoneOffset=3` (matching the JSON wire format).
 _API_CONFIG = ConfigDict(populate_by_name=True, extra="allow")
+
+# "+03:00", "-5" and "UTC+2" are offsets, and the API answers 400 for each of
+# them in the `timezone` field. Catching them here saves the round trip.
+_OFFSET_LIKE = re.compile(r"^(?:UTC|GMT)?\s*[+-]?\d{1,2}(?::\d{2})?$", re.IGNORECASE)
+
+
+def _check_timezone(value: Optional[str]) -> Optional[str]:
+    """Shared validator for the ``timezone`` field on every birth-shaped model."""
+    if value is None:
+        return None
+    if not value.strip():
+        raise ValueError(
+            "timezone must be a zone name or 'auto'; omit it rather than sending an empty string"
+        )
+    if _OFFSET_LIKE.match(value):
+        raise ValueError(
+            f"timezone takes a zone name, not an offset; use timezone_offset for {value!r}"
+        )
+    return value
 
 
 class BirthData(BaseModel):
@@ -61,6 +84,10 @@ class BirthData(BaseModel):
     zodiac_type: Optional[str] = Field(default=None, alias="zodiacType")
     ayanamsa_id: Optional[float] = Field(default=None, alias="ayanamsaId")
     cosmogram: Optional[bool] = None
+    timezone: Optional[str] = None
+
+    _validate_timezone = field_validator("timezone")(_check_timezone)
+
 
 
 class SynastryRequest(BaseModel):
@@ -76,8 +103,8 @@ class SynastryRequest(BaseModel):
 class TransitsRequest(BaseModel):
     """Transits to a natal chart at a target moment.
 
-    ``target_date`` defaults to "now" when omitted — pass an explicit
-    ``YYYY-MM-DD`` (and optionally ``target_time``) for a fixed date.
+    ``transit_date`` is required and names the moment to transit to; pass
+    ``transit_time`` and ``transit_tz_offset`` when the hour matters.
     """
 
     model_config = _API_CONFIG
@@ -89,13 +116,13 @@ class TransitsRequest(BaseModel):
     timezone_offset: float = Field(default=0, alias="timezoneOffset")
     latitude: float = 0
     longitude: float = 0
-    target_date: Optional[str] = Field(default=None, alias="targetDate")
-    target_time: Optional[str] = Field(default=None, alias="targetTime")
-    target_timezone_offset: Optional[float] = Field(
-        default=None, alias="targetTimezoneOffset"
-    )
-    target_latitude: Optional[float] = Field(default=None, alias="targetLatitude")
-    target_longitude: Optional[float] = Field(default=None, alias="targetLongitude")
+    transit_date: str = Field(alias="transitDate", pattern=r"^\d{4}-\d{2}-\d{2}$")
+    transit_time: Optional[str] = Field(default=None, alias="transitTime")
+    transit_tz_offset: Optional[float] = Field(default=None, alias="transitTzOffset")
+    timezone: Optional[str] = None
+
+    _validate_timezone = field_validator("timezone")(_check_timezone)
+
 
 
 class VedicDashaRequest(BaseModel):
@@ -115,6 +142,10 @@ class VedicDashaRequest(BaseModel):
     ayanamsa_id: Optional[float] = Field(default=None, alias="ayanamsaId")
     start_date: Optional[str] = Field(default=None, alias="startDate")
     end_date: Optional[str] = Field(default=None, alias="endDate")
+    timezone: Optional[str] = None
+
+    _validate_timezone = field_validator("timezone")(_check_timezone)
+
 
 
 __all__ = [

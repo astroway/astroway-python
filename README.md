@@ -102,8 +102,8 @@ print(f"Score: {result['compatibility']['score']}/100 ({result['compatibility'][
 from astroway import TransitsRequest
 
 transits = aw.transits.compute(TransitsRequest(
-    date="1990-07-14", time="14:30:00", timezone_offset=3, latitude=50.45, longitude=30.52,
-    target_date="2027-01-01",
+    date="1990-07-14", time="14:30:00", timezone="Europe/Kyiv", latitude=50.45, longitude=30.52,
+    transit_date="2027-01-01",
 ))
 ```
 

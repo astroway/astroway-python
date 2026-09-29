@@ -214,6 +214,10 @@ class _BaziNamespace:
     def __init__(self, client: Astroway) -> None:
         self._client = client
 
+    def chart(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
+        """Full BaZi chart (POST /bazi/chart)"""
+        return self._client.request("POST", "/bazi/chart", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
+
     def day_master(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
         """Day Master (POST /bazi/day-master)"""
         return self._client.request("POST", "/bazi/day-master", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
@@ -226,9 +230,21 @@ class _BaziNamespace:
         """Four Pillars (full) (POST /bazi/four-pillars)"""
         return self._client.request("POST", "/bazi/four-pillars", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
+    def hidden_stems(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
+        """Hidden stems (Cang Gan) (POST /bazi/hidden-stems)"""
+        return self._client.request("POST", "/bazi/hidden-stems", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
+
     def hour_pillar(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
         """Hour Pillar (POST /bazi/hour-pillar)"""
         return self._client.request("POST", "/bazi/hour-pillar", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
+
+    def interactions(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
+        """Branch and stem interactions (POST /bazi/interactions)"""
+        return self._client.request("POST", "/bazi/interactions", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
+
+    def life_stages(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
+        """Twelve life stages (POST /bazi/life-stages)"""
+        return self._client.request("POST", "/bazi/life-stages", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def luck_pillars(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
         """Luck Pillars (Da Yun) (POST /bazi/luck-pillars)"""
@@ -241,6 +257,18 @@ class _BaziNamespace:
     def monthly(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
         """Monthly Forecast (POST /bazi/monthly)"""
         return self._client.request("POST", "/bazi/monthly", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
+
+    def na_yin(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
+        """Na Yin sound-element (POST /bazi/na-yin)"""
+        return self._client.request("POST", "/bazi/na-yin", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
+
+    def strength(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
+        """Day-master strength (POST /bazi/strength)"""
+        return self._client.request("POST", "/bazi/strength", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
+
+    def symbolic_stars(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
+        """Symbolic stars (Shen Sha) (POST /bazi/symbolic-stars)"""
+        return self._client.request("POST", "/bazi/symbolic-stars", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def ten_gods(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
         """Ten Gods (Shi Shen) (POST /bazi/ten-gods)"""
@@ -385,6 +413,10 @@ class _ChineseNamespace:
     def tong_shu_select(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
         """Tong Shu date selection (POST /chinese/tong-shu/select)"""
         return self._client.request("POST", "/chinese/tong-shu/select", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
+
+    def true_solar_time(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
+        """True solar time (POST /chinese/true-solar-time)"""
+        return self._client.request("POST", "/chinese/true-solar-time", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def zodiac_animal(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
         """Chinese Zodiac Animal (POST /chinese/zodiac/animal)"""
@@ -3748,12 +3780,16 @@ class _ZiweiNamespace:
     def __init__(self, client: Astroway) -> None:
         self._client = client
 
+    def chart(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
+        """Full Chart (computed) (POST /ziwei/chart)"""
+        return self._client.request("POST", "/ziwei/chart", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
+
     def four_transformations(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
         """Four Transformations (四化) (POST /ziwei/four-transformations)"""
         return self._client.request("POST", "/ziwei/four-transformations", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def full_chart(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Full Chart (MVP) (POST /ziwei/full-chart)"""
+        """Full Chart (deprecated) (POST /ziwei/full-chart)"""
         return self._client.request("POST", "/ziwei/full-chart", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     def main_stars(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
@@ -4058,6 +4094,10 @@ class _BaziAsyncNamespace:
     def __init__(self, client: AsyncAstroway) -> None:
         self._client = client
 
+    async def chart(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
+        """Full BaZi chart (POST /bazi/chart)"""
+        return await self._client.request("POST", "/bazi/chart", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
+
     async def day_master(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
         """Day Master (POST /bazi/day-master)"""
         return await self._client.request("POST", "/bazi/day-master", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
@@ -4070,9 +4110,21 @@ class _BaziAsyncNamespace:
         """Four Pillars (full) (POST /bazi/four-pillars)"""
         return await self._client.request("POST", "/bazi/four-pillars", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
+    async def hidden_stems(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
+        """Hidden stems (Cang Gan) (POST /bazi/hidden-stems)"""
+        return await self._client.request("POST", "/bazi/hidden-stems", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
+
     async def hour_pillar(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
         """Hour Pillar (POST /bazi/hour-pillar)"""
         return await self._client.request("POST", "/bazi/hour-pillar", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
+
+    async def interactions(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
+        """Branch and stem interactions (POST /bazi/interactions)"""
+        return await self._client.request("POST", "/bazi/interactions", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
+
+    async def life_stages(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
+        """Twelve life stages (POST /bazi/life-stages)"""
+        return await self._client.request("POST", "/bazi/life-stages", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def luck_pillars(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
         """Luck Pillars (Da Yun) (POST /bazi/luck-pillars)"""
@@ -4085,6 +4137,18 @@ class _BaziAsyncNamespace:
     async def monthly(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
         """Monthly Forecast (POST /bazi/monthly)"""
         return await self._client.request("POST", "/bazi/monthly", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
+
+    async def na_yin(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
+        """Na Yin sound-element (POST /bazi/na-yin)"""
+        return await self._client.request("POST", "/bazi/na-yin", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
+
+    async def strength(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
+        """Day-master strength (POST /bazi/strength)"""
+        return await self._client.request("POST", "/bazi/strength", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
+
+    async def symbolic_stars(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
+        """Symbolic stars (Shen Sha) (POST /bazi/symbolic-stars)"""
+        return await self._client.request("POST", "/bazi/symbolic-stars", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def ten_gods(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
         """Ten Gods (Shi Shen) (POST /bazi/ten-gods)"""
@@ -4229,6 +4293,10 @@ class _ChineseAsyncNamespace:
     async def tong_shu_select(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
         """Tong Shu date selection (POST /chinese/tong-shu/select)"""
         return await self._client.request("POST", "/chinese/tong-shu/select", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
+
+    async def true_solar_time(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
+        """True solar time (POST /chinese/true-solar-time)"""
+        return await self._client.request("POST", "/chinese/true-solar-time", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def zodiac_animal(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
         """Chinese Zodiac Animal (POST /chinese/zodiac/animal)"""
@@ -7592,12 +7660,16 @@ class _ZiweiAsyncNamespace:
     def __init__(self, client: AsyncAstroway) -> None:
         self._client = client
 
+    async def chart(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
+        """Full Chart (computed) (POST /ziwei/chart)"""
+        return await self._client.request("POST", "/ziwei/chart", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
+
     async def four_transformations(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
         """Four Transformations (四化) (POST /ziwei/four-transformations)"""
         return await self._client.request("POST", "/ziwei/four-transformations", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def full_chart(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
-        """Full Chart (MVP) (POST /ziwei/full-chart)"""
+        """Full Chart (deprecated) (POST /ziwei/full-chart)"""
         return await self._client.request("POST", "/ziwei/full-chart", body=body, params=params, headers=headers, idempotency_key=idempotency_key)
 
     async def main_stars(self, body: Any = None, *, params: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, idempotency_key: str | None = None) -> Any:
