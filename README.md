@@ -133,6 +133,18 @@ hd = aw.human_design.compute({
 print(f"{hd['type']} - {hd['strategy']} - {hd['authority']}")
 ```
 
+### Natal interpretation texts
+
+Pre-written interpretation snippets for planet-in-sign, planet-in-house and
+aspect placements, no AI at request time, one ordinary call regardless of how
+many keys you ask for:
+
+```python
+result = aw.natal_texts(["sun.aries", "moon.h4", "sun_moon.trine"], lang="uk")
+print(result.texts["sun.aries"].body)
+print(result.missing)  # keys with no text in "uk"; no fallback to another language
+```
+
 ### White-label PDF report
 
 `/reports/*` endpoints accept an inline `whitelabel` object (the `BrandingObject`

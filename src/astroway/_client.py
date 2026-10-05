@@ -7,7 +7,7 @@ from __future__ import annotations
 import platform
 import sys
 import time
-from collections.abc import Mapping
+from collections.abc import Mapping, Sequence
 from dataclasses import dataclass
 from typing import TYPE_CHECKING, Any, Literal
 
@@ -31,6 +31,7 @@ from ._idempotency import (
     resolve_key_generator,
     should_attach_idempotency,
 )
+from ._natal_texts import NatalTextsResult, natal_texts_params, parse_natal_texts_result
 from ._retry import AsyncRetryTransport, RetryConfig, SyncRetryTransport
 from ._version import SDK_VERSION
 from .errors import (
@@ -457,6 +458,31 @@ class Astroway(_BaseAstroway):
         """
         return self.get("/health")
 
+    def natal_texts(self, keys: Sequence[str], lang: str) -> NatalTextsResult:
+        """Pre-written interpretation text for up to 64 keys in one call, no AI.
+
+        ``keys`` are lowercase strings: planet in sign (``sun.aries``,
+        ``ascendant.leo``), planet in house (``moon.h4``, ``lilith.h7``), or a
+        major aspect (``sun_moon.trine``, pair order normalised server side).
+        Pass a Python list or tuple; it is joined with commas on the wire.
+        Duplicates are removed server side before the 64-key cap.
+
+        ``lang`` is required, one of uk en de pl es pt fr it nl cs ro hu el tr
+        ar hi ja ko vi id. There is no fallback to another language: a key
+        with nothing in ``lang`` comes back in
+        :attr:`NatalTextsResult.missing` instead of raising.
+
+        One ordinary call (10 credits) no matter how many keys are asked for.
+
+        Example::
+
+            result = aw.natal_texts(["sun.aries", "moon.h4"], lang="uk")
+            result.texts["sun.aries"].body
+            result.missing
+        """
+        payload = self.get("/natal-texts", params=natal_texts_params(keys, lang))
+        return parse_natal_texts_result(payload)
+
     def paginate(
         self,
         method: str,
@@ -725,6 +751,11 @@ class AsyncAstroway(_BaseAstroway):
     async def health(self) -> dict[str, Any]:
         """Liveness probe — see :meth:`Astroway.health`."""
         return await self.get("/health")
+
+    async def natal_texts(self, keys: Sequence[str], lang: str) -> NatalTextsResult:
+        """Async counterpart of :meth:`Astroway.natal_texts`."""
+        payload = await self.get("/natal-texts", params=natal_texts_params(keys, lang))
+        return parse_natal_texts_result(payload)
 
     def paginate(
         self,

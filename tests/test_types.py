@@ -42,6 +42,8 @@ from astroway import (  # noqa: F401
     InternalServerError,
     MemoryCache,
     NON_DETERMINISTIC_PATH_PREFIXES,
+    NatalText,
+    NatalTextsResult,
     NotFoundError,
     PermissionDeniedError,
     QuotaExceededError,
@@ -179,6 +181,22 @@ def test_models_surface_locked() -> None:
     instantiate them directly: `aw.charts.compute(birth=NatalRequest(...))`."""
     for cls in (BirthData, SynastryRequest, TransitsRequest, VedicDashaRequest):
         assert isinstance(cls, type), f"{cls.__name__} no longer importable as a class"
+
+
+def test_natal_texts_surface_locked() -> None:
+    """`natal_texts()` result shape: NatalTextsResult(lang, texts, missing) of
+    NatalText(title, body, kind). Hand-written like health()/version(), so
+    nothing generates it back if removed."""
+    hints = get_type_hints(NatalTextsResult)
+    for f in ("lang", "texts", "missing"):
+        assert f in hints, f"NatalTextsResult lost field: {f}"
+    hints = get_type_hints(NatalText)
+    for f in ("title", "body", "kind"):
+        assert f in hints, f"NatalText lost field: {f}"
+
+    sig = inspect.signature(Astroway.natal_texts)
+    for name in ("keys", "lang"):
+        assert name in sig.parameters, f"Astroway.natal_texts lost parameter: {name}"
 
 
 def test_raw_response_dataclass_fields() -> None:

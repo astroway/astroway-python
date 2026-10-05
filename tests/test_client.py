@@ -13,6 +13,8 @@ from astroway import (
     AsyncAstroway,
     AuthenticationError,
     BadRequestError,
+    NatalText,
+    NatalTextsResult,
     RateLimitError,
 )
 
@@ -293,3 +295,62 @@ async def test_async_health_hits_health_endpoint() -> None:
     assert inner.last_request is not None
     assert inner.last_request.url.path.endswith("/health")
     assert result["status"] == "ok"
+
+
+# ─── natal_texts ──────────────────────────────────────────────────
+
+
+def test_natal_texts_joins_keys_with_commas_and_sends_lang() -> None:
+    payload = {
+        "lang": "uk",
+        "texts": {
+            "sun.aries": {"title": "Sonce v Ovni", "body": "Sonce v znaku Ovna...", "kind": "planet_in_sign"},
+        },
+        "missing": ["moon.h4"],
+    }
+    inner = _RecordingTransport(_ok_response(payload))
+    aw = Astroway(api_key="aw_test_x", transport=inner)
+    result = aw.natal_texts(["sun.aries", "moon.h4"], lang="uk")
+    aw.close()
+
+    assert inner.last_request is not None
+    assert inner.last_request.method == "GET"
+    assert inner.last_request.url.path.endswith("/natal-texts")
+    assert inner.last_request.url.params["keys"] == "sun.aries,moon.h4"
+    assert inner.last_request.url.params["lang"] == "uk"
+
+    assert isinstance(result, NatalTextsResult)
+    assert result.lang == "uk"
+    assert isinstance(result.texts["sun.aries"], NatalText)
+    assert result.texts["sun.aries"].title == "Sonce v Ovni"
+    assert result.texts["sun.aries"].body == "Sonce v znaku Ovna..."
+    assert result.texts["sun.aries"].kind == "planet_in_sign"
+    assert result.missing == ["moon.h4"]
+
+
+def test_natal_texts_title_can_be_null() -> None:
+    payload = {
+        "lang": "en",
+        "texts": {"sun_moon.trine": {"title": None, "body": "text", "kind": "aspect"}},
+        "missing": [],
+    }
+    inner = _RecordingTransport(_ok_response(payload))
+    aw = Astroway(api_key="aw_test_x", transport=inner)
+    result = aw.natal_texts(["sun_moon.trine"], lang="en")
+    aw.close()
+    assert result.texts["sun_moon.trine"].title is None
+    assert result.missing == []
+
+
+@pytest.mark.asyncio
+async def test_async_natal_texts_joins_keys_with_commas_and_sends_lang() -> None:
+    payload = {"lang": "de", "texts": {}, "missing": ["ascendant.leo"]}
+    inner = _RecordingAsyncTransport(_ok_response(payload))
+    async with AsyncAstroway(api_key="aw_test_x", transport=inner) as aw:
+        result = await aw.natal_texts(["ascendant.leo"], lang="de")
+    assert inner.last_request is not None
+    assert inner.last_request.method == "GET"
+    assert inner.last_request.url.params["keys"] == "ascendant.leo"
+    assert inner.last_request.url.params["lang"] == "de"
+    assert result.texts == {}
+    assert result.missing == ["ascendant.leo"]

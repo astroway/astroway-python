@@ -33,6 +33,7 @@ from ._cache import (
 )
 from ._client import Astroway, AsyncAstroway, RawResponse, TransportBackend
 from ._idempotency import IdempotencyMode, generate_idempotency_key
+from ._natal_texts import NatalText, NatalTextsResult
 from ._pagination import AsyncPage, AsyncPaginator, SyncPage, SyncPaginator
 from ._retry import RetryConfig
 from ._streaming import (
@@ -86,6 +87,8 @@ __all__ = [
     "IdempotencyMode",
     "InternalServerError",
     "MemoryCache",
+    "NatalText",
+    "NatalTextsResult",
     "NotFoundError",
     "PermissionDeniedError",
     "QuotaExceededError",

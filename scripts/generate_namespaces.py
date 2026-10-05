@@ -110,6 +110,11 @@ def main() -> int:
         # /public/* mirrors keyed endpoints the SDK already exposes.
         if path.startswith("/public/"):
             continue
+        # Hand-written on the client as natal_texts() (see _client.py). The
+        # path derives to a "natal_texts" namespace too, and a generated one
+        # would silently shadow the client method at attach time.
+        if path == "/natal-texts":
+            continue
         # System endpoints are hand-written on the client as health()/version().
         if "System" in (op.get("tags") or []):
             continue
