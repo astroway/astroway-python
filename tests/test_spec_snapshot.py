@@ -84,3 +84,12 @@ def test_spec_carries_the_typed_request_bodies() -> None:
         if schema and not any(k in schema for k in ("$ref", "properties", "allOf", "oneOf")):
             untyped.append(path)
     assert untyped == []
+
+
+def test_spec_carries_the_bodies_corrected_in_2_206_5() -> None:
+    """The 2.188.4 snapshot gave each of these another route's body."""
+    def ref(path: str) -> str:
+        return SPEC["paths"][path]["post"]["requestBody"]["content"]["application/json"]["schema"]["$ref"]
+    assert ref("/business/team-compatibility").endswith("/TeamCompatibility")
+    assert ref("/horary/planetary-hours").endswith("/HoraryPlanetaryHours")
+    assert ref("/mcp/multi-chart-context").endswith("/McpMultiChart")

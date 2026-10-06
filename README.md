@@ -47,8 +47,8 @@ chart = aw.chart.compute(BirthData(
 SIGNS = ["Aries", "Taurus", "Gemini", "Cancer", "Leo", "Virgo",
          "Libra", "Scorpio", "Sagittarius", "Capricorn", "Aquarius", "Pisces"]
 
-asc = chart["houses"]["ascendant"]                            # 212.0929
-print(f"ASC: {SIGNS[int(asc // 30)]} {asc % 30:.2f}°")        # ASC: Scorpio 2.09°
+asc = chart["houses"]["ascendant"]                            # 212.0953
+print(f"ASC: {SIGNS[int(asc // 30)]} {asc % 30:.2f}°")        # ASC: Scorpio 2.10°
 print(f"Sun: {chart['planets'][0]['longitude']:.2f}°")        # Sun: 111.77°
 ```
 
